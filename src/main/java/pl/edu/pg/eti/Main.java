@@ -17,8 +17,8 @@ public class Main {
 
         System.out.println("\nTASK 2\n");
 
-        var professions = getProfessionsStream().toList();
-        getCharactersStream(professions).toList();
+        var professions = getProfessionsStream(3).toList();
+        getCharactersStream(professions, 7).toList();
 
         professions.forEach(profession -> {
             System.out.println(profession.getName());
@@ -41,7 +41,7 @@ public class Main {
 
         System.out.println("\nTASK 5\n");
 
-        var professionCharacterDtos = characters.stream()
+        var characterDtos = characters.stream()
                 .map(character -> CharacterDto.builder()
                         .name(character.getName())
                         .level(character.getLevel())
@@ -50,38 +50,25 @@ public class Main {
                 )
                 .sorted()
                 .toList();
-        professionCharacterDtos.forEach(System.out::println);
+        characterDtos.forEach(System.out::println);
 
         System.out.println("\nTASK 6\n");
 
-        // Save
-        try (
-                var fileOutputStream = new FileOutputStream("professions.bin");
-                var objectOutputStream = new ObjectOutputStream(fileOutputStream)
-        ) {
-            objectOutputStream.writeObject(professions);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        var serializeFileName = "professions.bin";
 
-        // Read
-        try (
-                var fileInputStream = new FileInputStream("professions.bin");
-                var objectInputStream = new ObjectInputStream(fileInputStream)
-        ) {
-            ((List<Profession>) objectInputStream.readObject())
-                    .forEach(profession -> {
-                        System.out.println(profession.getName());
-                        profession.getCharacters().forEach(character -> System.out.printf("\t%s\n", character.toString()));
-                    });
-        } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        serialize(professions, serializeFileName);
+
+        deserialize(serializeFileName)
+                .forEach(profession -> {
+                    System.out.println(profession.getName());
+                    profession.getCharacters()
+                            .forEach(character -> System.out.printf("\t%s\n", character.toString()));
+            });
 
         System.out.println("\nTASK 7\n");
 
         var pool = new ForkJoinPool(4);
-        pool.submit(() -> characters.stream().toList().parallelStream().forEach(character -> {
+        pool.submit(() -> characters.parallelStream().forEach(character -> {
             try {
                 Thread.sleep(character.getLevel() * 500L);
                 System.out.println(character);
@@ -91,8 +78,30 @@ public class Main {
         })).join();
     }
 
-    private static Stream<Profession> getProfessionsStream() {
-        return IntStream.range(1, 4).mapToObj(i -> {
+    private static void serialize(List<Profession> professions, String fileName) {
+        try (
+                var fileOutputStream = new FileOutputStream(fileName);
+                var objectOutputStream = new ObjectOutputStream(fileOutputStream)
+        ) {
+            objectOutputStream.writeObject(professions);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static List<Profession> deserialize(String fileName) {
+        try (
+                var fileInputStream = new FileInputStream(fileName);
+                var objectInputStream = new ObjectInputStream(fileInputStream)
+        ) {
+            return ((List<Profession>) objectInputStream.readObject());
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static Stream<Profession> getProfessionsStream(int professionCount) {
+        return IntStream.range(1, professionCount + 1).mapToObj(i -> {
             var randomBaseArmor = (int)(Math.random() * 10) + 1;
             return Profession.builder()
                     .name("Profession " + i)
@@ -101,8 +110,8 @@ public class Main {
         });
     }
 
-    private static Stream<Character> getCharactersStream(List<Profession> professions) {
-        return IntStream.range(1, 8).mapToObj(i -> {
+    private static Stream<Character> getCharactersStream(List<Profession> professions, int characterCount) {
+        return IntStream.range(1, characterCount + 1).mapToObj(i -> {
             var randomProfessionIdx = (int)(Math.random() * professions.size());
             var randomProfession = professions.get(randomProfessionIdx);
             var randomLevel = (int)(Math.random() * 10) + 1;

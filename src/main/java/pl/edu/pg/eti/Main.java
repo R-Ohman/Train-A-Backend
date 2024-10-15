@@ -1,8 +1,8 @@
 package pl.edu.pg.eti;
 
-import pl.edu.pg.eti.dtos.CharacterDto;
-import pl.edu.pg.eti.entities.Character;
-import pl.edu.pg.eti.entities.Profession;
+import pl.edu.pg.eti.dtos.CarriageDto;
+import pl.edu.pg.eti.entities.Carriage;
+import pl.edu.pg.eti.entities.Train;
 
 import java.io.*;
 import java.util.Comparator;
@@ -17,109 +17,110 @@ public class Main {
 
         System.out.println("\nTASK 2\n");
 
-        var professions = getProfessionsStream(3).toList();
-        getCharactersStream(professions, 7).toList();
+        var trains = getTrainsStream(3).toList();
+        getCarriagesStream(trains, 7).toList();
 
-        professions.forEach(profession -> {
-            System.out.println(profession.getName());
-            profession.getCharacters().forEach(character -> System.out.printf("\t%s\n", character.toString()));
+        trains.forEach(train -> {
+            System.out.println(train.getName());
+            train.getCarriages().forEach(carriage -> System.out.printf("\t%s\n", carriage.toString()));
         });
 
         System.out.println("\nTASK 3\n");
 
-        var characters = professions.stream()
-                .flatMap(profession -> profession.getCharacters().stream())
+        var carriages = trains.stream()
+                .flatMap(train -> train.getCarriages().stream())
                 .collect(Collectors.toSet());
-        characters.forEach(System.out::println);
+        carriages.forEach(System.out::println);
 
         System.out.println("\nTASK 4\n");
 
-        characters.stream()
-                .filter(x -> x.getLevel() > 4)
-                .sorted(Comparator.comparing(Character::getName))
+        carriages.stream()
+                .filter(x -> x.getNumber() > 2)
+                .sorted(Comparator.comparing(Carriage::getType))
                 .forEach(System.out::println);
 
         System.out.println("\nTASK 5\n");
 
-        var characterDtos = characters.stream()
-                .map(character -> CharacterDto.builder()
-                        .name(character.getName())
-                        .level(character.getLevel())
-                        .profession(character.getProfession().getName())
+        var carriageDtos = carriages.stream()
+                .map(carriage -> CarriageDto.builder()
+                        .type(carriage.getType())
+                        .number(carriage.getNumber())
+                        .train(carriage.getTrain().getName())
                         .build()
                 )
                 .sorted()
                 .toList();
-        characterDtos.forEach(System.out::println);
+        carriageDtos.forEach(System.out::println);
 
         System.out.println("\nTASK 6\n");
 
-        var serializeFileName = "professions.bin";
+        var serializeFileName = "trains.bin";
 
-        serialize(professions, serializeFileName);
+        serialize(trains, serializeFileName);
 
         deserialize(serializeFileName)
-                .forEach(profession -> {
-                    System.out.println(profession.getName());
-                    profession.getCharacters()
-                            .forEach(character -> System.out.printf("\t%s\n", character.toString()));
+                .forEach(train -> {
+                    System.out.println(train.getName());
+                    train.getCarriages()
+                            .forEach(carriage -> System.out.printf("\t%s\n", carriage.toString()));
             });
 
         System.out.println("\nTASK 7\n");
 
-        var pool = new ForkJoinPool(4);
-        pool.submit(() -> characters.parallelStream().forEach(character -> {
+        var pool = new ForkJoinPool(2);
+        pool.submit(() -> carriages.parallelStream().forEach(carriage -> {
             try {
-                Thread.sleep(character.getLevel() * 500L);
-                System.out.println(character);
+                Thread.sleep(carriage.getNumber() * 500L);
+                System.out.println(carriage);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
         })).join();
     }
 
-    private static void serialize(List<Profession> professions, String fileName) {
+    private static void serialize(List<Train> trains, String fileName) {
         try (
                 var fileOutputStream = new FileOutputStream(fileName);
                 var objectOutputStream = new ObjectOutputStream(fileOutputStream)
         ) {
-            objectOutputStream.writeObject(professions);
+            objectOutputStream.writeObject(trains);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private static List<Profession> deserialize(String fileName) {
+    private static List<Train> deserialize(String fileName) {
         try (
                 var fileInputStream = new FileInputStream(fileName);
                 var objectInputStream = new ObjectInputStream(fileInputStream)
         ) {
-            return ((List<Profession>) objectInputStream.readObject());
+            return ((List<Train>) objectInputStream.readObject());
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private static Stream<Profession> getProfessionsStream(int professionCount) {
-        return IntStream.range(1, professionCount + 1).mapToObj(i -> {
-            var randomBaseArmor = (int)(Math.random() * 10) + 1;
-            return Profession.builder()
-                    .name("Profession " + i)
-                    .baseArmor(randomBaseArmor)
+    private static Stream<Train> getTrainsStream(int trainCount) {
+        return IntStream.range(1, trainCount + 1).mapToObj(i -> {
+            var randomTrainCode = (int)(Math.random() * 1000) + 1;
+            return Train.builder()
+                    .name("Train " + i)
+                    .code(randomTrainCode)
                     .build();
         });
     }
 
-    private static Stream<Character> getCharactersStream(List<Profession> professions, int characterCount) {
-        return IntStream.range(1, characterCount + 1).mapToObj(i -> {
-            var randomProfessionIdx = (int)(Math.random() * professions.size());
-            var randomProfession = professions.get(randomProfessionIdx);
-            var randomLevel = (int)(Math.random() * 10) + 1;
-            return Character.builder()
-                    .name("Character " + i)
-                    .level(randomLevel)
-                    .profession(randomProfession)
-                    .build();
+    private static Stream<Carriage> getCarriagesStream(List<Train> trains, int maxCarriageCount) {
+        return trains.stream().flatMap(train -> {
+            var randomCarriageNumber = (int)(Math.random() * maxCarriageCount) + 1;
+            return IntStream.range(1, randomCarriageNumber + 1).mapToObj(i -> {
+                var randomCarriageClass = (int)(Math.random() * 3) + 1;
+                return Carriage.builder()
+                        .type("Class " + randomCarriageClass)
+                        .number(i)
+                        .train(train)
+                        .build();
+            });
         });
     }
 }

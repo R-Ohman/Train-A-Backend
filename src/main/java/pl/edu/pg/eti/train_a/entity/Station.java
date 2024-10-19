@@ -33,4 +33,16 @@ public class Station {
             inverseJoinColumns = @JoinColumn(name = "route_id")
     )
     List<Route> routes = new ArrayList<>();
+
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @Builder.Default
+    @OneToMany(mappedBy = "stationStart", fetch = FetchType.LAZY)
+    List<Order> ordersStart = new ArrayList<>();
+
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @Builder.Default
+    @OneToMany(mappedBy = "stationEnd", fetch = FetchType.LAZY)
+    List<Order> ordersEnd = new ArrayList<>();
 }

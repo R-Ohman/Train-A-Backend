@@ -35,4 +35,20 @@ public class Order {
     Station stationEnd;
 
     String status;
+
+    public static OrderBuilder autoBuilder() {
+        return new AutoOrderBuilder();
+    }
+
+    public static class AutoOrderBuilder extends OrderBuilder {
+        @Override
+        public Order build() {
+            var order = super.build();
+            order.getUser().getOrders().add(order);
+            order.getRide().getOrders().add(order);
+            order.getStationStart().getOrdersStart().add(order);
+            order.getStationEnd().getOrdersEnd().add(order);
+            return order;
+        }
+    }
 }

@@ -3,10 +3,7 @@ package pl.edu.pg.eti.train_a.util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import pl.edu.pg.eti.train_a.service.CarriageService;
-import pl.edu.pg.eti.train_a.service.RideService;
-import pl.edu.pg.eti.train_a.service.RouteService;
-import pl.edu.pg.eti.train_a.service.StationService;
+import pl.edu.pg.eti.train_a.service.*;
 
 import java.util.Scanner;
 
@@ -16,18 +13,21 @@ public class CliRunner implements CommandLineRunner {
     private final CarriageService carriageService;
     private final StationService stationService;
     private final RideService rideService;
+    private final OrderService orderService;
 
     @Autowired
     public CliRunner(
             RouteService routeService,
             CarriageService carriageService,
             StationService stationService,
-            RideService rideService
+            RideService rideService,
+            OrderService orderService
     ) {
         this.routeService = routeService;
         this.carriageService = carriageService;
         this.stationService = stationService;
         this.rideService = rideService;
+        this.orderService = orderService;
     }
 
     @Override
@@ -60,8 +60,11 @@ public class CliRunner implements CommandLineRunner {
                 case "stations":
                     stationService.findAll().forEach(System.out::println);
                     break;
+                case "orders":
+                    orderService.findAll().forEach(System.out::println);
+                    break;
                 case "help":
-                    System.out.println("Available commands: routes, rides, carriages, stations, help, exit");
+                    System.out.println("Available commands: routes, rides, carriages, stations, orders, help, exit");
                     break;
                 case "exit":
                     isRunning = false;

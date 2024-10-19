@@ -3,14 +3,8 @@ package pl.edu.pg.eti.train_a.util;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pl.edu.pg.eti.train_a.entity.Carriage;
-import pl.edu.pg.eti.train_a.entity.Ride;
-import pl.edu.pg.eti.train_a.entity.Route;
-import pl.edu.pg.eti.train_a.entity.Station;
-import pl.edu.pg.eti.train_a.repository.CarriageRepository;
-import pl.edu.pg.eti.train_a.repository.RideRepository;
-import pl.edu.pg.eti.train_a.repository.RouteRepository;
-import pl.edu.pg.eti.train_a.repository.StationRepository;
+import pl.edu.pg.eti.train_a.entity.*;
+import pl.edu.pg.eti.train_a.repository.*;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -21,17 +15,24 @@ public class DataInitializer {
     private final CarriageRepository carriageRepository;
     private final StationRepository stationRepository;
     private final RideRepository rideRepository;
+    private final UserRepository userRepository;
+    private final OrderRepository orderRepository;
 
     @Autowired
     public DataInitializer(
             RouteRepository routeRepository,
             CarriageRepository carriageRepository,
             StationRepository stationRepository,
-            RideRepository rideRepository) {
+            RideRepository rideRepository,
+            UserRepository userRepository,
+            OrderRepository orderRepository
+    ) {
         this.routeRepository = routeRepository;
         this.carriageRepository = carriageRepository;
         this.stationRepository = stationRepository;
         this.rideRepository = rideRepository;
+        this.userRepository = userRepository;
+        this.orderRepository = orderRepository;
     }
 
     @PostConstruct
@@ -120,5 +121,56 @@ public class DataInitializer {
         );
 
         rideRepository.saveAll(rides);
+
+        var users = List.of(
+                User.builder()
+                        .id(1)
+                        .email("user1@abc.com")
+                        .name("User 1")
+                        .role("User")
+                        .passHash("pass1")
+                        .build(),
+                User.builder()
+                        .id(2)
+                        .email("admin1@adm.com")
+                        .name("Admin 1")
+                        .role("Admin")
+                        .passHash("pass2")
+                        .build()
+        );
+
+        userRepository.saveAll(users);
+
+        var orders = List.of(
+                Order.autoBuilder()
+                        .id(1)
+                        .user(users.get(0))
+                        .ride(rides.get(0))
+                        .stationStart(rides.get(0).getRoute().getStations().get(0))
+                        .stationEnd(rides.get(0).getRoute().getStations().get(1))
+                        .seatId(1)
+                        .status("confirmed")
+                        .build(),
+                Order.autoBuilder()
+                        .id(2)
+                        .user(users.get(0))
+                        .ride(rides.get(1))
+                        .stationStart(rides.get(1).getRoute().getStations().get(0))
+                        .stationEnd(rides.get(1).getRoute().getStations().get(2))
+                        .seatId(2)
+                        .status("pending")
+                        .build(),
+                Order.autoBuilder()
+                        .id(3)
+                        .user(users.get(1))
+                        .ride(rides.get(2))
+                        .stationStart(rides.get(2).getRoute().getStations().get(0))
+                        .stationEnd(rides.get(2).getRoute().getStations().get(1))
+                        .seatId(3)
+                        .status("cancelled")
+                        .build()
+        );
+
+        orderRepository.saveAll(orders);
     }
 }

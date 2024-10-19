@@ -22,7 +22,10 @@ public class RideService {
     @Transactional(readOnly = true)
     public List<Ride> findAll() {
         var rides = rideRepository.findAll();
-        rides.forEach(ride -> routeService.findById(ride.getRoute().getId()));
+        rides.forEach(ride -> {
+            ride.getOrders().size();
+            routeService.findById(ride.getRoute().getId());
+        });
         return rides;
     }
 }

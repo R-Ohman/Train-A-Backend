@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -17,11 +18,17 @@ public class Route {
     @Id
     int id;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     List<Carriage> carriages;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     List<Station> stations;
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @Builder.Default
+    @OneToMany(mappedBy = "route", fetch = FetchType.LAZY)
+    List<Ride> rides = new ArrayList<>();
 
     public static RouteBuilder autoBuilder() {
         return new AutoRouteBuilder();

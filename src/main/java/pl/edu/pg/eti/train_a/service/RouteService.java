@@ -19,6 +19,21 @@ public class RouteService {
 
     @Transactional(readOnly = true)
     public List<Route> findAll() {
-        return routeRepository.findAll();
+        var routes = routeRepository.findAll();
+        routes.forEach(this::loadLazyCollections);
+        return routes;
+    }
+
+    @Transactional(readOnly = true)
+    public Route findById(int id) {
+        var route = routeRepository.findById(id).get();
+        loadLazyCollections(route);
+        return route;
+    }
+
+    private void loadLazyCollections(Route route) {
+        route.getStations().size();
+        route.getRides().size();
+        route.getCarriages().size();
     }
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import pl.edu.pg.eti.train_a.service.CarriageService;
+import pl.edu.pg.eti.train_a.service.RideService;
 import pl.edu.pg.eti.train_a.service.RouteService;
 import pl.edu.pg.eti.train_a.service.StationService;
 
@@ -14,12 +15,19 @@ public class CliRunner implements CommandLineRunner {
     private final RouteService routeService;
     private final CarriageService carriageService;
     private final StationService stationService;
+    private final RideService rideService;
 
     @Autowired
-    public CliRunner(RouteService routeService, CarriageService carriageService, StationService stationService) {
+    public CliRunner(
+            RouteService routeService,
+            CarriageService carriageService,
+            StationService stationService,
+            RideService rideService
+    ) {
         this.routeService = routeService;
         this.carriageService = carriageService;
         this.stationService = stationService;
+        this.rideService = rideService;
     }
 
     @Override
@@ -36,7 +44,15 @@ public class CliRunner implements CommandLineRunner {
                         route.getCarriages().forEach(c -> System.out.printf("\t%s\n", c));
                         System.out.println("Stations:");
                         route.getStations().forEach(s -> System.out.printf("\t%s\n", s));
+                        System.out.println("Rides:");
+                        route.getRides().forEach(r -> System.out.printf("\t%s\n", r));
+                        if (route.getRides().isEmpty()) {
+                            System.out.println("\tNo rides available");
+                        }
                     });
+                    break;
+                case "rides":
+                    rideService.findAll().forEach(System.out::println);
                     break;
                 case "carriages":
                     carriageService.findAll().forEach(System.out::println);
@@ -45,7 +61,7 @@ public class CliRunner implements CommandLineRunner {
                     stationService.findAll().forEach(System.out::println);
                     break;
                 case "help":
-                    System.out.println("Available commands: routes, carriages, stations, help, exit");
+                    System.out.println("Available commands: routes, rides, carriages, stations, help, exit");
                     break;
                 case "exit":
                     isRunning = false;

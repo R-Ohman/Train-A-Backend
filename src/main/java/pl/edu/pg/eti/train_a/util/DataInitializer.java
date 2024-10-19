@@ -4,9 +4,11 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.edu.pg.eti.train_a.entity.Carriage;
+import pl.edu.pg.eti.train_a.entity.Ride;
 import pl.edu.pg.eti.train_a.entity.Route;
 import pl.edu.pg.eti.train_a.entity.Station;
 import pl.edu.pg.eti.train_a.repository.CarriageRepository;
+import pl.edu.pg.eti.train_a.repository.RideRepository;
 import pl.edu.pg.eti.train_a.repository.RouteRepository;
 import pl.edu.pg.eti.train_a.repository.StationRepository;
 
@@ -18,12 +20,18 @@ public class DataInitializer {
     private final RouteRepository routeRepository;
     private final CarriageRepository carriageRepository;
     private final StationRepository stationRepository;
+    private final RideRepository rideRepository;
 
     @Autowired
-    public DataInitializer(RouteRepository routeRepository, CarriageRepository carriageRepository, StationRepository stationRepository) {
+    public DataInitializer(
+            RouteRepository routeRepository,
+            CarriageRepository carriageRepository,
+            StationRepository stationRepository,
+            RideRepository rideRepository) {
         this.routeRepository = routeRepository;
         this.carriageRepository = carriageRepository;
         this.stationRepository = stationRepository;
+        this.rideRepository = rideRepository;
     }
 
     @PostConstruct
@@ -95,5 +103,22 @@ public class DataInitializer {
         );
 
         routeRepository.saveAll(routes);
+
+        var rides = List.of(
+                Ride.autoBuilder()
+                        .id(1)
+                        .route(routes.get(0))
+                        .build(),
+                Ride.autoBuilder()
+                        .id(2)
+                        .route(routes.get(0))
+                        .build(),
+                Ride.autoBuilder()
+                        .id(3)
+                        .route(routes.get(1))
+                        .build()
+        );
+
+        rideRepository.saveAll(rides);
     }
 }

@@ -16,7 +16,20 @@ public class Ride {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "route_id")
     Route route;
+
+    public static RideBuilder autoBuilder() {
+        return new AutoRideBuilder();
+    }
+
+    public static class AutoRideBuilder extends RideBuilder {
+        @Override
+        public Ride build() {
+            var ride = super.build();
+            ride.route.getRides().add(ride);
+            return ride;
+        }
+    }
 }

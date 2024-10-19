@@ -10,6 +10,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Table(name = "rides")
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Entity
 public class Ride {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

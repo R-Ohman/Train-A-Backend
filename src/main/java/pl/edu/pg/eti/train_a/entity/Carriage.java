@@ -10,6 +10,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Table(name = "carriages")
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Entity
 public class Carriage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

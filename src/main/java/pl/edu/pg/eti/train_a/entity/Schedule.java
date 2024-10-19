@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Table(name = "schedules")
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Entity
 public class Schedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

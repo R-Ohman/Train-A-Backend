@@ -12,9 +12,9 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "routes")
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Entity
 public class Route {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
     @ElementCollection

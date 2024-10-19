@@ -12,9 +12,9 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Table(name = "stations")
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Entity
 public class Station {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
     String city;

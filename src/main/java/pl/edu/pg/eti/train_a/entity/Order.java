@@ -10,6 +10,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Table(name = "orders")
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Entity
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

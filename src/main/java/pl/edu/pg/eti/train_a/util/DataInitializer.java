@@ -73,26 +73,27 @@ public class DataInitializer {
                         .build()
         );
 
+        carriageRepository.saveAll(carriages);
+        stationRepository.saveAll(stations);
+
         var routes = List.of(
-                Route.builder()
+                Route.autoBuilder()
                         .id(1)
-                        .carriages(List.of(1, 1, 2, 2, 3))
-                        .stations(List.of(1, 2, 3))
+                        .carriages(carriages)
+                        .stations(stations)
                         .build(),
-                Route.builder()
+                Route.autoBuilder()
                         .id(2)
-                        .carriages(List.of(2, 3, 3))
-                        .stations(List.of(2, 3))
+                        .carriages(List.of(carriages.get(0), carriages.get(1), carriages.get(1)))
+                        .stations(List.of(stations.get(1), stations.get(2)))
                         .build(),
-                Route.builder()
+                Route.autoBuilder()
                         .id(3)
-                        .carriages(List.of(3, 3, 3))
-                        .stations(List.of(1, 2, 3))
+                        .carriages(List.of(carriages.get(2), carriages.get(2), carriages.get(2)))
+                        .stations(stations)
                         .build()
         );
 
-        carriageRepository.saveAll(carriages);
-        stationRepository.saveAll(stations);
         routeRepository.saveAll(routes);
     }
 }

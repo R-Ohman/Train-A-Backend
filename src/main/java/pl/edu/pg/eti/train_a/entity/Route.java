@@ -17,9 +17,23 @@ public class Route {
     @Id
     int id;
 
-    @ElementCollection
-    List<Integer> carriages;
+    @ManyToMany(fetch = FetchType.EAGER)
+    List<Carriage> carriages;
 
-    @ElementCollection
-    List<Integer> stations;
+    @ManyToMany(fetch = FetchType.EAGER)
+    List<Station> stations;
+
+    public static RouteBuilder autoBuilder() {
+        return new AutoRouteBuilder();
+    }
+
+    public static class AutoRouteBuilder extends RouteBuilder {
+        @Override
+        public Route build() {
+            var route = super.build();
+            route.carriages.forEach(carriage -> carriage.getRoutes().add(route));
+            route.stations.forEach(station -> station.getRoutes().add(route));
+            return route;
+        }
+    }
 }

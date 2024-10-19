@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -20,4 +23,15 @@ public class Carriage {
     byte rows;
     byte leftSeats;
     byte rightSeats;
+
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @Builder.Default
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "route_carriages",
+            joinColumns = @JoinColumn(name = "carriage_id"),
+            inverseJoinColumns = @JoinColumn(name = "route_id")
+    )
+    List<Route> routes = new ArrayList<>();
 }

@@ -5,6 +5,8 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Builder
@@ -20,4 +22,15 @@ public class Station {
     String city;
     BigDecimal latitude;
     BigDecimal longitude;
+
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @Builder.Default
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "route_stations",
+            joinColumns = @JoinColumn(name = "station_id"),
+            inverseJoinColumns = @JoinColumn(name = "route_id")
+    )
+    List<Route> routes = new ArrayList<>();
 }

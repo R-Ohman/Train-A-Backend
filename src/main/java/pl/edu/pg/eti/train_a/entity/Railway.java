@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -16,13 +18,35 @@ public class Railway {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
-    @ManyToOne
-    @JoinColumn(name = "station1")
-    Station station1;
-
-    @ManyToOne
-    @JoinColumn(name = "station2")
-    Station station2;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "railway_stations",
+            joinColumns = @JoinColumn(name = "railway_id"),
+            inverseJoinColumns = @JoinColumn(name = "station_id")
+    )
+    List<Station> stations;
 
     int distance;
+
+    public static RailwayBuilder autoBuilder() {
+        return new AutoRailwayBuilder();
+    }
+
+    public static class AutoRailwayBuilder extends RailwayBuilder {
+        @Override
+        public Railway build() {
+            var railway = super.build();
+            if (railway.stations.size() != 2) {
+                throw new IllegalArgumentException("A railway must connect exactly two stations.");
+            }
+            railway.stations.forEach(station -> station.getRailways().add(railway));
+            railway.distance = (int) Math.round(
+                    111.32 * Math.sqrt(
+                            Math.pow(railway.stations.get(0).getLatitude().doubleValue() - railway.stations.get(1).getLatitude().doubleValue(), 2) +
+                                    Math.pow((railway.stations.get(0).getLongitude().doubleValue() - railway.stations.get(1).getLongitude().doubleValue()) * Math.cos(Math.toRadians((railway.stations.get(0).getLatitude().doubleValue() + railway.stations.get(1).getLatitude().doubleValue()) / 2)), 2)
+                    )
+            );
+            return railway;
+        }
+    }
 }

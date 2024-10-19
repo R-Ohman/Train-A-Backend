@@ -7,6 +7,8 @@ import lombok.experimental.FieldDefaults;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Data
 @Builder
@@ -38,11 +40,17 @@ public class Station {
     @ToString.Exclude
     @Builder.Default
     @OneToMany(mappedBy = "stationStart", fetch = FetchType.LAZY)
-    List<Order> ordersStart = new ArrayList<>();
+    List<Order> ordersFrom = new ArrayList<>();
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @Builder.Default
     @OneToMany(mappedBy = "stationEnd", fetch = FetchType.LAZY)
-    List<Order> ordersEnd = new ArrayList<>();
+    List<Order> ordersTo = new ArrayList<>();
+
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @Builder.Default
+    @ManyToMany(mappedBy = "stations", fetch = FetchType.LAZY)
+    List<Railway> railways = new ArrayList<>();
 }

@@ -46,8 +46,8 @@ public class Order {
             var order = super.build();
             order.getUser().getOrders().add(order);
             order.getRide().getOrders().add(order);
-            order.getStationStart().getOrdersStart().add(order);
-            order.getStationEnd().getOrdersEnd().add(order);
+            order.getStationStart().getOrdersFrom().add(order);
+            order.getStationEnd().getOrdersTo().add(order);
             return order;
         }
     }

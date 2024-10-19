@@ -60,11 +60,14 @@ public class CliRunner implements CommandLineRunner {
                 case "stations":
                     stationService.findAll().forEach(System.out::println);
                     break;
+                case "railways":
+                    stationService.findAllRailways().forEach(System.out::println);
+                    break;
                 case "orders":
                     orderService.findAll().forEach(System.out::println);
                     break;
                 case "help":
-                    System.out.println("Available commands: routes, rides, carriages, stations, orders, help, exit");
+                    System.out.println("Available commands: routes, rides, carriages, stations, railways, orders, help, exit");
                     break;
                 case "exit":
                     isRunning = false;

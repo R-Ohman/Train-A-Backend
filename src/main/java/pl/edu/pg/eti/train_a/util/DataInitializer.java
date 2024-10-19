@@ -17,6 +17,7 @@ public class DataInitializer {
     private final RideRepository rideRepository;
     private final UserRepository userRepository;
     private final OrderRepository orderRepository;
+    private final RailwayRepository railwayRepository;
 
     @Autowired
     public DataInitializer(
@@ -25,7 +26,8 @@ public class DataInitializer {
             StationRepository stationRepository,
             RideRepository rideRepository,
             UserRepository userRepository,
-            OrderRepository orderRepository
+            OrderRepository orderRepository,
+            RailwayRepository railwayRepository
     ) {
         this.routeRepository = routeRepository;
         this.carriageRepository = carriageRepository;
@@ -33,6 +35,7 @@ public class DataInitializer {
         this.rideRepository = rideRepository;
         this.userRepository = userRepository;
         this.orderRepository = orderRepository;
+        this.railwayRepository = railwayRepository;
     }
 
     @PostConstruct
@@ -172,5 +175,18 @@ public class DataInitializer {
         );
 
         orderRepository.saveAll(orders);
+
+        var railways = List.of(
+                Railway.autoBuilder()
+                        .id(1)
+                        .stations(List.of(stations.get(0), stations.get(1)))
+                        .build(),
+                Railway.autoBuilder()
+                        .id(2)
+                        .stations(List.of(stations.get(1), stations.get(2)))
+                        .build()
+        );
+
+        railwayRepository.saveAll(railways);
     }
 }

@@ -46,4 +46,15 @@ public class Price {
             return price;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Price{" +
+                "id=" + id +
+                ", ride_id=" + ride.getId() +
+                ", carriage_type=" + carriage.getType() +
+                ", railway_id=" + railway.getId() +
+                ", price=" + price +
+                '}';
+    }
 }

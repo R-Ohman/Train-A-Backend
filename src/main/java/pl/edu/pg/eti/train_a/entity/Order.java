@@ -51,4 +51,17 @@ public class Order {
             return order;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", user_id=" + user.getId() +
+                ", ride_id=" + ride.getId() +
+                ", seatId=" + seatId +
+                ", stationStart_id=" + stationStart.getId() +
+                ", stationEnd_id=" + stationEnd.getId() +
+                ", status='" + status + '\'' +
+                '}';
+    }
 }

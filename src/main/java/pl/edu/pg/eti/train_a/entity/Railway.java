@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -18,7 +19,7 @@ public class Railway {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "railway_stations",
             joinColumns = @JoinColumn(name = "railway_id"),
@@ -27,6 +28,12 @@ public class Railway {
     List<Station> stations;
 
     int distance;
+
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @Builder.Default
+    @OneToMany(mappedBy = "railway", fetch = FetchType.LAZY)
+    List<Price> prices = new ArrayList<>();
 
     public static RailwayBuilder autoBuilder() {
         return new AutoRailwayBuilder();

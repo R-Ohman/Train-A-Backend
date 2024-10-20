@@ -18,6 +18,7 @@ public class DataInitializer {
     private final UserRepository userRepository;
     private final OrderRepository orderRepository;
     private final RailwayRepository railwayRepository;
+    private final PriceRepository priceRepository;
 
     @Autowired
     public DataInitializer(
@@ -27,7 +28,8 @@ public class DataInitializer {
             RideRepository rideRepository,
             UserRepository userRepository,
             OrderRepository orderRepository,
-            RailwayRepository railwayRepository
+            RailwayRepository railwayRepository,
+            PriceRepository priceRepository
     ) {
         this.routeRepository = routeRepository;
         this.carriageRepository = carriageRepository;
@@ -36,6 +38,7 @@ public class DataInitializer {
         this.userRepository = userRepository;
         this.orderRepository = orderRepository;
         this.railwayRepository = railwayRepository;
+        this.priceRepository = priceRepository;
     }
 
     @PostConstruct
@@ -188,5 +191,31 @@ public class DataInitializer {
         );
 
         railwayRepository.saveAll(railways);
+
+        var prices = List.of(
+                Price.autoBuilder()
+                        .id(1)
+                        .ride(rides.get(0))
+                        .carriage(carriages.get(0))
+                        .railway(railways.get(0))
+                        .price(100)
+                        .build(),
+                Price.autoBuilder()
+                        .id(2)
+                        .ride(rides.get(0))
+                        .carriage(carriages.get(1))
+                        .railway(railways.get(0))
+                        .price(50)
+                        .build(),
+                Price.autoBuilder()
+                        .id(3)
+                        .ride(rides.get(1))
+                        .carriage(carriages.get(1))
+                        .railway(railways.get(1))
+                        .price(75)
+                        .build()
+        );
+
+        priceRepository.saveAll(prices);
     }
 }

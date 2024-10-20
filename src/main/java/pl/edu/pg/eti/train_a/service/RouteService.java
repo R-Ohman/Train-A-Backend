@@ -34,6 +34,7 @@ public class RouteService {
     private void loadLazyCollections(Route route) {
         route.getStations().size();
         route.getRides().size();
+        route.getRides().forEach(ride -> ride.getPrices().size());
         route.getCarriages().size();
     }
 }

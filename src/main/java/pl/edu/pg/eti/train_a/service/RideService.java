@@ -24,6 +24,7 @@ public class RideService {
         var rides = rideRepository.findAll();
         rides.forEach(ride -> {
             ride.getOrders().size();
+            ride.getPrices().size();
             routeService.findById(ride.getRoute().getId());
         });
         return rides;

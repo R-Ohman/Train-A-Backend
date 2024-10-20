@@ -29,6 +29,10 @@ public class Ride {
     @OneToMany(mappedBy = "ride", fetch = FetchType.LAZY)
     List<Order> orders = new ArrayList<>();
 
+    @Builder.Default
+    @OneToMany(mappedBy = "ride", fetch = FetchType.LAZY)
+    List<Price> prices = new ArrayList<>();
+
     public static RideBuilder autoBuilder() {
         return new AutoRideBuilder();
     }

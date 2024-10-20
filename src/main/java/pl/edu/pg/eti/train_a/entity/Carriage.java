@@ -34,4 +34,10 @@ public class Carriage {
             inverseJoinColumns = @JoinColumn(name = "route_id")
     )
     List<Route> routes = new ArrayList<>();
+
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @Builder.Default
+    @OneToMany(mappedBy = "carriage", fetch = FetchType.LAZY)
+    List<Price> prices = new ArrayList<>();
 }

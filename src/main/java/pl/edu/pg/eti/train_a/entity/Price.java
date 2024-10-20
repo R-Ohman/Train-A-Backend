@@ -16,6 +16,8 @@ public class Price {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "ride_id")
     Ride ride;
@@ -29,4 +31,19 @@ public class Price {
     Railway railway;
 
     int price;
+
+    public static PriceBuilder autoBuilder() {
+        return new AutoPriceBuilder();
+    }
+
+    public static class AutoPriceBuilder extends PriceBuilder {
+        @Override
+        public Price build() {
+            var price = super.build();
+            price.getRailway().getPrices().add(price);
+            price.getCarriage().getPrices().add(price);
+            price.getRide().getPrices().add(price);
+            return price;
+        }
+    }
 }

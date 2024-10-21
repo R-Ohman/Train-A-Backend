@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Data
 @Builder
@@ -15,8 +16,10 @@ import java.math.BigDecimal;
 @Entity
 public class Price {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    @ToString.Exclude
+    @Builder.Default
+    @Column(name = "id")
+    UUID id = UUID.randomUUID();
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
@@ -47,16 +50,5 @@ public class Price {
             price.getRide().getPrices().add(price);
             return price;
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Price{" +
-                "id=" + id +
-                ", ride_id=" + ride.getId() +
-                ", carriage_type=" + carriage.getType() +
-                ", railway_id=" + railway.getId() +
-                ", price=" + price +
-                '}';
     }
 }

@@ -49,14 +49,4 @@ public class Ride {
             return ride;
         }
     }
-
-    @Override
-    public String toString() {
-        return "Ride{" +
-                "id=" + id +
-                ", route_id=" + route.getId() +
-                ", prices=" + prices +
-                ", schedules=" + schedules +
-                '}';
-    }
 }

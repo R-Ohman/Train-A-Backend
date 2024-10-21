@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Data
 @Builder
@@ -15,8 +16,10 @@ import java.time.LocalDateTime;
 @Entity
 public class Schedule {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    @ToString.Exclude
+    @Builder.Default
+    @Column(name = "id")
+    UUID id = UUID.randomUUID();
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude

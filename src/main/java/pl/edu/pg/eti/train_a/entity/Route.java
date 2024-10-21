@@ -16,6 +16,7 @@ import java.util.List;
 @Entity
 public class Route {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
     @ManyToMany(fetch = FetchType.LAZY)

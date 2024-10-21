@@ -7,8 +7,7 @@ import lombok.experimental.FieldDefaults;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.UUID;
 
 @Data
 @Builder
@@ -19,7 +18,10 @@ import java.util.stream.Stream;
 @Entity
 public class Station {
     @Id
-    int id;
+    @ToString.Exclude
+    @Builder.Default
+    @Column(name = "id")
+    UUID id = UUID.randomUUID();
 
     String city;
     BigDecimal latitude;

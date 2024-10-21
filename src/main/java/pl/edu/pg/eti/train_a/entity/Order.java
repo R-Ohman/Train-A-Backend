@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.UUID;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -13,8 +15,10 @@ import lombok.experimental.FieldDefaults;
 @Entity
 public class Order {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    @ToString.Exclude
+    @Builder.Default
+    @Column(name = "id")
+    UUID id = UUID.randomUUID();
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -50,18 +54,5 @@ public class Order {
             order.getStationEnd().getOrdersTo().add(order);
             return order;
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", user_id=" + user.getId() +
-                ", ride_id=" + ride.getId() +
-                ", seatId=" + seatId +
-                ", stationStart_id=" + stationStart.getId() +
-                ", stationEnd_id=" + stationEnd.getId() +
-                ", status='" + status + '\'' +
-                '}';
     }
 }

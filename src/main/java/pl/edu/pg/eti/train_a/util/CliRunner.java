@@ -51,10 +51,10 @@ public class CliRunner implements CommandLineRunner {
                     stationService.findAll().forEach(System.out::println);
                     break;
                 case "railways":
-                    stationService.findAllRailways().forEach(System.out::println);
+                    this.showRailways();
                     break;
                 case "orders":
-                    orderService.findAll().forEach(System.out::println);
+                    this.showOrders();
                     break;
                 case "help":
                     System.out.println("Available commands: routes, rides, carriages, stations, railways, orders, help, exit");
@@ -72,14 +72,14 @@ public class CliRunner implements CommandLineRunner {
     private void showRoutes() {
         routeService.findAll().forEach(route -> {
             System.out.println("Route #" + route.getId());
-            System.out.println("Carriages:");
-            route.getCarriages().forEach(c -> System.out.printf("\t%s\n", c));
-            System.out.println("Stations:");
-            route.getStations().forEach(s -> System.out.printf("\t%s\n", s));
-            System.out.println("Rides:");
-            route.getRides().forEach(r -> System.out.printf("\tRide #%d\n", r.getId()));
+            System.out.println("\tCarriages:");
+            route.getCarriages().forEach(c -> System.out.printf("\t\t%s\n", c));
+            System.out.println("\tStations:");
+            route.getStations().forEach(s -> System.out.printf("\t\t%s\n", s));
+            System.out.println("\tRides:");
+            route.getRides().forEach(r -> System.out.printf("\t\tRide #%d\n", r.getId()));
             if (route.getRides().isEmpty()) {
-                System.out.println("\tNo rides available");
+                System.out.println("\t\tNo rides available");
             }
         });
     }
@@ -109,5 +109,25 @@ public class CliRunner implements CommandLineRunner {
                         });
             }
         });
+    }
+
+    private void showOrders() {
+        System.out.println("Orders:");
+        orderService.findAll().forEach(order -> System.out.printf(
+                        "\tuser_email=%s,\tride_id=%s,\tseat_id=%d,\tfrom=%s,\tto=%s,\tstatus=%s\n",
+                        order.getUser().getEmail(), order.getRide().getId(), order.getSeatId(),
+                        order.getStationStart().getCity(), order.getStationEnd().getCity(), order.getStatus()
+                )
+        );
+    }
+
+    private void showRailways() {
+        System.out.println("Railways:");
+        stationService.findAllRailways().forEach(railway ->
+                System.out.printf(
+                        "\tstation1=%s,\tstation2=%s,\tdistance=%d\n",
+                        railway.getStations().get(0).getCity(), railway.getStations().get(1).getCity(), railway.getDistance()
+                )
+        );
     }
 }

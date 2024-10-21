@@ -6,6 +6,7 @@ import lombok.experimental.FieldDefaults;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @Builder
@@ -16,8 +17,10 @@ import java.util.List;
 @Entity
 public class Railway {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    @ToString.Exclude
+    @Builder.Default
+    @Column(name = "id")
+    UUID id = UUID.randomUUID();
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -61,15 +64,5 @@ public class Railway {
             );
             return railway;
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Ride{" +
-                "id=" + id +
-                ", station1_id=" + stations.get(0).getId() +
-                ", station2_id=" + stations.get(1).getId() +
-                ", distance=" + distance +
-                '}';
     }
 }

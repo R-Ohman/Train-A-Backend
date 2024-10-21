@@ -23,6 +23,7 @@ public class RideService {
     public List<Ride> findAll() {
         var rides = rideRepository.findAll();
         rides.forEach(ride -> {
+            ride.getSchedules().size();
             ride.getOrders().size();
             ride.getPrices().size();
             routeService.findById(ride.getRoute().getId());

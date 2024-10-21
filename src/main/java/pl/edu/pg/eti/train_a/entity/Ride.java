@@ -33,6 +33,10 @@ public class Ride {
     @OneToMany(mappedBy = "ride", fetch = FetchType.LAZY)
     List<Price> prices = new ArrayList<>();
 
+    @Builder.Default
+    @OneToMany(mappedBy = "ride", fetch = FetchType.LAZY)
+    List<Schedule> schedules = new ArrayList<>();
+
     public static RideBuilder autoBuilder() {
         return new AutoRideBuilder();
     }
@@ -52,6 +56,7 @@ public class Ride {
                 "id=" + id +
                 ", route_id=" + route.getId() +
                 ", prices=" + prices +
+                ", schedules=" + schedules +
                 '}';
     }
 }

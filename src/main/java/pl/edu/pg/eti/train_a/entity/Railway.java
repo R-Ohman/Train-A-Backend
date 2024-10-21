@@ -35,6 +35,12 @@ public class Railway {
     @OneToMany(mappedBy = "railway", fetch = FetchType.LAZY)
     List<Price> prices = new ArrayList<>();
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @Builder.Default
+    @OneToMany(mappedBy = "railway", fetch = FetchType.LAZY)
+    List<Schedule> schedules = new ArrayList<>();
+
     public static RailwayBuilder autoBuilder() {
         return new AutoRailwayBuilder();
     }
@@ -55,5 +61,15 @@ public class Railway {
             );
             return railway;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Ride{" +
+                "id=" + id +
+                ", station1_id=" + stations.get(0).getId() +
+                ", station2_id=" + stations.get(1).getId() +
+                ", distance=" + distance +
+                '}';
     }
 }

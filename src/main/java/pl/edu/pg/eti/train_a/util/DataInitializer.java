@@ -7,6 +7,8 @@ import pl.edu.pg.eti.train_a.entity.*;
 import pl.edu.pg.eti.train_a.repository.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.List;
 
 @Component
@@ -19,6 +21,7 @@ public class DataInitializer {
     private final OrderRepository orderRepository;
     private final RailwayRepository railwayRepository;
     private final PriceRepository priceRepository;
+    private final ScheduleRepository scheduleRepository;
 
     @Autowired
     public DataInitializer(
@@ -29,7 +32,8 @@ public class DataInitializer {
             UserRepository userRepository,
             OrderRepository orderRepository,
             RailwayRepository railwayRepository,
-            PriceRepository priceRepository
+            PriceRepository priceRepository,
+            ScheduleRepository scheduleRepository
     ) {
         this.routeRepository = routeRepository;
         this.carriageRepository = carriageRepository;
@@ -39,6 +43,7 @@ public class DataInitializer {
         this.orderRepository = orderRepository;
         this.railwayRepository = railwayRepository;
         this.priceRepository = priceRepository;
+        this.scheduleRepository = scheduleRepository;
     }
 
     @PostConstruct
@@ -198,24 +203,82 @@ public class DataInitializer {
                         .ride(rides.get(0))
                         .carriage(carriages.get(0))
                         .railway(railways.get(0))
-                        .price(100)
+                        .price(BigDecimal.valueOf(100))
                         .build(),
                 Price.autoBuilder()
                         .id(2)
                         .ride(rides.get(0))
                         .carriage(carriages.get(1))
                         .railway(railways.get(0))
-                        .price(50)
+                        .price(BigDecimal.valueOf(50))
                         .build(),
                 Price.autoBuilder()
                         .id(3)
+                        .ride(rides.get(0))
+                        .carriage(carriages.get(0))
+                        .railway(railways.get(1))
+                        .price(BigDecimal.valueOf(25))
+                        .build(),
+                Price.autoBuilder()
+                        .id(4)
+                        .ride(rides.get(0))
+                        .carriage(carriages.get(1))
+                        .railway(railways.get(1))
+                        .price(BigDecimal.valueOf(35))
+                        .build(),
+                Price.autoBuilder()
+                        .id(5)
                         .ride(rides.get(1))
                         .carriage(carriages.get(1))
                         .railway(railways.get(1))
-                        .price(75)
+                        .price(BigDecimal.valueOf(75))
                         .build()
         );
 
         priceRepository.saveAll(prices);
+
+        var schedules = List.of(
+                Schedule.autoBuilder()
+                        .id(1)
+                        .ride(rides.get(0))
+                        .railway(railways.get(0))
+                        .departureTime(LocalDateTime.of(2024, Month.OCTOBER, 20, 10, 40))
+                        .arrivalTime(LocalDateTime.of(2024, Month.OCTOBER, 20, 12, 30))
+                        .build(),
+
+                Schedule.autoBuilder()
+                        .id(2)
+                        .ride(rides.get(0))
+                        .railway(railways.get(1))
+                        .departureTime(LocalDateTime.of(2024, Month.OCTOBER, 20, 12, 55))
+                        .arrivalTime(LocalDateTime.of(2024, Month.OCTOBER, 20, 15, 30))
+                        .build(),
+
+                Schedule.autoBuilder()
+                        .id(3)
+                        .ride(rides.get(1))
+                        .railway(railways.get(0))
+                        .departureTime(LocalDateTime.of(2024, Month.OCTOBER, 21, 11, 33))
+                        .arrivalTime(LocalDateTime.of(2024, Month.OCTOBER, 21, 12, 23))
+                        .build(),
+
+                Schedule.autoBuilder()
+                        .id(4)
+                        .ride(rides.get(1))
+                        .railway(railways.get(1))
+                        .departureTime(LocalDateTime.of(2024, Month.OCTOBER, 21, 12, 51))
+                        .arrivalTime(LocalDateTime.of(2024, Month.OCTOBER, 21, 14, 31))
+                        .build(),
+
+                Schedule.autoBuilder()
+                        .id(5)
+                        .ride(rides.get(2))
+                        .railway(railways.get(0))
+                        .departureTime(LocalDateTime.of(2025, Month.JANUARY, 2, 11, 40))
+                        .arrivalTime(LocalDateTime.of(2025, Month.JANUARY, 2, 12, 30))
+                        .build()
+        );
+
+        scheduleRepository.saveAll(schedules);
     }
 }

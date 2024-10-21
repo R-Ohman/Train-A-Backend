@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.math.BigDecimal;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -30,7 +32,7 @@ public class Price {
     @JoinColumn(name = "railway_id")
     Railway railway;
 
-    int price;
+    BigDecimal price;
 
     public static PriceBuilder autoBuilder() {
         return new AutoPriceBuilder();

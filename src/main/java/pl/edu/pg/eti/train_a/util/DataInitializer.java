@@ -48,6 +48,10 @@ public class DataInitializer {
 
     @PostConstruct
     public void initData() {
+        if (carriageRepository.count() > 0) {
+            return;
+        }
+
         var carriages = List.of(
                 Carriage.builder()
                         .type("1st class")

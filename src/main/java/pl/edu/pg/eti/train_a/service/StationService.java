@@ -28,10 +28,6 @@ public class StationService {
 
     @Transactional(readOnly = true)
     public List<Railway> findAllRailways() {
-        var railways = railwayRepository.findAll();
-        railways.forEach(railway -> {
-            railway.getStations().size();
-        });
-        return railways;
+        return railwayRepository.findAll();
     }
 }

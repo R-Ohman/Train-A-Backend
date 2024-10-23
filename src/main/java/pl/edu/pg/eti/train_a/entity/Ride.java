@@ -29,10 +29,14 @@ public class Ride {
     @OneToMany(mappedBy = "ride", fetch = FetchType.LAZY)
     List<Order> orders = new ArrayList<>();
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @Builder.Default
     @OneToMany(mappedBy = "ride", fetch = FetchType.LAZY)
     List<Price> prices = new ArrayList<>();
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @Builder.Default
     @OneToMany(mappedBy = "ride", fetch = FetchType.LAZY)
     List<Schedule> schedules = new ArrayList<>();

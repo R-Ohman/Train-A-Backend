@@ -1,5 +1,6 @@
 package pl.edu.pg.eti.train_a.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,23 +12,23 @@ import java.util.List;
 @Service
 public class RideService {
     private final RideRepository rideRepository;
-    private final RouteService routeService;
 
     @Autowired
-    public RideService(RideRepository rideRepository, RouteService routeService) {
+    public RideService(RideRepository rideRepository) {
         this.rideRepository = rideRepository;
-        this.routeService = routeService;
     }
 
     @Transactional(readOnly = true)
     public List<Ride> findAll() {
-        var rides = rideRepository.findAll();
-        rides.forEach(ride -> {
-            ride.getSchedules().size();
-            ride.getOrders().size();
-            ride.getPrices().size();
-            routeService.findById(ride.getRoute().getId());
-        });
-        return rides;
+        return rideRepository.findAll();
+    }
+
+    @Transactional
+    public Ride getRideWithLazyProperties(int rideId) {
+        Ride ride = rideRepository.findById(rideId).orElseThrow(() -> new EntityNotFoundException());
+        ride.getPrices().size();
+        ride.getSchedules().size();
+        ride.getOrders().size();
+        return ride;
     }
 }

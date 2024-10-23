@@ -19,9 +19,13 @@ public class Route {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToMany(fetch = FetchType.LAZY)
     List<Carriage> carriages;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToMany(fetch = FetchType.LAZY)
     List<Station> stations;
 

@@ -10,16 +10,13 @@ import java.util.List;
 @Service
 public class OrderService {
     private final OrderRepository orderRepository;
-    private final RideService rideService;
 
-    public OrderService(OrderRepository orderRepository, RideService rideService) {
+    public OrderService(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
-        this.rideService = rideService;
     }
 
     @Transactional(readOnly = true)
     public List<Order> findAll() {
-        this.rideService.findAll();
         return orderRepository.findAll();
     }
 }

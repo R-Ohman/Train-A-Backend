@@ -32,7 +32,7 @@ public class Route {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @Builder.Default
-    @OneToMany(mappedBy = "route", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "route", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     List<Ride> rides = new ArrayList<>();
 
     public static RouteBuilder autoBuilder() {

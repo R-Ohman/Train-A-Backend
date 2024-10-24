@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.edu.pg.eti.train_a.entity.Ride;
+import pl.edu.pg.eti.train_a.entity.Route;
 import pl.edu.pg.eti.train_a.repository.RideRepository;
 
 import java.util.List;
@@ -30,5 +31,13 @@ public class RideService {
         ride.getSchedules().size();
         ride.getOrders().size();
         return ride;
+    }
+
+    public void create(Ride ride) {
+        this.rideRepository.save(ride);
+    }
+
+    public void delete(int id) {
+        this.rideRepository.findById(id).ifPresent(rideRepository::delete);
     }
 }

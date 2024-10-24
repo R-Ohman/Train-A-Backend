@@ -4,6 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import pl.edu.pg.eti.train_a.entity.Price;
 
+import java.util.UUID;
+
 @Repository
-public interface PriceRepository extends JpaRepository<Price, Integer>  {
+public interface PriceRepository extends JpaRepository<Price, UUID>  {
 }

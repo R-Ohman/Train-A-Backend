@@ -3,12 +3,14 @@ package pl.edu.pg.eti.train_a.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.edu.pg.eti.train_a.entity.Carriage;
 import pl.edu.pg.eti.train_a.entity.Railway;
 import pl.edu.pg.eti.train_a.entity.Station;
 import pl.edu.pg.eti.train_a.repository.RailwayRepository;
 import pl.edu.pg.eti.train_a.repository.StationRepository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class StationService {
@@ -29,5 +31,13 @@ public class StationService {
     @Transactional(readOnly = true)
     public List<Railway> findAllRailways() {
         return railwayRepository.findAll();
+    }
+
+    public void create(Station station) {
+        this.stationRepository.save(station);
+    }
+
+    public void delete(UUID id) {
+        this.stationRepository.findById(id).ifPresent(stationRepository::delete);
     }
 }

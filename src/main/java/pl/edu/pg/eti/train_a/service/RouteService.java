@@ -25,10 +25,21 @@ public class RouteService {
 
     @Transactional
     public Route getRouteWithLazyProperties(int routeId) {
-        Route route = routeRepository.findById(routeId).orElseThrow(() -> new EntityNotFoundException());
+        Route route = routeRepository.findById(routeId).orElseThrow(EntityNotFoundException::new);
         route.getRides().size();
         route.getCarriages().size();
         route.getStations().size();
         return route;
+    }
+
+    public void create(Route route) {
+        this.routeRepository.save(route);
+    }
+
+    @Transactional
+    public void delete(int routeId) throws Exception {
+        var route = routeRepository.findById(routeId)
+                .orElseThrow(() -> new EntityNotFoundException("Route not found"));
+        this.routeRepository.delete(route);
     }
 }

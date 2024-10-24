@@ -32,13 +32,13 @@ public class Ride {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @Builder.Default
-    @OneToMany(mappedBy = "ride", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "ride", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     List<Price> prices = new ArrayList<>();
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @Builder.Default
-    @OneToMany(mappedBy = "ride", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "ride", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     List<Schedule> schedules = new ArrayList<>();
 
     public static RideBuilder autoBuilder() {
@@ -51,6 +51,14 @@ public class Ride {
             var ride = super.build();
             ride.route.getRides().add(ride);
             return ride;
+        }
+    }
+
+    @PreRemove
+    private void checkForOrdersBeforeRemove() {
+        // TODO: handle this error
+        if (!orders.isEmpty()) {
+            throw new IllegalStateException("Cannot delete Ride " + id + " as it has associated Orders.");
         }
     }
 }

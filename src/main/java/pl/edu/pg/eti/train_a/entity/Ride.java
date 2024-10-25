@@ -56,7 +56,6 @@ public class Ride {
 
     @PreRemove
     private void checkForOrdersBeforeRemove() {
-        // TODO: handle this error
         if (!orders.isEmpty()) {
             throw new IllegalStateException("Cannot delete Ride " + id + " as it has associated Orders.");
         }

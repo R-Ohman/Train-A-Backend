@@ -1,4 +1,4 @@
-package pl.edu.pg.eti.train_a.service;
+package pl.edu.pg.eti.train_a.service.order;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
@@ -10,27 +10,28 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class OrderService {
+@Transactional
+public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
 
-    public OrderService(OrderRepository orderRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
     }
 
-    @Transactional(readOnly = true)
     public List<Order> findAll() {
         return orderRepository.findAll();
+    }
+
+    public Order findById(UUID id) {
+        return orderRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Order not found"));
     }
 
     public void create(Order order) {
         this.orderRepository.save(order);
     }
 
-    @Transactional
     public void delete(UUID orderId) {
-        var order = orderRepository.findById(orderId)
-                .orElseThrow(() -> new EntityNotFoundException("Order not found"));
-
+        var order = this.findById(orderId);
         order.getUser().getOrders().remove(order);
         order.getRide().getOrders().remove(order);
         orderRepository.delete(order);

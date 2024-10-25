@@ -1,4 +1,4 @@
-package pl.edu.pg.eti.train_a.service;
+package pl.edu.pg.eti.train_a.service.route;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,22 +10,25 @@ import pl.edu.pg.eti.train_a.repository.RouteRepository;
 import java.util.List;
 
 @Service
-public class RouteService {
+@Transactional
+public class RouteServiceImpl {
     private final RouteRepository routeRepository;
 
     @Autowired
-    public RouteService(RouteRepository routeRepository) {
+    public RouteServiceImpl(RouteRepository routeRepository) {
         this.routeRepository = routeRepository;
     }
 
-    @Transactional(readOnly = true)
     public List<Route> findAll() {
         return routeRepository.findAll();
     }
 
-    @Transactional
-    public Route getRouteWithLazyProperties(int routeId) {
-        Route route = routeRepository.findById(routeId).orElseThrow(EntityNotFoundException::new);
+    public Route findById(int id) {
+        return routeRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Route not found"));
+    }
+
+    public Route findByIdWithDetails(int routeId) {
+        Route route = this.findById(routeId);
         route.getRides().size();
         route.getCarriages().size();
         route.getStations().size();
@@ -36,7 +39,6 @@ public class RouteService {
         this.routeRepository.save(route);
     }
 
-    @Transactional
     public void delete(int routeId) throws Exception {
         var route = routeRepository.findById(routeId)
                 .orElseThrow(() -> new EntityNotFoundException("Route not found"));

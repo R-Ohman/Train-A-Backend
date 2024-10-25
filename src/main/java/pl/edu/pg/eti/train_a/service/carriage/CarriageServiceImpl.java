@@ -1,27 +1,30 @@
-package pl.edu.pg.eti.train_a.service;
+package pl.edu.pg.eti.train_a.service.carriage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.edu.pg.eti.train_a.entity.Carriage;
-import pl.edu.pg.eti.train_a.entity.Route;
 import pl.edu.pg.eti.train_a.repository.CarriageRepository;
 
 import java.util.List;
 import java.util.UUID;
 
 @Service
-public class CarriageService {
+@Transactional
+public class CarriageServiceImpl implements CarriageService {
     private final CarriageRepository carriageRepository;
 
     @Autowired
-    public CarriageService(CarriageRepository carriageRepository) {
+    public CarriageServiceImpl(CarriageRepository carriageRepository) {
         this.carriageRepository = carriageRepository;
     }
 
-    @Transactional(readOnly = true)
     public List<Carriage> findAll() {
         return carriageRepository.findAll();
+    }
+
+    public Carriage findById(UUID id) {
+        return carriageRepository.findById(id).orElse(null);
     }
 
     public void create(Carriage carriage) {

@@ -38,7 +38,8 @@ public class Order {
     @JoinColumn(name = "station_end")
     Station stationEnd;
 
-    String status;
+    @Builder.Default
+    String status = "pending"; // TODO
 
     public static OrderBuilder autoBuilder() {
         return new AutoOrderBuilder();

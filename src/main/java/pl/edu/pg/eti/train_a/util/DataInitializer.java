@@ -96,17 +96,14 @@ public class DataInitializer {
 
         var routes = List.of(
                 Route.autoBuilder()
-//                        .id(1)
                         .carriages(carriages)
                         .stations(stations)
                         .build(),
                 Route.autoBuilder()
-//                        .id(2)
                         .carriages(List.of(carriages.get(0), carriages.get(1), carriages.get(1)))
                         .stations(List.of(stations.get(1), stations.get(2)))
                         .build(),
                 Route.autoBuilder()
-//                        .id(3)
                         .carriages(List.of(carriages.get(2), carriages.get(2), carriages.get(2)))
                         .stations(stations)
                         .build()
@@ -116,15 +113,12 @@ public class DataInitializer {
 
         var rides = List.of(
                 Ride.autoBuilder()
-//                        .id(1)
                         .route(routes.get(0))
                         .build(),
                 Ride.autoBuilder()
-//                        .id(2)
                         .route(routes.get(0))
                         .build(),
                 Ride.autoBuilder()
-//                        .id(3)
                         .route(routes.get(1))
                         .build()
         );

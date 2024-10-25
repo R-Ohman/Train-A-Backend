@@ -1,36 +1,31 @@
-package pl.edu.pg.eti.train_a.service;
+package pl.edu.pg.eti.train_a.service.station;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.edu.pg.eti.train_a.entity.Carriage;
-import pl.edu.pg.eti.train_a.entity.Railway;
 import pl.edu.pg.eti.train_a.entity.Station;
-import pl.edu.pg.eti.train_a.repository.RailwayRepository;
 import pl.edu.pg.eti.train_a.repository.StationRepository;
 
 import java.util.List;
 import java.util.UUID;
 
 @Service
-public class StationService {
+@Transactional
+public class StationServiceImpl {
     private final StationRepository stationRepository;
-    private final RailwayRepository railwayRepository;
 
     @Autowired
-    public StationService(StationRepository stationRepository, RailwayRepository railwayRepository) {
+    public StationServiceImpl(StationRepository stationRepository) {
         this.stationRepository = stationRepository;
-        this.railwayRepository = railwayRepository;
     }
 
-    @Transactional(readOnly = true)
     public List<Station> findAll() {
         return stationRepository.findAll();
     }
 
-    @Transactional(readOnly = true)
-    public List<Railway> findAllRailways() {
-        return railwayRepository.findAll();
+    public Station findById(UUID id) {
+        return stationRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Station not found"));
     }
 
     public void create(Station station) {

@@ -28,6 +28,12 @@ public class UserServiceImpl {
         return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found"));
     }
 
+    public User findByEmailWithDetails(String email) {
+        var user = userRepository.findByEmail(email).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        user.getOrders().size();
+        return user;
+    }
+
     public void create(User user) {
         this.userRepository.save(user);
     }

@@ -10,6 +10,8 @@ public interface CarriageService {
 
     Carriage findById(UUID id);
 
+    Carriage findByTypeWithDetails(String type);
+
     void create(Carriage carriage);
 
     void delete(UUID id);

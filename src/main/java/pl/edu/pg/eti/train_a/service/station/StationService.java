@@ -10,6 +10,8 @@ public interface StationService {
 
     Station findById(UUID id);
 
+    Station findByCityWithDetails(String city);
+
     void create(Station station);
 
     void delete(UUID id);

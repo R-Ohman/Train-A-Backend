@@ -39,7 +39,7 @@ public class Order {
     Station stationEnd;
 
     @Builder.Default
-    String status = "pending"; // TODO
+    String status = "pending";
 
     public static OrderBuilder autoBuilder() {
         return new AutoOrderBuilder();

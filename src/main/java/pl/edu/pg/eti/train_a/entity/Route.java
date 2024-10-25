@@ -40,6 +40,7 @@ public class Route {
     }
 
     public static class AutoRouteBuilder extends RouteBuilder {
+
         @Override
         public Route build() {
             var route = super.build();

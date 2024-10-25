@@ -28,6 +28,15 @@ public class StationServiceImpl {
         return stationRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Station not found"));
     }
 
+    public Station findByCityWithDetails(String city) {
+        var station = stationRepository.findByCity(city).orElseThrow(() -> new EntityNotFoundException("Station not found"));
+        station.getRoutes().size();
+        station.getRailways().size();
+        station.getOrdersFrom().size();
+        station.getOrdersTo().size();
+        return station;
+    }
+
     public void create(Station station) {
         this.stationRepository.save(station);
     }

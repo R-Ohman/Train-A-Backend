@@ -13,4 +13,6 @@ public interface UserService {
     List<User> findAll();
 
     User findById(UUID id);
+
+    User findByEmailWithDetails(String email);
 }

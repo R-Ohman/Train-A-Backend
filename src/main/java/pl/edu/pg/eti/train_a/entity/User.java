@@ -17,7 +17,6 @@ import java.util.UUID;
 @Entity
 public class User {
     @Id
-    @ToString.Exclude
     @Builder.Default
     @Column(name = "id")
     UUID id = UUID.randomUUID();
@@ -25,6 +24,8 @@ public class User {
     String email;
     String name;
     String role;
+
+    @ToString.Exclude
     String passHash;
 
     @ToString.Exclude

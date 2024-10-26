@@ -70,7 +70,7 @@ public class CliRunner implements CommandLineRunner {
                     System.out.println("Bye!");
                     break;
                 default:
-                    System.out.println("Unknown command: " + command);
+                    System.out.println("Unknown command: " + command + ". Type 'help' for available commands.");
             }
         }
     }
@@ -193,11 +193,19 @@ public class CliRunner implements CommandLineRunner {
                 var arrivalTime = schedule.getArrivalTime();
 
                 System.out.printf("\t[%s - %s] From %s to %s\n\tPrice list:\n", departureTime, arrivalTime, currentStation.getCity(), nextStation.getCity());
-                ride.getPrices().stream().filter(price -> price.getRailway().equals(schedule.getRailway())).forEach(price -> {
-                    var carriageType = price.getCarriage().getType();
-                    var cost = price.getPrice();
-                    System.out.printf("\t\t%s - %.2f$\n", carriageType, cost);
-                });
+                var prices = ride.getPrices().stream()
+                        .filter(price -> price.getRailway().equals(schedule.getRailway()))
+                        .toList();
+
+                if (prices.isEmpty()) {
+                    System.out.println("\t\tNo prices available");
+                } else {
+                    prices.forEach(price -> {
+                        var carriageType = price.getCarriage().getType();
+                        var cost = price.getPrice();
+                        System.out.printf("\t\t%s - %.2f$\n", carriageType, cost);
+                    });
+                }
             }
         });
     }

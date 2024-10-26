@@ -35,13 +35,13 @@ public class Railway {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @Builder.Default
-    @OneToMany(mappedBy = "railway", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "railway", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     List<Price> prices = new ArrayList<>();
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @Builder.Default
-    @OneToMany(mappedBy = "railway", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "railway", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     List<Schedule> schedules = new ArrayList<>();
 
     public static RailwayBuilder autoBuilder() {

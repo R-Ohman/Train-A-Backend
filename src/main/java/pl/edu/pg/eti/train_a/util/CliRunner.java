@@ -44,6 +44,7 @@ public class CliRunner implements CommandLineRunner {
     public void run(String... args) throws Exception {
         var scanner = new Scanner(System.in);
         var isRunning = true;
+        System.out.println("Welcome! Type \"help\" to list available commands.");
         while (isRunning) {
             System.out.print("Enter command: ");
             var input = scanner.nextLine().split(" ");

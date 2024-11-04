@@ -6,6 +6,7 @@ import pl.edu.pg.eti.train_a.entity.Station;
 
 import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Component
 public class StationToResponseFunction implements Function<List<Station>, GetStationsResponse> {
@@ -30,11 +31,11 @@ public class StationToResponseFunction implements Function<List<Station>, GetSta
                                                 .distance(railway.getDistance())
                                                 .build()
                                         )
-                                        .collect(java.util.stream.Collectors.toList())
+                                        .collect(Collectors.toList())
                                 )
                                 .build()
                         )
-                        .collect(java.util.stream.Collectors.toList())
+                        .collect(Collectors.toList())
                 )
                 .build();
     }

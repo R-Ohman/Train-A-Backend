@@ -6,6 +6,7 @@ import pl.edu.pg.eti.train_a.entity.Carriage;
 
 import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Component
 public class CarriageToResponseFunction implements Function<List<Carriage>, GetCarriagesResponse> {
@@ -22,7 +23,7 @@ public class CarriageToResponseFunction implements Function<List<Carriage>, GetC
                                 .rightSeats(carriage.getRightSeats())
                                 .build()
                         )
-                        .collect(java.util.stream.Collectors.toList())
+                        .collect(Collectors.toList())
                 )
                 .build();
     }

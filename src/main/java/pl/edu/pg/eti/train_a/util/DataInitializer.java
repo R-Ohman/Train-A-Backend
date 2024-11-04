@@ -129,13 +129,13 @@ public class DataInitializer {
                 User.builder()
                         .email("user1@abc.com")
                         .name("User 1")
-                        .role("User")
+                        .role(UserRole.USER)
                         .passHash("pass1")
                         .build(),
                 User.builder()
                         .email("admin1@adm.com")
                         .name("Admin 1")
-                        .role("Admin")
+                        .role(UserRole.MANAGER)
                         .passHash("pass2")
                         .build()
         );

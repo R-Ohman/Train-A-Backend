@@ -23,7 +23,9 @@ public class User {
 
     String email;
     String name;
-    String role;
+
+    @Enumerated(EnumType.STRING)
+    UserRole role;
 
     @ToString.Exclude
     String passHash;

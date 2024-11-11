@@ -6,16 +6,16 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.edu.pg.eti.train_a.controller.api.StationController;
 import pl.edu.pg.eti.train_a.dto.GetStationsResponse;
 import pl.edu.pg.eti.train_a.function.StationToResponseFunction;
-import pl.edu.pg.eti.train_a.service.station.StationServiceImpl;
+import pl.edu.pg.eti.train_a.service.station.StationService;
 
 @RestController
 @Log
 public class StationDefaultController implements StationController {
-    private final StationServiceImpl stationService;
+    private final StationService stationService;
     private final StationToResponseFunction stationToResponse;
 
     @Autowired
-    public StationDefaultController(StationServiceImpl stationService, StationToResponseFunction stationToResponseFunction) {
+    public StationDefaultController(StationService stationService, StationToResponseFunction stationToResponseFunction) {
         this.stationService = stationService;
         this.stationToResponse = stationToResponseFunction;
     }

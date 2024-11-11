@@ -2,6 +2,7 @@ package pl.edu.pg.eti.train_a.function;
 
 import org.springframework.stereotype.Component;
 import pl.edu.pg.eti.train_a.dto.GetRideResponse;
+import pl.edu.pg.eti.train_a.dto.RideSegmentResponse;
 import pl.edu.pg.eti.train_a.entity.*;
 
 import java.util.List;
@@ -45,7 +46,7 @@ public class RideToResponseFunction implements Function<Ride, GetRideResponse> {
                                             .boxed()
                                             .toList();
 
-                                    return GetRideResponse.Schedule.Segment.builder()
+                                    return RideSegmentResponse.builder()
                                             .time(List.of(schedule.getDepartureTime(), schedule.getArrivalTime()))
                                             .price(prices)
                                             .occupiedSeats(occupiedSeats)

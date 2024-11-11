@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @Service
 @Transactional
-public class UserServiceImpl {
+public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Autowired
@@ -20,10 +20,12 @@ public class UserServiceImpl {
         this.userRepository = userRepository;
     }
 
+    @Override
     public List<User> findAll() {
         return userRepository.findAll();
     }
 
+    @Override
     public User findById(UUID id) {
         return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found"));
     }
@@ -34,10 +36,12 @@ public class UserServiceImpl {
         return user;
     }
 
+    @Override
     public void create(User user) {
         this.userRepository.save(user);
     }
 
+    @Override
     public void delete(UUID id) {
         this.userRepository.findById(id).ifPresent(userRepository::delete);
     }

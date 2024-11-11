@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class RideServiceImpl {
+public class RideServiceImpl implements RideService {
     private final RideRepository rideRepository;
 
     @Autowired
@@ -19,10 +19,12 @@ public class RideServiceImpl {
         this.rideRepository = rideRepository;
     }
 
+    @Override
     public List<Ride> findAll() {
         return rideRepository.findAll();
     }
 
+    @Override
     public Ride findById(int id) {
         return rideRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Ride not found"));
     }
@@ -35,10 +37,12 @@ public class RideServiceImpl {
         return ride;
     }
 
+    @Override
     public void create(Ride ride) {
         this.rideRepository.save(ride);
     }
 
+    @Override
     public void delete(int id) {
         this.rideRepository.findById(id).ifPresent(rideRepository::delete);
     }

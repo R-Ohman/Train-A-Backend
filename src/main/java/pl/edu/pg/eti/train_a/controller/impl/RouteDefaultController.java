@@ -9,12 +9,12 @@ import pl.edu.pg.eti.train_a.dto.GetRouteInfoResponse;
 import pl.edu.pg.eti.train_a.dto.GetRoutesResponse;
 import pl.edu.pg.eti.train_a.function.RouteInfoToResponseFunction;
 import pl.edu.pg.eti.train_a.function.RouteToResponseFunction;
-import pl.edu.pg.eti.train_a.service.route.RouteServiceImpl;
+import pl.edu.pg.eti.train_a.service.route.RouteService;
 
 @RestController
 @Log
 public class RouteDefaultController implements RouteController {
-    private final RouteServiceImpl routeService;
+    private final RouteService routeService;
 
     private final RouteInfoToResponseFunction routeInfoToResponse;
 
@@ -22,7 +22,7 @@ public class RouteDefaultController implements RouteController {
 
     @Autowired
     public RouteDefaultController(
-            RouteServiceImpl routeService,
+            RouteService routeService,
             RouteToResponseFunction routeToResponseFunction,
             RouteInfoToResponseFunction routeInfoToResponseFunction
     ) {

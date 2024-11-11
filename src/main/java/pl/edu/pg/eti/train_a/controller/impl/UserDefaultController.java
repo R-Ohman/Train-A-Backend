@@ -6,16 +6,16 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.edu.pg.eti.train_a.controller.api.UserController;
 import pl.edu.pg.eti.train_a.dto.GetUsersResponse;
 import pl.edu.pg.eti.train_a.function.UserToResponseFunction;
-import pl.edu.pg.eti.train_a.service.user.UserServiceImpl;
+import pl.edu.pg.eti.train_a.service.user.UserService;
 
 @RestController
 @Log
 public class UserDefaultController implements UserController {
-    private final UserServiceImpl userService;
+    private final UserService userService;
     private final UserToResponseFunction userToResponseFunction;
 
     @Autowired
-    public UserDefaultController(UserServiceImpl userService, UserToResponseFunction userToResponseFunction) {
+    public UserDefaultController(UserService userService, UserToResponseFunction userToResponseFunction) {
         this.userService = userService;
         this.userToResponseFunction = userToResponseFunction;
     }

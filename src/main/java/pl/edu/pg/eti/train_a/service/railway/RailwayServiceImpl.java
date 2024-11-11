@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @Service
 @Transactional
-public class RailwayServiceImpl {
+public class RailwayServiceImpl implements RailwayService {
     private final RailwayRepository railwayRepository;
 
     @Autowired
@@ -20,18 +20,22 @@ public class RailwayServiceImpl {
         this.railwayRepository = railwayRepository;
     }
 
+    @Override
     public List<Railway> findAll() {
         return railwayRepository.findAll();
     }
 
+    @Override
     public Railway findById(UUID id) {
         return railwayRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Railway not found"));
     }
 
+    @Override
     public void create(Railway railway) {
         railwayRepository.save(railway);
     }
 
+    @Override
     public void delete(UUID id) {
         railwayRepository.findById(id).ifPresent(railwayRepository::delete);
     }

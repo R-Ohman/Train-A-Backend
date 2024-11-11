@@ -6,17 +6,17 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.edu.pg.eti.train_a.controller.api.CarriageController;
 import pl.edu.pg.eti.train_a.dto.GetCarriagesResponse;
 import pl.edu.pg.eti.train_a.function.CarriageToResponseFunction;
-import pl.edu.pg.eti.train_a.service.carriage.CarriageServiceImpl;
+import pl.edu.pg.eti.train_a.service.carriage.CarriageService;
 
 @RestController
 @Log
 public class CarriageDefaultController implements CarriageController {
 
-    private final CarriageServiceImpl carriageService;
+    private final CarriageService carriageService;
     private final CarriageToResponseFunction carriageToResponse;
 
     @Autowired
-    public CarriageDefaultController(CarriageServiceImpl carriageService, CarriageToResponseFunction carriageToResponse) {
+    public CarriageDefaultController(CarriageService carriageService, CarriageToResponseFunction carriageToResponse) {
         this.carriageService = carriageService;
         this.carriageToResponse = carriageToResponse;
     }

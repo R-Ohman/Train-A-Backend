@@ -6,16 +6,16 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.edu.pg.eti.train_a.controller.api.OrderController;
 import pl.edu.pg.eti.train_a.dto.GetOrdersResponse;
 import pl.edu.pg.eti.train_a.function.OrderToResponseFunction;
-import pl.edu.pg.eti.train_a.service.order.OrderServiceImpl;
+import pl.edu.pg.eti.train_a.service.order.OrderService;
 
 @RestController
 @Log
 public class OrderDefaultController implements OrderController {
-    private final OrderServiceImpl orderService;
+    private final OrderService orderService;
     private final OrderToResponseFunction orderToResponse;
 
     @Autowired
-    public OrderDefaultController(OrderServiceImpl orderService, OrderToResponseFunction orderToResponse) {
+    public OrderDefaultController(OrderService orderService, OrderToResponseFunction orderToResponse) {
         this.orderService = orderService;
         this.orderToResponse = orderToResponse;
     }

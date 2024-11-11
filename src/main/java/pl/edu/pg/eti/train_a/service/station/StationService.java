@@ -10,7 +10,7 @@ public interface StationService {
 
     Station findById(UUID id);
 
-    Station findByCityWithDetails(String city);
+    Station findNearestStation(double latitude, double longitude);
 
     void create(Station station);
 

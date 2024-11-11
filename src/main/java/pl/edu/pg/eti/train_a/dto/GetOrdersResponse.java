@@ -1,6 +1,7 @@
 package pl.edu.pg.eti.train_a.dto;
 
 import lombok.*;
+import pl.edu.pg.eti.train_a.entity.OrderStatus;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -48,7 +49,7 @@ public class GetOrdersResponse {
         private int routeId;
         private int seatId;
         private UUID userId;
-        private String status;
+        private OrderStatus status;
         private List<UUID> path;
         private List<String> carriages;
         private Schedule schedule;

@@ -39,7 +39,8 @@ public class Order {
     Station stationEnd;
 
     @Builder.Default
-    String status = "pending";
+    @Enumerated(EnumType.STRING)
+    OrderStatus status = OrderStatus.ACTIVE;
 
     public static OrderBuilder autoBuilder() {
         return new AutoOrderBuilder();

@@ -8,7 +8,6 @@ import pl.edu.pg.eti.train_a.entity.Railway;
 import pl.edu.pg.eti.train_a.repository.RailwayRepository;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @Transactional
@@ -26,7 +25,7 @@ public class RailwayServiceImpl implements RailwayService {
     }
 
     @Override
-    public Railway findById(UUID id) {
+    public Railway findById(int id) {
         return railwayRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Railway not found"));
     }
 
@@ -36,7 +35,7 @@ public class RailwayServiceImpl implements RailwayService {
     }
 
     @Override
-    public void delete(UUID id) {
+    public void delete(int id) {
         railwayRepository.findById(id).ifPresent(railwayRepository::delete);
     }
 }

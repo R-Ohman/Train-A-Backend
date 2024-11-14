@@ -4,7 +4,6 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -28,11 +27,11 @@ public class GetStationsResponse {
         @AllArgsConstructor(access = AccessLevel.PRIVATE)
         @Builder
         public static class Connection {
-            private UUID stationId;
+            private int stationId;
             private int distance;
         }
 
-        private UUID id;
+        private int id;
         private String city;
         private BigDecimal latitude;
         private BigDecimal longitude;

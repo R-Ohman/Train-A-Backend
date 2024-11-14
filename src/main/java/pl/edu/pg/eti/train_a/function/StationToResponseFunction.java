@@ -23,7 +23,7 @@ public class StationToResponseFunction implements Function<List<Station>, GetSta
                                 .connectedTo(station.getRailways().stream()
                                         .map(railway -> GetStationsResponse.Station.Connection.builder()
                                                 .stationId(railway.getStations().stream()
-                                                        .filter(s -> !s.getId().equals(station.getId()))
+                                                        .filter(s -> !(s.getId() == station.getId()))
                                                         .findFirst()
                                                         .orElseThrow(() -> new IllegalStateException("Station not found"))
                                                         .getId()

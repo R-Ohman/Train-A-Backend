@@ -54,18 +54,21 @@ public class DataInitializer {
 
         var carriages = List.of(
                 Carriage.builder()
+                        .code("car1")
                         .type("1st class")
                         .rows((byte) 25)
                         .leftSeats((byte) 2)
                         .rightSeats((byte) 1)
                         .build(),
                 Carriage.builder()
+                        .code("car2")
                         .type("2nd class")
                         .rows((byte) 30)
                         .leftSeats((byte) 2)
                         .rightSeats((byte) 2)
                         .build(),
                 Carriage.builder()
+                        .code("car3")
                         .type("3rd class")
                         .rows((byte) 35)
                         .leftSeats((byte) 2)

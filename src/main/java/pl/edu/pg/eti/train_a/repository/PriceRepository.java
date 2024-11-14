@@ -5,9 +5,8 @@ import org.springframework.stereotype.Repository;
 import pl.edu.pg.eti.train_a.entity.Price;
 
 import java.util.List;
-import java.util.UUID;
 
 @Repository
-public interface PriceRepository extends JpaRepository<Price, UUID>  {
+public interface PriceRepository extends JpaRepository<Price, Integer>  {
     List<Price> findPricesByRideId(int rideId);
 }

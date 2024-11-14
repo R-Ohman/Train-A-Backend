@@ -3,7 +3,6 @@ package pl.edu.pg.eti.train_a.dto;
 import lombok.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -21,7 +20,7 @@ public class GetRoutesResponse {
     @Builder
     public static class Route {
         private int id;
-        private List<UUID> path;
+        private List<Integer> path;
         private List<String> carriages;
     }
 

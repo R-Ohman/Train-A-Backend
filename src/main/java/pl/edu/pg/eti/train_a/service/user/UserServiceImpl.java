@@ -8,7 +8,6 @@ import pl.edu.pg.eti.train_a.entity.User;
 import pl.edu.pg.eti.train_a.repository.UserRepository;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @Transactional
@@ -26,7 +25,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findById(UUID id) {
+    public User findById(int id) {
         return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found"));
     }
 
@@ -42,7 +41,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void delete(UUID id) {
+    public void delete(int id) {
         this.userRepository.findById(id).ifPresent(userRepository::delete);
     }
 }

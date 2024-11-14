@@ -9,7 +9,6 @@ import pl.edu.pg.eti.train_a.repository.CarriageRepository;
 import pl.edu.pg.eti.train_a.repository.RouteRepository;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @Transactional
@@ -27,7 +26,7 @@ public class CarriageServiceImpl implements CarriageService {
         return carriageRepository.findAll();
     }
 
-    public Carriage findById(UUID id) {
+    public Carriage findById(int id) {
         return carriageRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Carriage not found"));
     }
 
@@ -43,7 +42,7 @@ public class CarriageServiceImpl implements CarriageService {
         this.carriageRepository.save(carriage);
     }
 
-    public void delete(UUID id) {
+    public void delete(int id) {
         this.carriageRepository.findById(id).ifPresent(carriageRepository::delete);
     }
 }

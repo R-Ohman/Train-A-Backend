@@ -6,7 +6,6 @@ import lombok.experimental.FieldDefaults;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Data
 @Builder
@@ -17,10 +16,11 @@ import java.util.UUID;
 @Entity
 public class Carriage {
     @Id
-    @ToString.Exclude
-    @Builder.Default
-    @Column(name = "id")
-    UUID id = UUID.randomUUID();;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    int id;
+
+    @Column(unique = true)
+    String code;
 
     String type;
     byte rows;

@@ -3,7 +3,6 @@ package pl.edu.pg.eti.train_a.dto;
 import lombok.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -15,7 +14,7 @@ import java.util.UUID;
 public class GetRideResponse {
     private int rideId;
     private int routeId;
-    private List<UUID> path;
+    private List<Integer> path;
     private List<String> carriages;
     private Schedule schedule;
 

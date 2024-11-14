@@ -17,7 +17,6 @@ import pl.edu.pg.eti.train_a.service.user.UserServiceImpl;
 
 import java.util.Arrays;
 import java.util.Scanner;
-import java.util.UUID;
 
 @Component
 public class CliRunner implements CommandLineRunner {
@@ -129,7 +128,7 @@ public class CliRunner implements CommandLineRunner {
                 break;
             case "order":
                 System.out.print("Enter order id: ");
-                var orderId = UUID.fromString(scanner.nextLine());
+                var orderId = Integer.parseInt(scanner.nextLine());
                 try {
                     orderService.delete(orderId);
                     System.out.println("Deleted order with ID: " + orderId);

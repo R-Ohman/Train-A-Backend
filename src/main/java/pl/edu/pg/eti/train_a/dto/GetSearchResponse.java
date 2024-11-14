@@ -4,7 +4,6 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -25,7 +24,7 @@ public class GetSearchResponse {
     @Builder
     public static class Route {
         private int id;
-        private List<UUID> path;
+        private List<Integer> path;
         private List<String> carriages;
         private List<Schedule> schedule;
 
@@ -46,7 +45,7 @@ public class GetSearchResponse {
     @AllArgsConstructor(access = AccessLevel.PRIVATE)
     @Builder
     public static class Station {
-        private UUID stationId;
+        private int stationId;
         private String city;
         private Geolocation geolocation;
 

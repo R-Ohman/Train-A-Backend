@@ -5,9 +5,8 @@ import org.springframework.stereotype.Repository;
 import pl.edu.pg.eti.train_a.entity.User;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, UUID> {
+public interface UserRepository extends JpaRepository<User, Integer> {
     Optional<User> findByEmail(String email);
 }

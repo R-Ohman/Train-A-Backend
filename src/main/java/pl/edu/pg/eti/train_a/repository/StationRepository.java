@@ -5,9 +5,8 @@ import org.springframework.stereotype.Repository;
 import pl.edu.pg.eti.train_a.entity.Station;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @Repository
-public interface StationRepository extends JpaRepository<Station, UUID> {
+public interface StationRepository extends JpaRepository<Station, Integer> {
     Optional<Station> findByCity(String city);
 }

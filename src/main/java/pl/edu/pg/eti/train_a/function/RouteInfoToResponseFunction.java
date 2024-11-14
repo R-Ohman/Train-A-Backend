@@ -29,7 +29,7 @@ public class RouteInfoToResponseFunction implements Function<Route, GetRouteInfo
                                 .segments(ride.getSchedules().stream()
                                         .map(schedule -> {
                                             var prices = ride.getPrices().stream()
-                                                    .filter(price -> price.getRailway().getId().equals(schedule.getRailway().getId()))
+                                                    .filter(price -> price.getRailway().getId() == schedule.getRailway().getId())
                                                     .collect(Collectors.toMap(
                                                             price -> price.getCarriage().getType(),
                                                             Price::getPrice

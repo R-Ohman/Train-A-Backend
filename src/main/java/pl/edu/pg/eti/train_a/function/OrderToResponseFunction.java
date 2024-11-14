@@ -35,7 +35,7 @@ public class OrderToResponseFunction implements Function<List<Order>, GetOrdersR
                                         .segments(order.getRide().getSchedules().stream()
                                                 .map(schedule -> {
                                                     var prices = order.getRide().getPrices().stream()
-                                                            .filter(price -> price.getRailway().getId().equals(schedule.getRailway().getId()))
+                                                            .filter(price -> price.getRailway().getId() == schedule.getRailway().getId())
                                                             .collect(Collectors.toMap(
                                                                     price -> price.getCarriage().getType(),
                                                                     Price::getPrice

@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.util.UUID;
-
 @Data
 @Builder
 @NoArgsConstructor
@@ -15,10 +13,8 @@ import java.util.UUID;
 @Entity
 public class Order {
     @Id
-    @ToString.Exclude
-    @Builder.Default
-    @Column(name = "id")
-    UUID id = UUID.randomUUID();
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    int id;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

@@ -6,7 +6,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -17,7 +16,7 @@ import java.util.UUID;
 @Builder
 public class GetRouteInfoResponse {
     private int id;
-    private List<UUID> path;
+    private List<Integer> path;
     private List<String> carriages;
     private List<Schedule> schedule;
 

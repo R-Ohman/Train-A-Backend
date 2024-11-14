@@ -31,7 +31,7 @@ public class RideToResponseFunction implements Function<Ride, GetRideResponse> {
                         .segments(ride.getSchedules().stream()
                                 .map(schedule -> {
                                     var prices = ride.getPrices().stream()
-                                            .filter(price -> price.getRailway().getId().equals(schedule.getRailway().getId()))
+                                            .filter(price -> price.getRailway().getId() == schedule.getRailway().getId())
                                             .collect(Collectors.toMap(
                                                     price -> price.getCarriage().getType(),
                                                     Price::getPrice
@@ -41,7 +41,7 @@ public class RideToResponseFunction implements Function<Ride, GetRideResponse> {
                                             .filter(order -> order.getRide().getId() == ride.getId())
                                             .filter(order -> order.getStatus().equals(OrderStatus.ACTIVE))
                                             .filter(order -> order.getRide().getSchedules().stream()
-                                                    .anyMatch(s -> s.getId().equals(schedule.getId())))
+                                                    .anyMatch(s -> s.getId() == schedule.getId()))
                                             .mapToInt(Order::getSeatId)
                                             .boxed()
                                             .toList();

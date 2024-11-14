@@ -5,9 +5,8 @@ import org.springframework.stereotype.Repository;
 import pl.edu.pg.eti.train_a.entity.Order;
 
 import java.util.List;
-import java.util.UUID;
 
 @Repository
-public interface OrderRepository extends JpaRepository<Order, UUID> {
-    List<Order> findOrdersByUserId(UUID userId);
+public interface OrderRepository extends JpaRepository<Order, Integer> {
+    List<Order> findOrdersByUserId(int userId);
 }

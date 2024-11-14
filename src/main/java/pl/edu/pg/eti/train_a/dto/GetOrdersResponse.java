@@ -7,7 +7,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -44,13 +43,13 @@ public class GetOrdersResponse {
             private List<Segment> segments;
         }
 
-        private UUID id;
+        private int id;
         private int rideId;
         private int routeId;
         private int seatId;
-        private UUID userId;
+        private int userId;
         private OrderStatus status;
-        private List<UUID> path;
+        private List<Integer> path;
         private List<String> carriages;
         private Schedule schedule;
     }

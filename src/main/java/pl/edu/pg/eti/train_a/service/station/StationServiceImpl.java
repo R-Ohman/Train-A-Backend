@@ -8,7 +8,6 @@ import pl.edu.pg.eti.train_a.entity.Station;
 import pl.edu.pg.eti.train_a.repository.StationRepository;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @Transactional
@@ -26,7 +25,7 @@ public class StationServiceImpl implements StationService {
     }
 
     @Override
-    public Station findById(UUID id) {
+    public Station findById(int id) {
         return stationRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Station not found"));
     }
 
@@ -56,7 +55,7 @@ public class StationServiceImpl implements StationService {
     }
 
     @Override
-    public void delete(UUID id) {
+    public void delete(int id) {
         this.stationRepository.findById(id).ifPresent(stationRepository::delete);
     }
 }

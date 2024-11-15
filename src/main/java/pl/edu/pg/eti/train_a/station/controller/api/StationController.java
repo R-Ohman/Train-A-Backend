@@ -17,4 +17,8 @@ public interface StationController {
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
     Map<String, Integer> postStation(@RequestBody PostStationRequest request);
+
+    @DeleteMapping("/api/station/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    void deleteStation(@PathVariable int id);
 }

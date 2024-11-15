@@ -26,7 +26,7 @@ public class RequestToRouteFunction implements Function<PostRouteRequest, Route>
     public Route apply(PostRouteRequest postRouteRequest) {
         return Route.builder()
                 .stations(postRouteRequest.getPath().stream()
-                        .map(stationService::findById)
+                        .map((id) -> stationService.findById(id).orElseThrow())
                         .toList())
                 .carriages(postRouteRequest.getCarriages().stream()
                         .map(carriageService::findByType)

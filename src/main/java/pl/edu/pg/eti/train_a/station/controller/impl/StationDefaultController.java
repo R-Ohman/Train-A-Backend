@@ -2,7 +2,9 @@ package pl.edu.pg.eti.train_a.station.controller.impl;
 
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 import pl.edu.pg.eti.train_a.station.controller.api.StationController;
 import pl.edu.pg.eti.train_a.station.dto.GetStationsResponse;
 import pl.edu.pg.eti.train_a.station.dto.PostStationRequest;
@@ -39,5 +41,16 @@ public class StationDefaultController implements StationController {
     public Map<String, Integer> postStation(PostStationRequest request) {
         int newStationId = stationService.create(requestToStation.apply(request));
         return Map.of("id", newStationId);
+    }
+
+    @Override
+    public void deleteStation(int id) {
+        stationService.findById(id)
+                .ifPresentOrElse(
+                        character -> stationService.delete(id),
+                        () -> {
+                            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+                        }
+                );
     }
 }

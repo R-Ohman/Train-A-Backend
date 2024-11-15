@@ -10,6 +10,7 @@ import pl.edu.pg.eti.train_a.station.service.api.StationService;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -27,8 +28,8 @@ public class StationServiceImpl implements StationService {
     }
 
     @Override
-    public Station findById(int id) {
-        return stationRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Station not found"));
+    public Optional<Station> findById(int id) {
+        return stationRepository.findById(id);
     }
 
     @Override

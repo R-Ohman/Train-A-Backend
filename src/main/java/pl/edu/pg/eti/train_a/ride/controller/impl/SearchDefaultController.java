@@ -2,7 +2,9 @@ package pl.edu.pg.eti.train_a.ride.controller.impl;
 
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 import pl.edu.pg.eti.train_a.ride.controller.api.SearchController;
 import pl.edu.pg.eti.train_a.ride.dto.GetRideResponse;
 import pl.edu.pg.eti.train_a.ride.dto.GetSearchResponse;
@@ -65,12 +67,23 @@ public class SearchDefaultController implements SearchController {
 
     @Override
     public GetRideResponse getSearchInfoById(int rideId) {
-        return rideToResponse.apply(rideService.findById(rideId));
+        return rideToResponse.apply(rideService.findById(rideId).orElseThrow());
     }
 
     @Override
     public Map<String, Integer> postRide(int routeId, PostRideRequest request) {
         int newRideId = rideService.create(requestToRide.apply(routeId, request));
         return Map.of("id", newRideId);
+    }
+
+    @Override
+    public void deleteRide(int routeId, int rideId) {
+        rideService.findById(rideId)
+                .ifPresentOrElse(
+                        character -> rideService.delete(rideId),
+                        () -> {
+                            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+                        }
+                );
     }
 }

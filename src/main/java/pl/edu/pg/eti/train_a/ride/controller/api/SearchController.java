@@ -30,4 +30,8 @@ public interface SearchController {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     Map<String, Integer> postRide(@PathVariable int routeId, @RequestBody PostRideRequest request);
+
+    @DeleteMapping("/api/route/{routeId}/ride/{rideId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    void deleteRide(@PathVariable int routeId, @PathVariable int rideId);
 }

@@ -25,7 +25,7 @@ public class RequestToOrderFunction implements Function<PostOrderRequest, Order>
     public Order apply(PostOrderRequest postOrderRequest) {
         // TODO: take into account the USER
         return Order.builder()
-                .ride(rideService.findById(postOrderRequest.getRideId()))
+                .ride(rideService.findById(postOrderRequest.getRideId()).orElseThrow())
                 .seatId(postOrderRequest.getSeatId())
                 .stationStart(stationService.findById(postOrderRequest.getStationStart()).orElseThrow())
                 .stationEnd(stationService.findById(postOrderRequest.getStationEnd()).orElseThrow())

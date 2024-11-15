@@ -31,7 +31,7 @@ public class RequestToRideFunction implements BiFunction<Integer, PostRideReques
     @Override
     public Ride apply(Integer routeId, PostRideRequest postRideRequest) {
         return Ride.autoBuilder()
-                .route(routeService.findById(routeId))
+                .route(routeService.findById(routeId).orElseThrow())
                 .segments(postRideRequest.getSegments().stream()
                         .map(segment -> Segment.builder()
                                 .arrival(LocalDateTime.parse(segment.getTime().get(1)))

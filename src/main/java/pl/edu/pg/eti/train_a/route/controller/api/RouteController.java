@@ -23,6 +23,10 @@ public interface RouteController {
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
     Map<String, Integer> postRoute(@RequestBody PostRouteRequest request);
+
+    @DeleteMapping("/api/route/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    void deleteRoute(@PathVariable int id);
 }
 
 

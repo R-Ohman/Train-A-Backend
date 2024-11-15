@@ -5,11 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.edu.pg.eti.train_a.route.entity.Route;
+import pl.edu.pg.eti.train_a.route.repository.api.RouteRepository;
 import pl.edu.pg.eti.train_a.route.service.api.RouteService;
 import pl.edu.pg.eti.train_a.station.entity.Station;
-import pl.edu.pg.eti.train_a.route.repository.api.RouteRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -27,8 +28,8 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    public Route findById(int id) {
-        return routeRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Route not found"));
+    public Optional<Route> findById(int id) {
+        return routeRepository.findById(id);
     }
 
     @Override
@@ -40,7 +41,7 @@ public class RouteServiceImpl implements RouteService {
     }
 
     public Route findByIdWithDetails(int routeId) {
-        Route route = this.findById(routeId);
+        Route route = this.findById(routeId).orElseThrow();
         route.getRides().size();
         route.getCarriages().size();
         route.getStations().size();
@@ -54,7 +55,7 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    public void delete(int routeId) throws Exception {
+    public void delete(int routeId) {
         var route = routeRepository.findById(routeId)
                 .orElseThrow(() -> new EntityNotFoundException("Route not found"));
         this.routeRepository.delete(route);

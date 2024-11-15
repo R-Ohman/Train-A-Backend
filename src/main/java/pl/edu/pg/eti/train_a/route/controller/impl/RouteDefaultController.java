@@ -3,7 +3,9 @@ package pl.edu.pg.eti.train_a.route.controller.impl;
 
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 import pl.edu.pg.eti.train_a.route.controller.api.RouteController;
 import pl.edu.pg.eti.train_a.route.dto.GetRouteInfoResponse;
 import pl.edu.pg.eti.train_a.route.dto.GetRoutesResponse;
@@ -46,12 +48,23 @@ public class RouteDefaultController implements RouteController {
 
     @Override
     public GetRouteInfoResponse getRouteInfoById(int id) {
-        return routeInfoToResponse.apply(routeService.findById(id));
+        return routeInfoToResponse.apply(routeService.findById(id).orElseThrow());
     }
 
     @Override
     public Map<String, Integer> postRoute(PostRouteRequest request) {
         int newRouteId = routeService.create(requestToRoute.apply(request));
         return Map.of("id", newRouteId);
+    }
+
+    @Override
+    public void deleteRoute(int id) {
+        routeService.findById(id)
+                .ifPresentOrElse(
+                        character -> routeService.delete(id),
+                        () -> {
+                            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+                        }
+                );
     }
 }

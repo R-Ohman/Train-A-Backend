@@ -26,8 +26,9 @@ public class OrderServiceImpl implements OrderService {
         return orderRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Order not found"));
     }
 
-    public void create(Order order) {
-        this.orderRepository.save(order);
+    public int create(Order order) {
+        var newOrder = this.orderRepository.save(order);
+        return newOrder.getId();
     }
 
     public void delete(int orderId) {

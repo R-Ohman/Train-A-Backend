@@ -1,0 +1,27 @@
+package pl.edu.pg.eti.train_a.order.controller.impl;
+
+import lombok.extern.java.Log;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
+import pl.edu.pg.eti.train_a.order.controller.api.OrderController;
+import pl.edu.pg.eti.train_a.order.dto.GetOrdersResponse;
+import pl.edu.pg.eti.train_a.order.function.OrderToResponseFunction;
+import pl.edu.pg.eti.train_a.order.service.api.OrderService;
+
+@RestController
+@Log
+public class OrderDefaultController implements OrderController {
+    private final OrderService orderService;
+    private final OrderToResponseFunction orderToResponse;
+
+    @Autowired
+    public OrderDefaultController(OrderService orderService, OrderToResponseFunction orderToResponse) {
+        this.orderService = orderService;
+        this.orderToResponse = orderToResponse;
+    }
+
+    @Override
+    public GetOrdersResponse getOrders() {
+        return orderToResponse.apply(orderService.findAll());
+    }
+}

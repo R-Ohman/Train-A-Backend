@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.edu.pg.eti.train_a.ride.controller.api.SearchController;
 import pl.edu.pg.eti.train_a.ride.dto.GetRideResponse;
 import pl.edu.pg.eti.train_a.ride.dto.GetSearchResponse;
+import pl.edu.pg.eti.train_a.ride.dto.PostRideRequest;
+import pl.edu.pg.eti.train_a.ride.function.RequestToRideFunction;
 import pl.edu.pg.eti.train_a.ride.function.RideToResponseFunction;
 import pl.edu.pg.eti.train_a.ride.function.SearchToResponseFunction;
 import pl.edu.pg.eti.train_a.ride.service.api.RideService;
@@ -14,6 +16,7 @@ import pl.edu.pg.eti.train_a.station.service.api.StationService;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.Optional;
 
 import static java.time.ZoneOffset.UTC;
@@ -26,6 +29,7 @@ public class SearchDefaultController implements SearchController {
     private final StationService stationService;
     private final RideToResponseFunction rideToResponse;
     private final SearchToResponseFunction searchToResponse;
+    private final RequestToRideFunction requestToRide;
 
     @Autowired
     public SearchDefaultController(
@@ -33,13 +37,15 @@ public class SearchDefaultController implements SearchController {
             RouteService routeService,
             StationService stationService,
             RideToResponseFunction rideToResponseFunction,
-            SearchToResponseFunction searchToResponseFunction
+            SearchToResponseFunction searchToResponseFunction,
+            RequestToRideFunction requestToRide
     ) {
         this.rideService = rideService;
         this.routeService = routeService;
         this.stationService = stationService;
         this.rideToResponse = rideToResponseFunction;
         this.searchToResponse = searchToResponseFunction;
+        this.requestToRide = requestToRide;
     }
 
     @Override
@@ -60,5 +66,11 @@ public class SearchDefaultController implements SearchController {
     @Override
     public GetRideResponse getSearchInfoById(int rideId) {
         return rideToResponse.apply(rideService.findById(rideId));
+    }
+
+    @Override
+    public Map<String, Integer> postRide(int routeId, PostRideRequest request) {
+        int newRideId = rideService.create(requestToRide.apply(routeId, request));
+        return Map.of("id", newRideId);
     }
 }

@@ -44,6 +44,7 @@ public class Ride {
         public Ride build() {
             var ride = super.build();
             ride.route.getRides().add(ride);
+            ride.segments.forEach(segment -> segment.setRide(ride));
             return ride;
         }
     }

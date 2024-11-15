@@ -16,7 +16,7 @@ public class CarriageToResponseFunction implements Function<List<Carriage>, GetC
         return GetCarriagesResponse.builder()
                 .carriages(carriages.stream()
                         .map(carriage -> GetCarriagesResponse.Carriage.builder()
-                                .code(carriage.getCode())
+                                .code(String.valueOf(carriage.getCode()))
                                 .name(carriage.getType())
                                 .rows(carriage.getRows())
                                 .leftSeats(carriage.getLeftSeats())

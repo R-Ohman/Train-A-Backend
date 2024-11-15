@@ -6,6 +6,7 @@ import lombok.experimental.FieldDefaults;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @Builder
@@ -16,16 +17,15 @@ import java.util.List;
 @Entity
 public class Carriage {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    @Builder.Default
+    @Column(name = "id")
+    UUID code = UUID.randomUUID();
 
     @Column(unique = true)
-    String code;
-
     String type;
-    byte rows;
-    byte leftSeats;
-    byte rightSeats;
+    int rows;
+    int leftSeats;
+    int rightSeats;
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude

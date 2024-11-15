@@ -9,6 +9,7 @@ import pl.edu.pg.eti.train_a.repository.CarriageRepository;
 import pl.edu.pg.eti.train_a.repository.RouteRepository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -42,8 +43,9 @@ public class CarriageServiceImpl implements CarriageService {
         return carriage;
     }
 
-    public void create(Carriage carriage) {
-        this.carriageRepository.save(carriage);
+    public UUID create(Carriage carriage) {
+        var newCarriage = this.carriageRepository.save(carriage);
+        return newCarriage.getCode();
     }
 
     public void delete(int id) {

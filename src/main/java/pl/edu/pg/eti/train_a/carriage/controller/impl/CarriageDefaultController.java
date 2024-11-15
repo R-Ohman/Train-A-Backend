@@ -2,7 +2,9 @@ package pl.edu.pg.eti.train_a.carriage.controller.impl;
 
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 import pl.edu.pg.eti.train_a.carriage.controller.api.CarriageController;
 import pl.edu.pg.eti.train_a.carriage.dto.GetCarriagesResponse;
 import pl.edu.pg.eti.train_a.carriage.dto.PostCarriageRequest;
@@ -41,5 +43,16 @@ public class CarriageDefaultController implements CarriageController {
     public Map<String, UUID> postCarriage(PostCarriageRequest request) {
         var newCarriageId = carriageService.create(requestToCarriage.apply(request));
         return Map.of("code", newCarriageId);
+    }
+
+    @Override
+    public void deleteCarriage(UUID code) {
+        carriageService.findById(code)
+                .ifPresentOrElse(
+                        character -> carriageService.delete(code),
+                        () -> {
+                            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+                        }
+                );
     }
 }

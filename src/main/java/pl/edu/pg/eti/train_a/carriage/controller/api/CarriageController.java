@@ -18,4 +18,8 @@ public interface CarriageController {
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
     Map<String, UUID> postCarriage(@RequestBody PostCarriageRequest request);
+
+    @DeleteMapping("/api/carriage/{code}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    void deleteCarriage(@PathVariable UUID code);
 }

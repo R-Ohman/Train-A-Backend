@@ -3,12 +3,13 @@ package pl.edu.pg.eti.train_a.carriage.service.api;
 import pl.edu.pg.eti.train_a.carriage.entity.Carriage;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface CarriageService {
     List<Carriage> findAll();
 
-    Carriage findById(int id);
+    Optional<Carriage> findById(UUID id);
 
     Carriage findByType(String type);
 
@@ -16,5 +17,5 @@ public interface CarriageService {
 
     UUID create(Carriage carriage);
 
-    void delete(int id);
+    void delete(UUID id);
 }

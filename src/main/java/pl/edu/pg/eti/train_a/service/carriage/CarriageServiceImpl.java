@@ -39,7 +39,6 @@ public class CarriageServiceImpl implements CarriageService {
         routeRepository.findAll();
         var carriage = carriageRepository.findByType(type).orElseThrow(() -> new EntityNotFoundException("Carriage not found"));
         carriage.getRoutes().size();
-        carriage.getPrices().size();
         return carriage;
     }
 

@@ -6,6 +6,7 @@ import pl.edu.pg.eti.train_a.dto.RideSegmentResponse;
 import pl.edu.pg.eti.train_a.entity.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -28,34 +29,30 @@ public class RideToResponseFunction implements Function<Ride, GetRideResponse> {
                                 )
                 )
                 .schedule(GetRideResponse.Schedule.builder()
-                        .segments(ride.getSchedules().stream()
-                                .map(schedule -> {
-                                    var prices = ride.getPrices().stream()
-                                            .filter(price -> price.getRailway().getId() == schedule.getRailway().getId())
-                                            .collect(Collectors.toMap(
-                                                    price -> price.getCarriage().getType(),
-                                                    Price::getPrice
-                                            ));
-
+                        .segments(ride.getSegments().stream()
+                                .map(segment -> {
                                     var occupiedSeats = ride.getOrders().stream()
-                                            .filter(order -> order.getRide().getId() == ride.getId())
-                                            .filter(order -> order.getStatus().equals(OrderStatus.ACTIVE))
-                                            .filter(order -> order.getRide().getSchedules().stream()
-                                                    .anyMatch(s -> s.getId() == schedule.getId()))
+                                            .filter(order -> order.getRide().getId() == ride.getId()
+                                                    && order.getStatus().equals(OrderStatus.ACTIVE))
+                                            .filter(order -> order.getRide().getSegments().stream()
+                                                    .anyMatch(s -> s.getId() == segment.getId()))
                                             .mapToInt(Order::getSeatId)
                                             .boxed()
                                             .toList();
 
                                     return RideSegmentResponse.builder()
-                                            .time(List.of(schedule.getDepartureTime(), schedule.getArrivalTime()))
-                                            .price(prices)
+                                            .time(List.of(segment.getDeparture(), segment.getArrival()))
+                                            .price(
+                                                    segment.getPrices().entrySet().stream()
+                                                            .collect(Collectors.toMap(
+                                                                    entry -> entry.getKey().getType(),
+                                                                    Map.Entry::getValue))
+                                            )
                                             .occupiedSeats(occupiedSeats)
                                             .build();
                                 })
-                                .toList()
-                        )
-                        .build()
-                )
+                                .toList())
+                        .build())
                 .build();
     }
 }

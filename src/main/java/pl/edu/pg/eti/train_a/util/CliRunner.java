@@ -7,36 +7,37 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.edu.pg.eti.train_a.entity.Order;
 import pl.edu.pg.eti.train_a.entity.Ride;
 import pl.edu.pg.eti.train_a.entity.Route;
-import pl.edu.pg.eti.train_a.service.carriage.CarriageServiceImpl;
+import pl.edu.pg.eti.train_a.service.carriage.CarriageService;
 import pl.edu.pg.eti.train_a.service.order.OrderService;
+import pl.edu.pg.eti.train_a.service.railway.RailwayService;
 import pl.edu.pg.eti.train_a.service.railway.RailwayServiceImpl;
-import pl.edu.pg.eti.train_a.service.ride.RideServiceImpl;
-import pl.edu.pg.eti.train_a.service.route.RouteServiceImpl;
-import pl.edu.pg.eti.train_a.service.station.StationServiceImpl;
-import pl.edu.pg.eti.train_a.service.user.UserServiceImpl;
+import pl.edu.pg.eti.train_a.service.ride.RideService;
+import pl.edu.pg.eti.train_a.service.route.RouteService;
+import pl.edu.pg.eti.train_a.service.station.StationService;
+import pl.edu.pg.eti.train_a.service.user.UserService;
 
 import java.util.Arrays;
 import java.util.Scanner;
 
 @Component
 public class CliRunner implements CommandLineRunner {
-    private final RouteServiceImpl routeServiceImpl;
-    private final CarriageServiceImpl carriageServiceImpl;
-    private final StationServiceImpl stationServiceImpl;
-    private final RideServiceImpl rideServiceImpl;
+    private final RouteService routeService;
+    private final CarriageService carriageService;
+    private final StationService stationService;
+    private final RideService rideService;
     private final OrderService orderService;
-    private final RailwayServiceImpl railwayServiceImpl;
-    private final UserServiceImpl userServiceImpl;
+    private final RailwayService railwayService;
+    private final UserService userService;
 
     @Autowired
-    public CliRunner(RouteServiceImpl routeServiceImpl, CarriageServiceImpl carriageServiceImpl, StationServiceImpl stationServiceImpl, RideServiceImpl rideServiceImpl, OrderService orderService, RailwayServiceImpl railwayServiceImpl, UserServiceImpl userServiceImpl) {
-        this.routeServiceImpl = routeServiceImpl;
-        this.carriageServiceImpl = carriageServiceImpl;
-        this.stationServiceImpl = stationServiceImpl;
-        this.rideServiceImpl = rideServiceImpl;
+    public CliRunner(RouteService routeService, CarriageService carriageService, StationService stationService, RideService rideService, OrderService orderService, RailwayServiceImpl railwayService, UserService userService) {
+        this.routeService = routeService;
+        this.carriageService = carriageService;
+        this.stationService = stationService;
+        this.rideService = rideService;
         this.orderService = orderService;
-        this.railwayServiceImpl = railwayServiceImpl;
-        this.userServiceImpl = userServiceImpl;
+        this.railwayService = railwayService;
+        this.userService = userService;
     }
 
     @Override
@@ -84,10 +85,10 @@ public class CliRunner implements CommandLineRunner {
                 this.showRides();
                 break;
             case "carriages":
-                carriageServiceImpl.findAll().forEach(System.out::println);
+                carriageService.findAll().forEach(System.out::println);
                 break;
             case "stations":
-                stationServiceImpl.findAll().forEach(System.out::println);
+                stationService.findAll().forEach(System.out::println);
                 break;
             case "railways":
                 this.showRailways();
@@ -96,7 +97,7 @@ public class CliRunner implements CommandLineRunner {
                 this.showOrders();
                 break;
             case "users":
-                userServiceImpl.findAll().forEach(System.out::println);
+                userService.findAll().forEach(System.out::println);
                 break;
             default:
                 System.out.println("Unknown target: " + target);
@@ -110,7 +111,7 @@ public class CliRunner implements CommandLineRunner {
                 System.out.print("Enter route id: ");
                 var routeId = Integer.parseInt(scanner.nextLine());
                 try {
-                    routeServiceImpl.delete(routeId);
+                    routeService.delete(routeId);
                     System.out.println("Deleted route with ID: " + routeId);
                 } catch (Exception e) {
                     System.out.printf("Error: %s\n", e.getMessage());
@@ -120,7 +121,7 @@ public class CliRunner implements CommandLineRunner {
                 System.out.print("Enter ride id: ");
                 var rideId = Integer.parseInt(scanner.nextLine());
                 try {
-                    rideServiceImpl.delete(rideId);
+                    rideService.delete(rideId);
                     System.out.println("Deleted ride with ID: " + rideId);
                 } catch (Exception e) {
                     System.out.printf("Error: %s\n", e.getMessage());
@@ -158,7 +159,7 @@ public class CliRunner implements CommandLineRunner {
     }
 
     private void showRoutes() {
-        routeServiceImpl.findAll().stream().map(route -> routeServiceImpl.findByIdWithDetails(route.getId())).forEach(route -> {
+        routeService.findAll().stream().map(route -> routeService.findByIdWithDetails(route.getId())).forEach(route -> {
             System.out.println("Route #" + route.getId());
             System.out.println("\tCarriages:");
             route.getCarriages().forEach(c -> System.out.printf("\t\t%s\n", c));
@@ -173,39 +174,31 @@ public class CliRunner implements CommandLineRunner {
     }
 
     private void showRides() {
-        rideServiceImpl.findAll().stream().map(ride -> rideServiceImpl.findByIdWithDetails(ride.getId())).forEach(ride -> {
-            var route = routeServiceImpl.findByIdWithDetails(ride.getRoute().getId());
+        rideService.findAll()
+                .stream().map(ride -> rideService.findByIdWithDetails(ride.getId()))
+                .forEach(ride -> {
+            var route = routeService.findByIdWithDetails(ride.getRoute().getId());
             var routeStations = route.getStations();
 
             System.out.println("Ride #" + ride.getId());
             System.out.printf("\tRoute #%s\n", route.getId());
 
-            if (ride.getSchedules().isEmpty() || ride.getPrices().isEmpty()) {
-                System.out.println("\tNo schedules or prices available");
+            if (ride.getSegments().isEmpty()) {
+                System.out.println("\tSchedule is not provided yet!");
                 return;
             }
 
-            for (int i = 0; i < routeStations.size() - 1; i++) {
+            for (int i = 0; i < ride.getSegments().size(); i++) {
                 var currentStation = routeStations.get(i);
                 var nextStation = routeStations.get(i + 1);
-                var schedule = ride.getSchedules().get(i);
-                var departureTime = schedule.getDepartureTime();
-                var arrivalTime = schedule.getArrivalTime();
+                var segment = ride.getSegments().get(i);
 
-                System.out.printf("\t[%s - %s] From %s to %s\n\tPrice list:\n", departureTime, arrivalTime, currentStation.getCity(), nextStation.getCity());
-                var prices = ride.getPrices().stream()
-                        .filter(price -> price.getRailway().equals(schedule.getRailway()))
-                        .toList();
+                System.out.printf("\t[%s - %s] From %s to %s\n\tPrice list:\n", segment.getDeparture(), segment.getArrival(), currentStation.getCity(), nextStation.getCity());
 
-                if (prices.isEmpty()) {
-                    System.out.println("\t\tNo prices available");
-                } else {
-                    prices.forEach(price -> {
-                        var carriageType = price.getCarriage().getType();
-                        var cost = price.getPrice();
-                        System.out.printf("\t\t%s - %.2f$\n", carriageType, cost);
-                    });
-                }
+                segment.getPrices().forEach((carriage, price) -> {
+                    System.out.printf("\t\t%s - %.2f$\n", carriage.getType(), price);
+                });
+
             }
         });
     }
@@ -217,7 +210,7 @@ public class CliRunner implements CommandLineRunner {
 
     private void showRailways() {
         System.out.println("Railways:");
-        railwayServiceImpl.findAll().forEach(railway -> System.out.printf("\tstation1=%s,\tstation2=%s,\tdistance=%d\n", railway.getStations().get(0).getCity(), railway.getStations().get(1).getCity(), railway.getDistance()));
+        railwayService.findAll().forEach(railway -> System.out.printf("\tstation1=%s,\tstation2=%s,\tdistance=%d\n", railway.getStations().get(0).getCity(), railway.getStations().get(1).getCity(), railway.getDistance()));
     }
 
     @Transactional
@@ -234,10 +227,10 @@ public class CliRunner implements CommandLineRunner {
         System.out.print("End station: ");
         var stationEndCity = scanner.nextLine();
 
-        var user = userServiceImpl.findByEmailWithDetails(userEmail);
-        var ride = rideServiceImpl.findByIdWithDetails(Integer.parseInt(rideId));
-        var stationStart = stationServiceImpl.findByCityWithDetails(stationStartCity);
-        var stationEnd = stationServiceImpl.findByCityWithDetails(stationEndCity);
+        var user = userService.findByEmailWithDetails(userEmail);
+        var ride = rideService.findByIdWithDetails(Integer.parseInt(rideId));
+        var stationStart = stationService.findByCityWithDetails(stationStartCity);
+        var stationEnd = stationService.findByCityWithDetails(stationEndCity);
         var order = Order.autoBuilder().user(user).ride(ride).seatId(Integer.parseInt(seatId)).stationStart(stationStart).stationEnd(stationEnd).build();
         orderService.create(order);
 
@@ -252,11 +245,11 @@ public class CliRunner implements CommandLineRunner {
         System.out.print("Enter route stations (separate by comma): ");
         var stationIds = Arrays.asList(scanner.nextLine().split(","));
 
-        var carriages = carriageTypes.stream().map(String::trim).map(carriageServiceImpl::findByTypeWithDetails).toList();
-        var stations = stationIds.stream().map(String::trim).map(stationServiceImpl::findByCityWithDetails).toList();
+        var carriages = carriageTypes.stream().map(String::trim).map(carriageService::findByTypeWithDetails).toList();
+        var stations = stationIds.stream().map(String::trim).map(stationService::findByCityWithDetails).toList();
 
         var route = Route.autoBuilder().carriages(carriages).stations(stations).build();
-        routeServiceImpl.create(route);
+        routeService.create(route);
 
         System.out.println("Created route with ID: " + route.getId());
     }
@@ -266,9 +259,9 @@ public class CliRunner implements CommandLineRunner {
         var scanner = new Scanner(System.in);
         System.out.print("Enter ride route ID: ");
         var routeId = Integer.parseInt(scanner.nextLine());
-        var route = routeServiceImpl.findByIdWithDetails(routeId);
+        var route = routeService.findByIdWithDetails(routeId);
         var ride = Ride.autoBuilder().route(route).build();
-        rideServiceImpl.create(ride);
+        rideService.create(ride);
 
         System.out.println("Created ride with ID: " + ride.getId());
     }

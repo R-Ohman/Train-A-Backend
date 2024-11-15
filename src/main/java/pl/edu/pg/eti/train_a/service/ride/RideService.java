@@ -12,4 +12,6 @@ public interface RideService {
     int create(Ride ride);
 
     void delete(int id);
+
+    Ride findByIdWithDetails(int rideId);
 }

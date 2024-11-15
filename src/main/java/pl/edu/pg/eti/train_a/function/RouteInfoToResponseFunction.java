@@ -3,11 +3,11 @@ package pl.edu.pg.eti.train_a.function;
 import org.springframework.stereotype.Component;
 import pl.edu.pg.eti.train_a.dto.GetRouteInfoResponse;
 import pl.edu.pg.eti.train_a.entity.Carriage;
-import pl.edu.pg.eti.train_a.entity.Price;
 import pl.edu.pg.eti.train_a.entity.Route;
 import pl.edu.pg.eti.train_a.entity.Station;
 
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -26,19 +26,16 @@ public class RouteInfoToResponseFunction implements Function<Route, GetRouteInfo
                 .schedule(route.getRides().stream()
                         .map(ride -> GetRouteInfoResponse.Schedule.builder()
                                 .rideId(ride.getId())
-                                .segments(ride.getSchedules().stream()
-                                        .map(schedule -> {
-                                            var prices = ride.getPrices().stream()
-                                                    .filter(price -> price.getRailway().getId() == schedule.getRailway().getId())
-                                                    .collect(Collectors.toMap(
-                                                            price -> price.getCarriage().getType(),
-                                                            Price::getPrice
-                                                    ));
-                                            return GetRouteInfoResponse.Schedule.Segment.builder()
-                                                    .time(List.of(schedule.getDepartureTime(), schedule.getArrivalTime()))
-                                                    .price(prices)
-                                                    .build();
-                                        })
+                                .segments(ride.getSegments().stream()
+                                        .map(segment -> GetRouteInfoResponse.Schedule.Segment.builder()
+                                                .time(List.of(segment.getDeparture(), segment.getArrival()))
+                                                .price(
+                                                        segment.getPrices().entrySet().stream()
+                                                                .collect(Collectors.toMap(
+                                                                        entry -> entry.getKey().getType(),
+                                                                        Map.Entry::getValue))
+                                                )
+                                                .build())
                                         .toList())
                                 .build())
                         .toList()

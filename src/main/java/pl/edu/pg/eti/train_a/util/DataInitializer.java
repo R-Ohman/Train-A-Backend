@@ -8,8 +8,8 @@ import pl.edu.pg.eti.train_a.repository.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class DataInitializer {
@@ -20,9 +20,7 @@ public class DataInitializer {
     private final UserRepository userRepository;
     private final OrderRepository orderRepository;
     private final RailwayRepository railwayRepository;
-    private final PriceRepository priceRepository;
-    private final ScheduleRepository scheduleRepository;
-
+    private final SegmentRepository segmentRepository;
     @Autowired
     public DataInitializer(
             RouteRepository routeRepository,
@@ -32,8 +30,7 @@ public class DataInitializer {
             UserRepository userRepository,
             OrderRepository orderRepository,
             RailwayRepository railwayRepository,
-            PriceRepository priceRepository,
-            ScheduleRepository scheduleRepository
+            SegmentRepository segmentRepository
     ) {
         this.routeRepository = routeRepository;
         this.carriageRepository = carriageRepository;
@@ -42,8 +39,7 @@ public class DataInitializer {
         this.userRepository = userRepository;
         this.orderRepository = orderRepository;
         this.railwayRepository = railwayRepository;
-        this.priceRepository = priceRepository;
-        this.scheduleRepository = scheduleRepository;
+        this.segmentRepository = segmentRepository;
     }
 
     @PostConstruct
@@ -112,18 +108,62 @@ public class DataInitializer {
         routeRepository.saveAll(routes);
 
         var rides = List.of(
-                Ride.autoBuilder()
+                Ride.builder()
                         .route(routes.get(0))
                         .build(),
-                Ride.autoBuilder()
+                Ride.builder()
                         .route(routes.get(0))
                         .build(),
-                Ride.autoBuilder()
+                Ride.builder()
                         .route(routes.get(1))
                         .build()
         );
 
         rideRepository.saveAll(rides);
+
+        var segments = List.of(
+                Segment.autoBuilder()
+                        .ride(rides.get(0))
+                        .departure(LocalDateTime.parse("2021-06-01T12:00:00"))
+                        .arrival(LocalDateTime.parse("2021-06-01T13:00:00"))
+                        .prices(Map.of(
+                                carriages.get(0), BigDecimal.valueOf(100),
+                                carriages.get(1), BigDecimal.valueOf(50),
+                                carriages.get(2), BigDecimal.valueOf(25)
+                        ))
+                        .build(),
+                Segment.autoBuilder()
+                        .ride(rides.get(1))
+                        .departure(LocalDateTime.parse("2021-06-01T14:00:00"))
+                        .arrival(LocalDateTime.parse("2021-06-01T15:00:00"))
+                        .prices(Map.of(
+                                carriages.get(0), BigDecimal.valueOf(110),
+                                carriages.get(1), BigDecimal.valueOf(55),
+                                carriages.get(2), BigDecimal.valueOf(27.5)
+                        ))
+                        .build(),
+                Segment.autoBuilder()
+                        .ride(rides.get(1))
+                        .departure(LocalDateTime.parse("2021-06-01T15:30:00"))
+                        .arrival(LocalDateTime.parse("2021-06-01T16:30:00"))
+                        .prices(Map.of(
+                                carriages.get(0), BigDecimal.valueOf(120),
+                                carriages.get(1), BigDecimal.valueOf(60),
+                                carriages.get(2), BigDecimal.valueOf(30)
+                        ))
+                        .build(),
+                Segment.autoBuilder()
+                        .ride(rides.get(2))
+                        .departure(LocalDateTime.parse("2022-06-01T12:00:00"))
+                        .arrival(LocalDateTime.parse("2022-06-01T13:00:00"))
+                        .prices(Map.of(
+                                carriages.get(0), BigDecimal.valueOf(100),
+                                carriages.get(1), BigDecimal.valueOf(50)
+                        ))
+                        .build()
+        );
+
+        segmentRepository.saveAll(segments);
 
         var users = List.of(
                 User.builder()
@@ -182,78 +222,5 @@ public class DataInitializer {
 
         railwayRepository.saveAll(railways);
 
-        var prices = List.of(
-                Price.autoBuilder()
-                        .ride(rides.get(0))
-                        .carriage(carriages.get(0))
-                        .railway(railways.get(0))
-                        .price(BigDecimal.valueOf(100))
-                        .build(),
-                Price.autoBuilder()
-                        .ride(rides.get(0))
-                        .carriage(carriages.get(1))
-                        .railway(railways.get(0))
-                        .price(BigDecimal.valueOf(50))
-                        .build(),
-                Price.autoBuilder()
-                        .ride(rides.get(0))
-                        .carriage(carriages.get(0))
-                        .railway(railways.get(1))
-                        .price(BigDecimal.valueOf(25))
-                        .build(),
-                Price.autoBuilder()
-                        .ride(rides.get(0))
-                        .carriage(carriages.get(1))
-                        .railway(railways.get(1))
-                        .price(BigDecimal.valueOf(35))
-                        .build(),
-                Price.autoBuilder()
-                        .ride(rides.get(1))
-                        .carriage(carriages.get(1))
-                        .railway(railways.get(1))
-                        .price(BigDecimal.valueOf(75))
-                        .build()
-        );
-
-        priceRepository.saveAll(prices);
-
-        var schedules = List.of(
-                Schedule.autoBuilder()
-                        .ride(rides.get(0))
-                        .railway(railways.get(0))
-                        .departureTime(LocalDateTime.of(2024, Month.OCTOBER, 20, 10, 40))
-                        .arrivalTime(LocalDateTime.of(2024, Month.OCTOBER, 20, 12, 30))
-                        .build(),
-
-                Schedule.autoBuilder()
-                        .ride(rides.get(0))
-                        .railway(railways.get(1))
-                        .departureTime(LocalDateTime.of(2024, Month.OCTOBER, 20, 12, 55))
-                        .arrivalTime(LocalDateTime.of(2024, Month.OCTOBER, 20, 15, 30))
-                        .build(),
-
-                Schedule.autoBuilder()
-                        .ride(rides.get(1))
-                        .railway(railways.get(0))
-                        .departureTime(LocalDateTime.of(2024, Month.OCTOBER, 21, 11, 33))
-                        .arrivalTime(LocalDateTime.of(2024, Month.OCTOBER, 21, 12, 23))
-                        .build(),
-
-                Schedule.autoBuilder()
-                        .ride(rides.get(1))
-                        .railway(railways.get(1))
-                        .departureTime(LocalDateTime.of(2024, Month.OCTOBER, 21, 12, 51))
-                        .arrivalTime(LocalDateTime.of(2024, Month.OCTOBER, 21, 14, 31))
-                        .build(),
-
-                Schedule.autoBuilder()
-                        .ride(rides.get(2))
-                        .railway(railways.get(0))
-                        .departureTime(LocalDateTime.of(2025, Month.JANUARY, 2, 11, 40))
-                        .arrivalTime(LocalDateTime.of(2025, Month.JANUARY, 2, 12, 30))
-                        .build()
-        );
-
-        scheduleRepository.saveAll(schedules);
     }
 }

@@ -15,4 +15,6 @@ public interface StationService {
     int create(Station station);
 
     void delete(int id);
+
+    Station findByCityWithDetails(String city);
 }

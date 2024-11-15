@@ -4,10 +4,10 @@ import org.springframework.stereotype.Component;
 import pl.edu.pg.eti.train_a.dto.GetOrdersResponse;
 import pl.edu.pg.eti.train_a.entity.Carriage;
 import pl.edu.pg.eti.train_a.entity.Order;
-import pl.edu.pg.eti.train_a.entity.Price;
 import pl.edu.pg.eti.train_a.entity.Station;
 
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -32,19 +32,16 @@ public class OrderToResponseFunction implements Function<List<Order>, GetOrdersR
                                         .map(Carriage::getType)
                                         .toList())
                                 .schedule(GetOrdersResponse.Order.Schedule.builder()
-                                        .segments(order.getRide().getSchedules().stream()
-                                                .map(schedule -> {
-                                                    var prices = order.getRide().getPrices().stream()
-                                                            .filter(price -> price.getRailway().getId() == schedule.getRailway().getId())
-                                                            .collect(Collectors.toMap(
-                                                                    price -> price.getCarriage().getType(),
-                                                                    Price::getPrice
-                                                            ));
-                                                    return GetOrdersResponse.Order.Schedule.Segment.builder()
-                                                            .time(List.of(schedule.getDepartureTime(), schedule.getArrivalTime()))
-                                                            .price(prices)
-                                                            .build();
-                                                })
+                                        .segments(order.getRide().getSegments().stream()
+                                                .map(segment -> GetOrdersResponse.Order.Schedule.Segment.builder()
+                                                        .time(List.of(segment.getDeparture(), segment.getArrival()))
+                                                        .price(
+                                                                segment.getPrices().entrySet().stream()
+                                                                        .collect(Collectors.toMap(
+                                                                                entry -> entry.getKey().getType(),
+                                                                                Map.Entry::getValue))
+                                                        )
+                                                        .build())
                                                 .toList())
                                         .build())
                                 .build())

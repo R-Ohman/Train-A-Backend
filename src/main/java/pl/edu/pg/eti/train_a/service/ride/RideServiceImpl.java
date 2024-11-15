@@ -30,10 +30,9 @@ public class RideServiceImpl implements RideService {
     }
 
     public Ride findByIdWithDetails(int rideId) {
-        Ride ride = this.findById(rideId);
-        ride.getPrices().size();
-        ride.getSchedules().size();
+        var ride = this.findById(rideId);
         ride.getOrders().size();
+        ride.getSegments().size();
         return ride;
     }
 

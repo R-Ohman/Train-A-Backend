@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -28,18 +27,6 @@ public class Railway {
     List<Station> stations;
 
     int distance;
-
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    @Builder.Default
-    @OneToMany(mappedBy = "railway", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Price> prices = new ArrayList<>();
-
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    @Builder.Default
-    @OneToMany(mappedBy = "railway", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Schedule> schedules = new ArrayList<>();
 
     public static RailwayBuilder autoBuilder() {
         return new AutoRailwayBuilder();

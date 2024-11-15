@@ -15,4 +15,6 @@ public interface RouteService {
     int create(Route route);
 
     void delete(int id) throws Exception;
+
+    Route findByIdWithDetails(int routeId);
 }

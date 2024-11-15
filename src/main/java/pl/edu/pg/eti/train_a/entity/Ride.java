@@ -29,17 +29,9 @@ public class Ride {
     @OneToMany(mappedBy = "ride", fetch = FetchType.LAZY)
     List<Order> orders = new ArrayList<>();
 
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
     @Builder.Default
     @OneToMany(mappedBy = "ride", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Price> prices = new ArrayList<>();
-
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @Builder.Default
-    @OneToMany(mappedBy = "ride", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Schedule> schedules = new ArrayList<>();
+    List<Segment> segments = new ArrayList<>();
 
     public static RideBuilder autoBuilder() {
         return new AutoRideBuilder();

@@ -9,7 +9,7 @@ public interface RideService {
 
     Ride findById(int id);
 
-    void create(Ride ride);
+    int create(Ride ride);
 
     void delete(int id);
 }

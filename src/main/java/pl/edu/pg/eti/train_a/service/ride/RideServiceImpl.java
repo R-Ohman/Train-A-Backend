@@ -38,8 +38,9 @@ public class RideServiceImpl implements RideService {
     }
 
     @Override
-    public void create(Ride ride) {
-        this.rideRepository.save(ride);
+    public int create(Ride ride) {
+        var newRide = this.rideRepository.save(ride);
+        return newRide.getId();
     }
 
     @Override

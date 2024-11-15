@@ -47,8 +47,9 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    public void create(Route route) {
-        this.routeRepository.save(route);
+    public int create(Route route) {
+        var newRoute = this.routeRepository.save(route);
+        return newRoute.getId();
     }
 
     @Override

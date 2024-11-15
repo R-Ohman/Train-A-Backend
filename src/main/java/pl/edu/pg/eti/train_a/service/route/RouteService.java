@@ -12,7 +12,7 @@ public interface RouteService {
 
     List<Route> findFromToStation(Station from, Station to);
 
-    void create(Route route);
+    int create(Route route);
 
     void delete(int id) throws Exception;
 }

@@ -30,6 +30,10 @@ public class CarriageServiceImpl implements CarriageService {
         return carriageRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Carriage not found"));
     }
 
+    public Carriage findByType(String type) {
+        return carriageRepository.findByType(type).orElseThrow(() -> new EntityNotFoundException("Carriage not found"));
+    }
+
     public Carriage findByTypeWithDetails(String type) {
         routeRepository.findAll();
         var carriage = carriageRepository.findByType(type).orElseThrow(() -> new EntityNotFoundException("Carriage not found"));

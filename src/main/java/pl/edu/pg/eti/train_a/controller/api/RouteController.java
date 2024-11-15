@@ -1,12 +1,12 @@
 package pl.edu.pg.eti.train_a.controller.api;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 import pl.edu.pg.eti.train_a.dto.GetRouteInfoResponse;
 import pl.edu.pg.eti.train_a.dto.GetRoutesResponse;
+import pl.edu.pg.eti.train_a.dto.PostRouteRequest;
+
+import java.util.Map;
 
 public interface RouteController {
     @GetMapping("api/routes")
@@ -18,4 +18,34 @@ public interface RouteController {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     GetRouteInfoResponse getRouteInfoById(@PathVariable int id);
+
+    @PostMapping("api/route")
+    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseBody
+    Map<String, Integer> postRoute(@RequestBody PostRouteRequest request);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

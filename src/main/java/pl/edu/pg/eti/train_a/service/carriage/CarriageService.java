@@ -9,6 +9,8 @@ public interface CarriageService {
 
     Carriage findById(int id);
 
+    Carriage findByType(String type);
+
     Carriage findByTypeWithDetails(String type);
 
     void create(Carriage carriage);

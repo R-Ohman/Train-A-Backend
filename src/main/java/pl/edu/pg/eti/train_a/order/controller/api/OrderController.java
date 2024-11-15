@@ -17,4 +17,8 @@ public interface OrderController {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     Map<String, Integer> postOrder(@RequestBody PostOrderRequest request);
+
+    @DeleteMapping("/api/order/{orderId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    void deleteOrder(@PathVariable int orderId);
 }

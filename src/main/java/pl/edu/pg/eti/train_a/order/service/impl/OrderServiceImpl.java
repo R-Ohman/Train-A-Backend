@@ -8,6 +8,7 @@ import pl.edu.pg.eti.train_a.order.repository.api.OrderRepository;
 import pl.edu.pg.eti.train_a.order.service.api.OrderService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -22,8 +23,8 @@ public class OrderServiceImpl implements OrderService {
         return orderRepository.findAll();
     }
 
-    public Order findById(int id) {
-        return orderRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Order not found"));
+    public Optional<Order> findById(int id) {
+        return orderRepository.findById(id);
     }
 
     public int create(Order order) {
@@ -32,7 +33,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     public void delete(int orderId) {
-        var order = this.findById(orderId);
+        var order = this.findById(orderId).orElseThrow(() -> new EntityNotFoundException("Order not found"));
         order.getUser().getOrders().remove(order);
         order.getRide().getOrders().remove(order);
         orderRepository.delete(order);

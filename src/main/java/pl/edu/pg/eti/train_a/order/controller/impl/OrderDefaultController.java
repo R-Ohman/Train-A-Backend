@@ -2,7 +2,9 @@ package pl.edu.pg.eti.train_a.order.controller.impl;
 
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 import pl.edu.pg.eti.train_a.order.controller.api.OrderController;
 import pl.edu.pg.eti.train_a.order.dto.GetOrdersResponse;
 import pl.edu.pg.eti.train_a.order.dto.PostOrderRequest;
@@ -41,5 +43,16 @@ public class OrderDefaultController implements OrderController {
     public Map<String, Integer> postOrder(PostOrderRequest request) {
         int orderId = orderService.create(requestToOrder.apply(request));
         return Map.of("orderId", orderId);
+    }
+
+    @Override
+    public void deleteOrder(int orderId) {
+        orderService.findById(orderId)
+                .ifPresentOrElse(
+                        character -> orderService.delete(orderId),
+                        () -> {
+                            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+                        }
+                );
     }
 }

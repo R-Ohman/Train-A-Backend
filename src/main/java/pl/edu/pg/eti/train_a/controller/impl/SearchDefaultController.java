@@ -12,6 +12,7 @@ import pl.edu.pg.eti.train_a.service.ride.RideService;
 import pl.edu.pg.eti.train_a.service.route.RouteService;
 import pl.edu.pg.eti.train_a.service.station.StationService;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -43,7 +44,7 @@ public class SearchDefaultController implements SearchController {
 
     @Override
     public GetSearchResponse getSearchInfo(
-            double fromLatitude, double fromLongitude, double toLatitude, double toLongitude, Long time
+            BigDecimal fromLatitude, BigDecimal fromLongitude, BigDecimal toLatitude, BigDecimal toLongitude, Long time
     ) {
         Optional<LocalDateTime> optionalTime = (time != null) ? Optional.of(LocalDateTime.ofEpochSecond(time, 0, UTC)) : Optional.empty();
         var from = stationService.findNearestStation(fromLatitude, fromLongitude);

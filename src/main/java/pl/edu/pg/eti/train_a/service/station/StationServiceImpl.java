@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.edu.pg.eti.train_a.entity.Station;
 import pl.edu.pg.eti.train_a.repository.StationRepository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -30,11 +31,11 @@ public class StationServiceImpl implements StationService {
     }
 
     @Override
-    public Station findNearestStation(double latitude, double longitude) {
+    public Station findNearestStation(BigDecimal latitude, BigDecimal longitude) {
         return stationRepository.findAll().stream()
                 .min((s1, s2) -> {
-                    double d1 = Math.pow(s1.getLatitude().doubleValue() - latitude, 2) + Math.pow(s1.getLongitude().doubleValue() - longitude, 2);
-                    double d2 = Math.pow(s2.getLatitude().doubleValue() - latitude, 2) + Math.pow(s2.getLongitude().doubleValue() - longitude, 2);
+                    var d1 = Math.pow(s1.getLatitude().subtract(latitude).doubleValue(), 2) + Math.pow(s1.getLongitude().subtract(longitude).doubleValue(), 2);
+                    var d2 = Math.pow(s2.getLatitude().subtract(latitude).doubleValue(), 2) + Math.pow(s2.getLongitude().subtract(longitude).doubleValue(), 2);
                     return Double.compare(d1, d2);
                 })
                 .orElseThrow(() -> new EntityNotFoundException("Station not found"));
@@ -50,8 +51,9 @@ public class StationServiceImpl implements StationService {
     }
 
     @Override
-    public void create(Station station) {
-        this.stationRepository.save(station);
+    public int create(Station station) {
+        var newStation = this.stationRepository.save(station);
+        return newStation.getId();
     }
 
     @Override

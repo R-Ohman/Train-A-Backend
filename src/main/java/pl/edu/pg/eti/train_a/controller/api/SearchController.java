@@ -5,15 +5,17 @@ import org.springframework.web.bind.annotation.*;
 import pl.edu.pg.eti.train_a.dto.GetRideResponse;
 import pl.edu.pg.eti.train_a.dto.GetSearchResponse;
 
+import java.math.BigDecimal;
+
 public interface SearchController {
     @GetMapping("api/search")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     GetSearchResponse getSearchInfo(
-            @RequestParam double fromLatitude,
-            @RequestParam double fromLongitude,
-            @RequestParam double toLatitude,
-            @RequestParam double toLongitude,
+            @RequestParam BigDecimal fromLatitude,
+            @RequestParam BigDecimal fromLongitude,
+            @RequestParam BigDecimal toLatitude,
+            @RequestParam BigDecimal toLongitude,
             @RequestParam(required = false) Long time
     );
 

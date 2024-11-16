@@ -4,8 +4,7 @@ import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import pl.edu.pg.eti.train_a.user.controller.api.UserController;
-import pl.edu.pg.eti.train_a.user.dto.GetUsersResponse;
-import pl.edu.pg.eti.train_a.user.dto.PostUserRequest;
+import pl.edu.pg.eti.train_a.user.dto.*;
 import pl.edu.pg.eti.train_a.user.function.RequestToUserFunction;
 import pl.edu.pg.eti.train_a.user.function.UserToResponseFunction;
 import pl.edu.pg.eti.train_a.user.service.api.UserService;
@@ -36,5 +35,23 @@ public class UserDefaultController implements UserController {
     @Override
     public void postUser(PostUserRequest request) {
         userService.create(requestToUser.apply(request));
+    }
+
+    @Override
+    public PutUserResponse putUser(PutUserRequest request) {
+        var user = requestToUser.apply(1, request); // TODO: get user id from session
+        userService.create(user);
+        return PutUserResponse.builder()
+                .email(user.getEmail())
+                .name(user.getName())
+                .role(user.getRole())
+                .build();
+    }
+
+    @Override
+    public void putPassword(PutPasswordRequest request) {
+        var user = userService.findById(1); // TODO: get user id from session
+        user.setPassHash(request.getPassword());
+        userService.create(user);
     }
 }

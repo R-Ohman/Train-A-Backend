@@ -11,7 +11,7 @@ public interface OrderController {
     @GetMapping("api/order")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    GetOrdersResponse getOrders();
+    GetOrdersResponse getOrders(@RequestParam(required = false) boolean all);
 
     @PostMapping("/api/order")
     @ResponseStatus(HttpStatus.OK)

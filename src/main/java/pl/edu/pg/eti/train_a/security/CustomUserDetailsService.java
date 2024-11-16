@@ -24,7 +24,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         return User
                 .withUsername(user.getUsername())
                 .password("{noop}" + user.getPassHash())
-                .authorities(user.getRole().getValue())
+                .roles(user.getRole().getValue())
                 .accountExpired(false)
                 .accountLocked(false)
                 .credentialsExpired(false)

@@ -11,6 +11,8 @@ import pl.edu.pg.eti.train_a.order.dto.PostOrderRequest;
 import pl.edu.pg.eti.train_a.order.function.OrderToResponseFunction;
 import pl.edu.pg.eti.train_a.order.function.RequestToOrderFunction;
 import pl.edu.pg.eti.train_a.order.service.api.OrderService;
+import pl.edu.pg.eti.train_a.user.entity.UserRole;
+import pl.edu.pg.eti.train_a.user.service.api.UserService;
 
 import java.util.Map;
 
@@ -22,21 +24,27 @@ public class OrderDefaultController implements OrderController {
     private final OrderToResponseFunction orderToResponse;
 
     private final RequestToOrderFunction requestToOrder;
+    private final UserService userService;
 
     @Autowired
     public OrderDefaultController(
             OrderService orderService,
             OrderToResponseFunction orderToResponse,
-            RequestToOrderFunction requestToOrder
-    ) {
+            RequestToOrderFunction requestToOrder,
+            UserService userService) {
         this.orderService = orderService;
         this.orderToResponse = orderToResponse;
         this.requestToOrder = requestToOrder;
+        this.userService = userService;
     }
 
     @Override
-    public GetOrdersResponse getOrders() {
-        return orderToResponse.apply(orderService.findAll());
+    public GetOrdersResponse getOrders(boolean all) {
+        var user = userService.getCurrentUser().orElseThrow();
+        if (all && user.getRole() == UserRole.MANAGER) { // TODO: throw exception if user is not manager
+            return orderToResponse.apply(orderService.findAll());
+        }
+        return orderToResponse.apply(user.getOrders());
     }
 
     @Override
@@ -47,6 +55,12 @@ public class OrderDefaultController implements OrderController {
 
     @Override
     public void deleteOrder(int orderId) {
+        var user = userService.getCurrentUser().orElseThrow();
+        if (user.getRole() != UserRole.MANAGER
+                && user.getOrders().stream().noneMatch(order -> order.getId() == orderId)) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+        }
+
         orderService.findById(orderId)
                 .ifPresentOrElse(
                         character -> orderService.delete(orderId),

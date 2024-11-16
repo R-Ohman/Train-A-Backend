@@ -30,10 +30,9 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.securityMatcher("/api/**").authorizeHttpRequests(rmr -> rmr
                 .requestMatchers(
-                        "/api/profile",
-                        "/api/profile/password",
-                        "/api/logout"
-                ).authenticated()
+                        HttpMethod.GET,
+                        "/api/users"
+                ).hasRole(UserRole.MANAGER.getValue())
                 .requestMatchers(
                         HttpMethod.DELETE,
                         "/api/carriage/{code}",
@@ -54,6 +53,12 @@ public class SecurityConfig {
                         "/api/route",
                         "/api/route/{routeId}/ride"
                 ).hasRole(UserRole.MANAGER.getValue())
+                .requestMatchers(
+                        "/api/order",
+                        "/api/profile",
+                        "/api/profile/password",
+                        "/api/logout"
+                ).authenticated()
                 .anyRequest().permitAll()
         ).httpBasic(httpbc -> httpbc
                 .authenticationEntryPoint(authenticationEntryPoint())

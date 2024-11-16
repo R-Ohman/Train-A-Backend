@@ -12,6 +12,8 @@ public interface RideService {
 
     int create(Ride ride);
 
+    int update(Ride ride);
+
     void delete(int id);
 
     Ride findByIdWithDetails(int rideId);

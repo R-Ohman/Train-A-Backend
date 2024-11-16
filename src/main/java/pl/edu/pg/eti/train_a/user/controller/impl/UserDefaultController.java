@@ -2,7 +2,13 @@ package pl.edu.pg.eti.train_a.user.controller.impl;
 
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.RestController;
+import pl.edu.pg.eti.train_a.security.JwtUtil;
 import pl.edu.pg.eti.train_a.user.controller.api.UserController;
 import pl.edu.pg.eti.train_a.user.dto.*;
 import pl.edu.pg.eti.train_a.user.function.RequestToUserFunction;
@@ -15,16 +21,25 @@ public class UserDefaultController implements UserController {
     private final UserService userService;
     private final UserToResponseFunction userToResponseFunction;
     private final RequestToUserFunction requestToUser;
+    private final JwtUtil jwtUtil;
+    private final UserDetailsService userDetailsService;
+    private final AuthenticationManager authenticationManager;
 
     @Autowired
     public UserDefaultController(
             UserService userService,
             UserToResponseFunction userToResponseFunction,
-            RequestToUserFunction requestToUser
+            RequestToUserFunction requestToUser,
+            JwtUtil jwtUtil,
+            UserDetailsService userDetailsService,
+            AuthenticationManager authenticationManager
     ) {
         this.userService = userService;
         this.userToResponseFunction = userToResponseFunction;
         this.requestToUser = requestToUser;
+        this.jwtUtil = jwtUtil;
+        this.userDetailsService = userDetailsService;
+        this.authenticationManager = authenticationManager;
     }
 
     @Override
@@ -33,15 +48,9 @@ public class UserDefaultController implements UserController {
     }
 
     @Override
-    public void postUser(PostUserRequest request) {
-        userService.create(requestToUser.apply(request));
-    }
-
-    @Override
-    public PutUserResponse putUser(PutUserRequest request) {
-        var user = requestToUser.apply(1, request); // TODO: get user id from session
-        userService.create(user);
-        return PutUserResponse.builder()
+    public UserProfileResponse getUser() {
+        var user = userService.getCurrentUser().orElseThrow();
+        return UserProfileResponse.builder()
                 .email(user.getEmail())
                 .name(user.getName())
                 .role(user.getRole())
@@ -49,9 +58,43 @@ public class UserDefaultController implements UserController {
     }
 
     @Override
+    public void postUser(PostUserRequest request) {
+        userService.create(requestToUser.apply(request));
+    }
+
+    @Override
+    public UserProfileResponse putUser(PutUserRequest request) {
+        var user = userService.getCurrentUser().orElseThrow();
+        var updatedUser = requestToUser.apply(user.getId(), request);
+        userService.create(updatedUser);
+        return UserProfileResponse.builder()
+                .email(updatedUser.getEmail())
+                .name(updatedUser.getName())
+                .role(updatedUser.getRole())
+                .build();
+    }
+
+    @Override
     public void putPassword(PutPasswordRequest request) {
-        var user = userService.findById(1); // TODO: get user id from session
+        var user = userService.getCurrentUser().orElseThrow();
         user.setPassHash(request.getPassword());
         userService.create(user);
+    }
+
+    @Override
+    public SignInResponse signIn(SignInRequest request) throws Exception {
+        var user = userService.findByEmail(request.getEmail());
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(user.getUsername(), request.getPassword())
+            );
+        } catch (AuthenticationException e) {
+            throw new Exception("Incorrect username or password", e);
+        }
+
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
+        final String jwt = jwtUtil.generateToken(userDetails.getUsername());
+
+        return SignInResponse.builder().token(jwt).build();
     }
 }

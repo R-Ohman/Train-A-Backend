@@ -20,6 +20,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
+    public String getUsername() {
+        return Integer.toString(id);
+    }
+
     String email;
     String name;
 

@@ -10,14 +10,22 @@ public interface UserController {
     @ResponseBody
     GetUsersResponse getUsers();
 
+    @GetMapping("api/profile")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    UserProfileResponse getUser();
+
     @PostMapping("api/signup")
     @ResponseStatus(HttpStatus.CREATED)
     void postUser(@RequestBody PostUserRequest request);
 
+    @PostMapping("api/signin")
+    SignInResponse signIn(@RequestBody SignInRequest request) throws Exception;
+
     @PutMapping("api/profile")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    PutUserResponse putUser(@RequestBody PutUserRequest request);
+    UserProfileResponse putUser(@RequestBody PutUserRequest request);
 
     @PutMapping("api/profile/password")
     @ResponseStatus(HttpStatus.OK)

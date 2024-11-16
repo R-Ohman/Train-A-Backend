@@ -1,7 +1,6 @@
 package pl.edu.pg.eti.train_a.user.dto;
 
 import lombok.*;
-import pl.edu.pg.eti.train_a.user.entity.UserRole;
 
 @Getter
 @Setter
@@ -10,8 +9,7 @@ import pl.edu.pg.eti.train_a.user.entity.UserRole;
 @EqualsAndHashCode
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
-public class PutUserResponse {
+public class SignInRequest {
     private String email;
-    private String name;
-    private UserRole role;
+    private String password;
 }

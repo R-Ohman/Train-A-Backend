@@ -100,7 +100,7 @@
     - Attributes (object)
         - error:
             - message: `Access is not granted` (string) - Error message
-            - reason: `invalidAccessToken` (string) - Wrong token idintifier
+            - reason: `invalidAccessToken` (string) - Wrong token identifier
 
 ### Update user information
 

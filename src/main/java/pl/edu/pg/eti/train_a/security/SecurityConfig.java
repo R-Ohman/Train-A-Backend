@@ -64,7 +64,18 @@ public class SecurityConfig {
                 .authenticationEntryPoint(authenticationEntryPoint())
         ).sessionManagement(smc -> smc
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        ).csrf(AbstractHttpConfigurer::disable);
+        )
+                .cors(cors -> {
+                    cors.configurationSource(request -> {
+                        var corsConfiguration = new org.springframework.web.cors.CorsConfiguration();
+                        corsConfiguration.applyPermitDefaultValues();
+                        corsConfiguration.addAllowedMethod(HttpMethod.POST);
+                        corsConfiguration.addAllowedMethod(HttpMethod.PUT);
+                        corsConfiguration.addAllowedMethod(HttpMethod.DELETE);
+                        corsConfiguration.addAllowedMethod(HttpMethod.PATCH);
+                        return corsConfiguration;
+                    });
+                }).csrf(AbstractHttpConfigurer::disable);
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 

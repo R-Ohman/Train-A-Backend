@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public interface CarriageController {
-    @GetMapping("api/carriages")
+    @GetMapping("api/carriage")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     GetCarriagesResponse getCarriages();

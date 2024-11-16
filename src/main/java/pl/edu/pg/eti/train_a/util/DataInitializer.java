@@ -150,8 +150,8 @@ public class DataInitializer {
                         .build(),
                 Segment.autoBuilder()
                         .ride(rides.get(1))
-                        .departure(LocalDateTime.parse("2021-06-01T14:00:00"))
-                        .arrival(LocalDateTime.parse("2021-06-01T15:00:00"))
+                        .departure(LocalDateTime.parse("2025-06-01T14:00:00"))
+                        .arrival(LocalDateTime.parse("2025-06-01T15:00:00"))
                         .prices(Map.of(
                                 carriages.get(0), BigDecimal.valueOf(110),
                                 carriages.get(1), BigDecimal.valueOf(55),
@@ -160,8 +160,8 @@ public class DataInitializer {
                         .build(),
                 Segment.autoBuilder()
                         .ride(rides.get(1))
-                        .departure(LocalDateTime.parse("2021-06-01T15:30:00"))
-                        .arrival(LocalDateTime.parse("2021-06-01T16:30:00"))
+                        .departure(LocalDateTime.parse("2025-06-01T15:30:00"))
+                        .arrival(LocalDateTime.parse("2025-06-01T16:30:00"))
                         .prices(Map.of(
                                 carriages.get(0), BigDecimal.valueOf(120),
                                 carriages.get(1), BigDecimal.valueOf(60),
@@ -186,13 +186,13 @@ public class DataInitializer {
                         .email("user1@abc.com")
                         .name("User 1")
                         .role(UserRole.USER)
-                        .passHash("pass1")
+                        .passHash("password1")
                         .build(),
                 User.builder()
                         .email("admin1@adm.com")
                         .name("Admin 1")
                         .role(UserRole.MANAGER)
-                        .passHash("pass2")
+                        .passHash("password2")
                         .build()
         );
 

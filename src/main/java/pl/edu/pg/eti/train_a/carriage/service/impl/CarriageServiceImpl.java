@@ -49,6 +49,10 @@ public class CarriageServiceImpl implements CarriageService {
         return newCarriage.getCode();
     }
 
+    public UUID update(Carriage carriage) {
+        return this.create(carriage);
+    }
+
     public void delete(UUID id) {
         this.carriageRepository.findById(id).ifPresent(carriageRepository::delete);
     }

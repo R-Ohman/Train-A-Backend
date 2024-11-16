@@ -8,6 +8,7 @@ import org.springframework.web.server.ResponseStatusException;
 import pl.edu.pg.eti.train_a.carriage.controller.api.CarriageController;
 import pl.edu.pg.eti.train_a.carriage.dto.GetCarriagesResponse;
 import pl.edu.pg.eti.train_a.carriage.dto.PostCarriageRequest;
+import pl.edu.pg.eti.train_a.carriage.dto.PutCarriageRequest;
 import pl.edu.pg.eti.train_a.carriage.function.CarriageToResponseFunction;
 import pl.edu.pg.eti.train_a.carriage.function.RequestToCarriageFunction;
 import pl.edu.pg.eti.train_a.carriage.service.api.CarriageService;
@@ -43,6 +44,12 @@ public class CarriageDefaultController implements CarriageController {
     public Map<String, UUID> postCarriage(PostCarriageRequest request) {
         var newCarriageId = carriageService.create(requestToCarriage.apply(request));
         return Map.of("code", newCarriageId);
+    }
+
+    @Override
+    public Map<String, UUID> putCarriage(UUID code, PutCarriageRequest request) {
+        var updatedCarriageId = carriageService.update(requestToCarriage.apply(code, request));
+        return Map.of("code", updatedCarriageId);
     }
 
     @Override

@@ -17,5 +17,7 @@ public interface CarriageService {
 
     UUID create(Carriage carriage);
 
+    UUID update(Carriage carriage);
+
     void delete(UUID id);
 }

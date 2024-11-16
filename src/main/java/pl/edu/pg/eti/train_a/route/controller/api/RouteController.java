@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.edu.pg.eti.train_a.route.dto.GetRouteInfoResponse;
 import pl.edu.pg.eti.train_a.route.dto.GetRoutesResponse;
 import pl.edu.pg.eti.train_a.route.dto.PostRouteRequest;
+import pl.edu.pg.eti.train_a.route.dto.PutRouteRequest;
 
 import java.util.Map;
 
@@ -23,6 +24,11 @@ public interface RouteController {
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
     Map<String, Integer> postRoute(@RequestBody PostRouteRequest request);
+
+    @PutMapping("/api/route/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseBody
+    Map<String, Integer> putRoute(@PathVariable int id, @RequestBody PutRouteRequest request);
 
     @DeleteMapping("/api/route/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

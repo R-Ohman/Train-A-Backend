@@ -15,6 +15,8 @@ public interface RouteService {
 
     int create(Route route);
 
+    int update(Route route);
+
     void delete(int id);
 
     Route findByIdWithDetails(int routeId);

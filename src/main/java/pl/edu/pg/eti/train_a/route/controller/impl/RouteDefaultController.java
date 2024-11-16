@@ -10,6 +10,7 @@ import pl.edu.pg.eti.train_a.route.controller.api.RouteController;
 import pl.edu.pg.eti.train_a.route.dto.GetRouteInfoResponse;
 import pl.edu.pg.eti.train_a.route.dto.GetRoutesResponse;
 import pl.edu.pg.eti.train_a.route.dto.PostRouteRequest;
+import pl.edu.pg.eti.train_a.route.dto.PutRouteRequest;
 import pl.edu.pg.eti.train_a.route.function.RequestToRouteFunction;
 import pl.edu.pg.eti.train_a.route.function.RouteInfoToResponseFunction;
 import pl.edu.pg.eti.train_a.route.function.RouteToResponseFunction;
@@ -54,6 +55,12 @@ public class RouteDefaultController implements RouteController {
     @Override
     public Map<String, Integer> postRoute(PostRouteRequest request) {
         int newRouteId = routeService.create(requestToRoute.apply(request));
+        return Map.of("id", newRouteId);
+    }
+
+    @Override
+    public Map<String, Integer> putRoute(int id, PutRouteRequest request) {
+        int newRouteId = routeService.update(requestToRoute.apply(id, request));
         return Map.of("id", newRouteId);
     }
 

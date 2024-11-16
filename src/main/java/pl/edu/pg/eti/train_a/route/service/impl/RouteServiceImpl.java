@@ -55,6 +55,11 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
+    public int update(Route route) {
+        return this.create(route);
+    }
+
+    @Override
     public void delete(int routeId) {
         var route = routeRepository.findById(routeId)
                 .orElseThrow(() -> new EntityNotFoundException("Route not found"));

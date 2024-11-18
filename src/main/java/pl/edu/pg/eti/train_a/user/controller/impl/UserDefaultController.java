@@ -2,12 +2,13 @@ package pl.edu.pg.eti.train_a.user.controller.impl;
 
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 import pl.edu.pg.eti.train_a.security.JwtUtil;
 import pl.edu.pg.eti.train_a.user.controller.api.UserController;
 import pl.edu.pg.eti.train_a.user.dto.*;
@@ -83,18 +84,17 @@ public class UserDefaultController implements UserController {
 
     @Override
     public SignInResponse signIn(SignInRequest request) throws Exception {
-        var user = userService.findByEmail(request.getEmail());
         try {
+            var user = userService.findByEmail(request.getEmail());
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(user.getUsername(), request.getPassword())
             );
-        } catch (AuthenticationException e) {
-            throw new Exception("Incorrect username or password", e);
+            final UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
+            final String jwt = jwtUtil.generateToken(userDetails.getUsername());
+
+            return SignInResponse.builder().token(jwt).build();
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Incorrect username or password", e);
         }
-
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
-        final String jwt = jwtUtil.generateToken(userDetails.getUsername());
-
-        return SignInResponse.builder().token(jwt).build();
     }
 }

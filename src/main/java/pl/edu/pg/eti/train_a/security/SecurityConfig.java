@@ -31,7 +31,8 @@ public class SecurityConfig {
         http.securityMatcher("/api/**").authorizeHttpRequests(rmr -> rmr
                 .requestMatchers(
                         HttpMethod.GET,
-                        "/api/users"
+                        "/api/users",
+                        "/api/routes/{id}"
                 ).hasRole(UserRole.MANAGER.getValue())
                 .requestMatchers(
                         HttpMethod.DELETE,

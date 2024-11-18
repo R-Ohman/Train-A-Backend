@@ -183,16 +183,16 @@ public class DataInitializer {
 
         var users = List.of(
                 User.builder()
-                        .email("user1@abc.com")
+                        .email("user@user.com")
                         .name("User 1")
                         .role(UserRole.USER)
-                        .passHash("password1")
+                        .passHash("password123")
                         .build(),
                 User.builder()
-                        .email("admin1@adm.com")
+                        .email("admin@admim.com")
                         .name("Admin 1")
                         .role(UserRole.MANAGER)
-                        .passHash("password2")
+                        .passHash("password123")
                         .build()
         );
 

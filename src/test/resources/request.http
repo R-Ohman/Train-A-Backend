@@ -1,0 +1,264 @@
+###
+@baseUrl = http://localhost:8080
+
+POST {{baseUrl}}/api/signin
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "password": "{{password}}"
+}
+
+> {% client.global.set("token", response.body.token); %}
+
+###
+GET {{baseUrl}}/api/routes
+
+###
+GET {{baseUrl}}/api/users
+Authorization: Bearer {{token}}
+
+###
+GET {{baseUrl}}/api/carriages
+
+###
+GET {{baseUrl}}/api/station
+
+###
+GET {{baseUrl}}/api/order
+Authorization: Bearer {{token}}
+
+###
+GET {{baseUrl}}/api/order?all=true
+Authorization: Bearer {{token}}
+
+###
+GET {{baseUrl}}/api/routes/1
+Authorization: Bearer {{token}}
+
+###
+GET {{baseUrl}}/api/routes/2
+Authorization: Bearer {{token}}
+
+###
+GET {{baseUrl}}/api/routes/3
+Authorization: Bearer {{token}}
+
+###
+GET {{baseUrl}}/api/search/1
+
+###
+GET {{baseUrl}}/api/search/2
+
+###
+GET {{baseUrl}}/api/search/3
+
+###
+GET {{baseUrl}}/api/search?
+    fromLatitude=54.5&
+    fromLongitude=18.5&
+    toLatitude=54.351&
+    toLongitude=18.7&
+    time=1762866687
+
+###
+GET {{baseUrl}}/api/search?
+    fromLatitude=54.5&
+    fromLongitude=18.5&
+    toLatitude=54.351&
+    toLongitude=18.7&
+    time=1099708287
+
+###
+POST {{baseUrl}}/api/route
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "path": [1, 2, 3],
+  "carriages": ["1st class", "2nd class", "3rd class", "3rd class", "2nd class", "1st class"]
+}
+
+###
+POST {{baseUrl}}/api/carriage
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "4th class",
+  "rows": 100,
+  "leftSeats": 3,
+  "rightSeats": 6
+}
+
+###
+POST {{baseUrl}}/api/station
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "city": "Warszawa",
+  "latitude": 52.22977,
+  "longitude": 21.01178,
+  "relations": [1, 2, 3]
+}
+
+###
+POST {{baseUrl}}/api/signup
+Content-Type: application/json
+
+{
+  "email": "test_user2@gmail.com",
+  "password": "test_password"
+}
+
+###
+POST {{baseUrl}}/api/route/1/ride
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "segments": [
+    {
+      "time": [
+        "2024-11-15T22:15:00",
+        "2024-11-15T22:30:00"
+      ],
+      "price": {
+        "1st class": 100,
+        "2nd class": 50,
+        "3rd class": 25
+      }
+    },
+    {
+      "time": [
+        "2024-11-15T22:30:00",
+        "2024-11-15T22:45:00"
+      ],
+      "price": {
+        "1st class": 100,
+        "2nd class": 50,
+        "3rd class": 25
+      }
+    }
+  ]
+}
+
+###
+POST {{baseUrl}}/api/order
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "rideId": 1,
+  "seatId": 8,
+  "stationStart": 1,
+  "stationEnd": 3
+}
+
+###
+DELETE {{baseUrl}}/api/order/4
+Authorization: Bearer {{token}}
+
+###
+DELETE {{baseUrl}}/api/carriage/21537160-6014-40ed-b0f6-966e90238e1e
+Authorization: Bearer {{token}}
+
+###
+DELETE {{baseUrl}}/api/station/4
+Authorization: Bearer {{token}}
+
+###
+DELETE {{baseUrl}}/api/route/4
+Authorization: Bearer {{token}}
+
+###
+DELETE {{baseUrl}}/api/route/1/ride/4
+Authorization: Bearer {{token}}
+
+###
+PUT {{baseUrl}}/api/route/5
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "path": [1, 3],
+  "carriages": ["1st class", "2nd class", "1st class"]
+}
+
+###
+PUT {{baseUrl}}/api/carriage/{carriageId}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "3rd class",
+  "rows": 40,
+  "leftSeats": 3,
+  "rightSeats": 3
+}
+
+###
+PUT {{baseUrl}}/api/route/1/ride/4
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "segments": [
+    {
+      "time": [
+        "2024-11-15T20:15:00",
+        "2024-11-15T21:30:00"
+      ],
+      "price": {
+        "1st class": 1000,
+        "2nd class": 500,
+        "3rd class": 250
+      }
+    },
+    {
+      "time": [
+        "2024-11-15T22:30:00",
+        "2024-11-15T23:45:00"
+      ],
+      "price": {
+        "1st class": 100,
+        "2nd class": 50,
+        "3rd class": 25
+      }
+    }
+  ]
+}
+
+###
+PUT {{baseUrl}}/api/profile
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "email": "new_email@abc.com",
+  "name": "John Doe"
+}
+
+###
+PUT {{baseUrl}}/api/profile/password
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "password": "new_password_123"
+}
+
+###
+PUT {{baseUrl}}/api/profile
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "email": "email1@gmail.com",
+  "name": "John Doe 2"
+}
+
+###
+GET {{baseUrl}}/api/profile
+Authorization: Bearer {{token}}

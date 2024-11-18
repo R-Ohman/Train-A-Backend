@@ -41,7 +41,9 @@ public class OrderDefaultController implements OrderController {
     @Override
     public GetOrdersResponse getOrders(boolean all) {
         var user = userService.getCurrentUser().orElseThrow();
-        if (all && user.getRole() == UserRole.MANAGER) { // TODO: throw exception if user is not manager
+        if (all && user.getRole() != UserRole.MANAGER) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+        } else if (all) {
             return orderToResponse.apply(orderService.findAll());
         }
         return orderToResponse.apply(user.getOrders());

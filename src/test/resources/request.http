@@ -1,6 +1,6 @@
-###
 @baseUrl = http://localhost:8080
 
+### Sign in and get authentication token
 POST {{baseUrl}}/api/signin
 Content-Type: application/json
 
@@ -9,51 +9,38 @@ Content-Type: application/json
   "password": "{{password}}"
 }
 
+### Save token to global variable for further requests
 > {% client.global.set("token", response.body.token); %}
 
-###
+### Get all routes
 GET {{baseUrl}}/api/routes
 
-###
+### Get all users
 GET {{baseUrl}}/api/users
 Authorization: Bearer {{token}}
 
-###
+### Get all carriage types
 GET {{baseUrl}}/api/carriages
 
-###
+### Get all stations
 GET {{baseUrl}}/api/station
 
-###
+### Get orders for current user
 GET {{baseUrl}}/api/order
 Authorization: Bearer {{token}}
 
-###
+### Get all orders
 GET {{baseUrl}}/api/order?all=true
 Authorization: Bearer {{token}}
 
-###
+### Get information about route and its rides
 GET {{baseUrl}}/api/routes/1
 Authorization: Bearer {{token}}
 
-###
-GET {{baseUrl}}/api/routes/2
-Authorization: Bearer {{token}}
-
-###
-GET {{baseUrl}}/api/routes/3
-Authorization: Bearer {{token}}
-
-###
+### Get detailed information about ride
 GET {{baseUrl}}/api/search/1
 
-###
-GET {{baseUrl}}/api/search/2
-
-###
-GET {{baseUrl}}/api/search/3
-
-###
+### Search for available rides
 GET {{baseUrl}}/api/search?
     fromLatitude=54.5&
     fromLongitude=18.5&
@@ -61,15 +48,7 @@ GET {{baseUrl}}/api/search?
     toLongitude=18.7&
     time=1762866687
 
-###
-GET {{baseUrl}}/api/search?
-    fromLatitude=54.5&
-    fromLongitude=18.5&
-    toLatitude=54.351&
-    toLongitude=18.7&
-    time=1099708287
-
-###
+### Create new route
 POST {{baseUrl}}/api/route
 Content-Type: application/json
 Authorization: Bearer {{token}}
@@ -79,7 +58,7 @@ Authorization: Bearer {{token}}
   "carriages": ["1st class", "2nd class", "3rd class", "3rd class", "2nd class", "1st class"]
 }
 
-###
+### Create new carriage type
 POST {{baseUrl}}/api/carriage
 Content-Type: application/json
 Authorization: Bearer {{token}}
@@ -91,7 +70,7 @@ Authorization: Bearer {{token}}
   "rightSeats": 6
 }
 
-###
+### Create new station
 POST {{baseUrl}}/api/station
 Content-Type: application/json
 Authorization: Bearer {{token}}
@@ -103,7 +82,7 @@ Authorization: Bearer {{token}}
   "relations": [1, 2, 3]
 }
 
-###
+### Create new user
 POST {{baseUrl}}/api/signup
 Content-Type: application/json
 
@@ -112,7 +91,7 @@ Content-Type: application/json
   "password": "test_password"
 }
 
-###
+### Create new ride for the route
 POST {{baseUrl}}/api/route/1/ride
 Content-Type: application/json
 Authorization: Bearer {{token}}
@@ -144,7 +123,7 @@ Authorization: Bearer {{token}}
   ]
 }
 
-###
+### Create new order
 POST {{baseUrl}}/api/order
 Content-Type: application/json
 Authorization: Bearer {{token}}
@@ -156,27 +135,27 @@ Authorization: Bearer {{token}}
   "stationEnd": 3
 }
 
-###
+### Delete order
 DELETE {{baseUrl}}/api/order/4
 Authorization: Bearer {{token}}
 
-###
+### Delete carriage type
 DELETE {{baseUrl}}/api/carriage/21537160-6014-40ed-b0f6-966e90238e1e
 Authorization: Bearer {{token}}
 
-###
+### Delete station
 DELETE {{baseUrl}}/api/station/4
 Authorization: Bearer {{token}}
 
-###
+### Delete route
 DELETE {{baseUrl}}/api/route/4
 Authorization: Bearer {{token}}
 
-###
+### Delete ride
 DELETE {{baseUrl}}/api/route/1/ride/4
 Authorization: Bearer {{token}}
 
-###
+### Update route
 PUT {{baseUrl}}/api/route/5
 Content-Type: application/json
 Authorization: Bearer {{token}}
@@ -186,7 +165,7 @@ Authorization: Bearer {{token}}
   "carriages": ["1st class", "2nd class", "1st class"]
 }
 
-###
+### Update carriage type
 PUT {{baseUrl}}/api/carriage/{carriageId}
 Content-Type: application/json
 Authorization: Bearer {{token}}
@@ -198,7 +177,7 @@ Authorization: Bearer {{token}}
   "rightSeats": 3
 }
 
-###
+### Update ride
 PUT {{baseUrl}}/api/route/1/ride/4
 Content-Type: application/json
 Authorization: Bearer {{token}}
@@ -230,35 +209,25 @@ Authorization: Bearer {{token}}
   ]
 }
 
-###
+### Update user profile
 PUT {{baseUrl}}/api/profile
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "email": "new_email@abc.com",
+  "email": "new@email.com",
   "name": "John Doe"
 }
 
-###
+### Update user password
 PUT {{baseUrl}}/api/profile/password
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "password": "new_password_123"
+  "password": "new-password123"
 }
 
-###
-PUT {{baseUrl}}/api/profile
-Content-Type: application/json
-Authorization: Bearer {{token}}
-
-{
-  "email": "email1@gmail.com",
-  "name": "John Doe 2"
-}
-
-###
+### Get user profile information
 GET {{baseUrl}}/api/profile
 Authorization: Bearer {{token}}

@@ -83,7 +83,8 @@ public class UserDefaultController implements UserController {
     }
 
     @Override
-    public SignInResponse signIn(SignInRequest request) throws Exception {
+    public SignInResponse signIn(SignInRequest request) {
+        System.out.println("asdasdas");
         try {
             var user = userService.findByEmail(request.getEmail());
             authenticationManager.authenticate(
@@ -96,5 +97,10 @@ public class UserDefaultController implements UserController {
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Incorrect username or password", e);
         }
+    }
+
+    @Override
+    public void logout() {
+        // TODO: (?) jwt is stateless
     }
 }

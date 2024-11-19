@@ -5,28 +5,15 @@ POST {{baseUrl}}/api/signin
 Content-Type: application/json
 
 {
-  "email": "{{email}}",
-  "password": "{{password}}"
+  "email": {{email}},
+  "password": {{password}}
 }
 
 ### Save token to global variable for further requests
 > {% client.global.set("token", response.body.token); %}
 
-### Get all routes
-GET {{baseUrl}}/api/routes
-
 ### Get all users
 GET {{baseUrl}}/api/users
-Authorization: Bearer {{token}}
-
-### Get all carriage types
-GET {{baseUrl}}/api/carriage
-
-### Get all stations
-GET {{baseUrl}}/api/station
-
-### Get orders for current user
-GET {{baseUrl}}/api/order
 Authorization: Bearer {{token}}
 
 ### Get all orders
@@ -36,17 +23,6 @@ Authorization: Bearer {{token}}
 ### Get information about route and its rides
 GET {{baseUrl}}/api/routes/1
 Authorization: Bearer {{token}}
-
-### Get detailed information about ride
-GET {{baseUrl}}/api/search/1
-
-### Search for available rides
-GET {{baseUrl}}/api/search?
-    fromLatitude=54.5&
-    fromLongitude=18.5&
-    toLatitude=54.351&
-    toLongitude=18.7&
-    time=1762866687
 
 ### Create new route
 POST {{baseUrl}}/api/route
@@ -82,15 +58,6 @@ Authorization: Bearer {{token}}
   "relations": [1, 2, 3]
 }
 
-### Create new user
-POST {{baseUrl}}/api/signup
-Content-Type: application/json
-
-{
-  "email": "test_user2@gmail.com",
-  "password": "test_password"
-}
-
 ### Create new ride for the route
 POST {{baseUrl}}/api/route/1/ride
 Content-Type: application/json
@@ -121,18 +88,6 @@ Authorization: Bearer {{token}}
       }
     }
   ]
-}
-
-### Create new order
-POST {{baseUrl}}/api/order
-Content-Type: application/json
-Authorization: Bearer {{token}}
-
-{
-  "rideId": 1,
-  "seatId": 8,
-  "stationStart": 1,
-  "stationEnd": 3
 }
 
 ### Delete order
@@ -208,26 +163,3 @@ Authorization: Bearer {{token}}
     }
   ]
 }
-
-### Update user profile
-PUT {{baseUrl}}/api/profile
-Content-Type: application/json
-Authorization: Bearer {{token}}
-
-{
-  "email": "new@email.com",
-  "name": "John Doe"
-}
-
-### Update user password
-PUT {{baseUrl}}/api/profile/password
-Content-Type: application/json
-Authorization: Bearer {{token}}
-
-{
-  "password": "new-password123"
-}
-
-### Get user profile information
-GET {{baseUrl}}/api/profile
-Authorization: Bearer {{token}}

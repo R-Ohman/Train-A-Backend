@@ -189,7 +189,7 @@ public class DataInitializer {
                         .passHash("password123")
                         .build(),
                 User.builder()
-                        .email("admin@admim.com")
+                        .email("admin@admin.com")
                         .name("Admin 1")
                         .role(UserRole.MANAGER)
                         .passHash("password123")

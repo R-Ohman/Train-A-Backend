@@ -31,4 +31,8 @@ public interface UserController {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     void putPassword(@RequestBody PutPasswordRequest request);
+
+    @DeleteMapping("api/logout")
+    @ResponseStatus(HttpStatus.OK)
+    void logout();
 }

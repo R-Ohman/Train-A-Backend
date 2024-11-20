@@ -49,7 +49,9 @@ public class RouteDefaultController implements RouteController {
 
     @Override
     public GetRouteInfoResponse getRouteInfoById(int id) {
-        return routeInfoToResponse.apply(routeService.findById(id).orElseThrow());
+        return routeInfoToResponse.apply(routeService.findById(id).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Route not found")
+        ));
     }
 
     @Override

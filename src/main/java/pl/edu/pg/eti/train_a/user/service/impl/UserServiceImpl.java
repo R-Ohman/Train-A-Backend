@@ -55,9 +55,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> getCurrentUser() {
-        var authentication = SecurityContextHolder.getContext().getAuthentication();
-        var username = authentication.getName();
-        var user = this.findById(Integer.parseInt(username)); // TODO: refactor
-        return Optional.of(user);
+        try {
+            var authentication = SecurityContextHolder.getContext().getAuthentication();
+            var username = authentication.getName();
+            var user = this.findById(Integer.parseInt(username)); // TODO: refactor
+            return Optional.of(user);
+        } catch (Exception e) {
+            return Optional.empty();
+        }
     }
 }

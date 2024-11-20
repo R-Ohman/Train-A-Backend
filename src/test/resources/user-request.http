@@ -5,11 +5,10 @@ POST {{baseUrl}}/api/signin
 Content-Type: application/json
 
 {
-  "email": {{email}},
-  "password": {{password}}
+  "email": "{{email}}",
+  "password": "{{password}}"
 }
 
-### Save token to global variable for further requests
 > {% client.global.set("token", response.body.token); %}
 
 ### Get orders for current user

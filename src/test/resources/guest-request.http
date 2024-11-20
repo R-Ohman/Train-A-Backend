@@ -3,6 +3,8 @@
 ### Get all routes
 GET {{baseUrl}}/api/routes
 
+> {% client.global.set("token", ""); %}
+
 ### Get all carriage types
 GET {{baseUrl}}/api/carriage
 

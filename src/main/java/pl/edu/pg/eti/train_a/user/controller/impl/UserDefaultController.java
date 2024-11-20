@@ -84,7 +84,6 @@ public class UserDefaultController implements UserController {
 
     @Override
     public SignInResponse signIn(SignInRequest request) {
-        System.out.println("asdasdas");
         try {
             var user = userService.findByEmail(request.getEmail());
             authenticationManager.authenticate(

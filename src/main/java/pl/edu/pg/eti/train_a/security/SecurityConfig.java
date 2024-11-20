@@ -29,54 +29,44 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.securityMatcher("/api/**").authorizeHttpRequests(rmr -> rmr
-                .requestMatchers(
-                        HttpMethod.GET,
-                        "/api/users",
-                        "/api/routes/{id}"
-                ).hasRole(UserRole.MANAGER.getValue())
-                .requestMatchers(
-                        HttpMethod.DELETE,
-                        "/api/carriage/{code}",
-                        "/api/station/{id}",
-                        "/api/route/{id}",
-                        "/api/route/{routeId}/ride/{rideId}"
-                ).hasRole(UserRole.MANAGER.getValue())
-                .requestMatchers(
-                        HttpMethod.PUT,
-                        "/api/carriage/{code}",
-                        "/api/route/{id}",
-                        "/api/route/{routeId}/ride/{rideId}"
-                ).hasRole(UserRole.MANAGER.getValue())
-                .requestMatchers(
-                        HttpMethod.POST,
-                        "/api/carriage",
-                        "/api/station",
-                        "/api/route",
-                        "/api/route/{routeId}/ride"
-                ).hasRole(UserRole.MANAGER.getValue())
-                .requestMatchers(
-                        "/api/order",
-                        "/api/profile",
-                        "/api/profile/password",
-                        "/api/logout"
-                ).authenticated()
-                .anyRequest().permitAll()
-        ).httpBasic(httpbc -> httpbc
-                .authenticationEntryPoint(authenticationEntryPoint())
-        ).sessionManagement(smc -> smc
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        )
-                .cors(cors -> {
-                    cors.configurationSource(request -> {
-                        var corsConfiguration = new org.springframework.web.cors.CorsConfiguration();
-                        corsConfiguration.applyPermitDefaultValues();
-                        corsConfiguration.addAllowedMethod(HttpMethod.POST);
-                        corsConfiguration.addAllowedMethod(HttpMethod.PUT);
-                        corsConfiguration.addAllowedMethod(HttpMethod.DELETE);
-                        corsConfiguration.addAllowedMethod(HttpMethod.PATCH);
-                        return corsConfiguration;
-                    });
-                }).csrf(AbstractHttpConfigurer::disable);
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/api/users",
+                                "/api/routes/{id}"
+                        ).hasRole(UserRole.MANAGER.getValue())
+                        .requestMatchers(
+                                HttpMethod.DELETE,
+                                "/api/carriage/{code}",
+                                "/api/station/{id}",
+                                "/api/route/{id}",
+                                "/api/route/{routeId}/ride/{rideId}"
+                        ).hasRole(UserRole.MANAGER.getValue())
+                        .requestMatchers(
+                                HttpMethod.PUT,
+                                "/api/carriage/{code}",
+                                "/api/route/{id}",
+                                "/api/route/{routeId}/ride/{rideId}"
+                        ).hasRole(UserRole.MANAGER.getValue())
+                        .requestMatchers(
+                                HttpMethod.POST,
+                                "/api/carriage",
+                                "/api/station",
+                                "/api/route",
+                                "/api/route/{routeId}/ride"
+                        ).hasRole(UserRole.MANAGER.getValue())
+                        .requestMatchers(
+                                "/api/order",
+                                "/api/profile",
+                                "/api/profile/password",
+                                "/api/logout"
+                        ).authenticated()
+                        .anyRequest().permitAll()
+                ).httpBasic(httpbc -> httpbc
+                        .authenticationEntryPoint(authenticationEntryPoint())
+                ).sessionManagement(smc -> smc
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
+                .csrf(AbstractHttpConfigurer::disable);
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 

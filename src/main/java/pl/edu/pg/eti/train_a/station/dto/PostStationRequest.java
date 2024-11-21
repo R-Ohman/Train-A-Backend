@@ -1,5 +1,8 @@
 package pl.edu.pg.eti.train_a.station.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -13,8 +16,12 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode
 public class PostStationRequest {
+    @NotBlank
     String city;
+    @NotNull
     BigDecimal latitude;
+    @NotNull
     BigDecimal longitude;
-    List<Integer> relations;
+    @NotEmpty
+    List<@NotNull Integer> relations;
 }

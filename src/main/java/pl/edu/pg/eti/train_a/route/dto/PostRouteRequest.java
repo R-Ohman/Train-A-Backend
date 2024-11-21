@@ -1,5 +1,8 @@
 package pl.edu.pg.eti.train_a.route.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.List;
@@ -12,6 +15,8 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode
 public class PostRouteRequest {
-    private List<Integer> path;
-    private List<String> carriages;
+    @NotEmpty
+    private List<@NotNull Integer> path;
+    @NotEmpty
+    private List<@NotBlank String> carriages;
 }

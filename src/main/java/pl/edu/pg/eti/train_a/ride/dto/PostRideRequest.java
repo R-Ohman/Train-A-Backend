@@ -1,5 +1,8 @@
 package pl.edu.pg.eti.train_a.ride.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -14,7 +17,8 @@ import java.util.Map;
 @ToString
 @EqualsAndHashCode
 public class PostRideRequest {
-    private List<Segment> segments;
+    @NotEmpty
+    private List<@NotNull Segment> segments;
 
     @Getter
     @Setter
@@ -24,7 +28,9 @@ public class PostRideRequest {
     @ToString
     @EqualsAndHashCode
     public static class Segment {
-        private List<String> time;
-        private Map<String, BigDecimal> price;
+        @NotEmpty
+        private List<@NotBlank String> time;
+        @NotEmpty
+        private Map<@NotBlank String, @NotNull BigDecimal> price;
     }
 }

@@ -17,7 +17,7 @@ public interface UserController {
 
     @PostMapping("api/signup")
     @ResponseStatus(HttpStatus.CREATED)
-    void postUser(@RequestBody PostUserRequest request);
+    void signUp(@RequestBody PostUserRequest request);
 
     @PostMapping("api/signin")
     SignInResponse signIn(@RequestBody SignInRequest request) throws Exception;
@@ -25,12 +25,12 @@ public interface UserController {
     @PutMapping("api/profile")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    UserProfileResponse putUser(@RequestBody PutUserRequest request);
+    UserProfileResponse updateUser(@RequestBody PutUserRequest request);
 
     @PutMapping("api/profile/password")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    void putPassword(@RequestBody PutPasswordRequest request);
+    void updatePassword(@RequestBody PutPasswordRequest request);
 
     @DeleteMapping("api/logout")
     @ResponseStatus(HttpStatus.OK)

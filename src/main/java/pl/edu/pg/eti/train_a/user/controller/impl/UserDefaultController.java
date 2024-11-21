@@ -59,12 +59,12 @@ public class UserDefaultController implements UserController {
     }
 
     @Override
-    public void postUser(PostUserRequest request) {
+    public void signUp(PostUserRequest request) {
         userService.create(requestToUser.apply(request));
     }
 
     @Override
-    public UserProfileResponse putUser(PutUserRequest request) {
+    public UserProfileResponse updateUser(PutUserRequest request) {
         var user = userService.getCurrentUser().orElseThrow();
         var updatedUser = requestToUser.apply(user.getId(), request);
         userService.create(updatedUser);
@@ -76,7 +76,7 @@ public class UserDefaultController implements UserController {
     }
 
     @Override
-    public void putPassword(PutPasswordRequest request) {
+    public void updatePassword(PutPasswordRequest request) {
         var user = userService.getCurrentUser().orElseThrow();
         user.setPassHash(request.getPassword());
         userService.create(user);

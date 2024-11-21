@@ -7,6 +7,7 @@ import pl.edu.pg.eti.train_a.order.entity.Order;
 
 import java.util.ArrayList;
 import java.util.List;
+ import java.util.UUID;
 
 @Data
 @Builder
@@ -20,9 +21,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
-    public String getUsername() {
-        return Integer.toString(id);
-    }
+    @Builder.Default
+    String username = String.valueOf(UUID.randomUUID());
 
     String email;
     String name;

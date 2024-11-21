@@ -19,11 +19,11 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        var user = userRepository.findById(Integer.valueOf(username)) // TODO: refactor
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + username));
+        var user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with UUID: " + username));
         return User
                 .withUsername(user.getUsername())
-                .password("{noop}" + user.getPassHash())
+                .password(user.getPassHash())
                 .roles(user.getRole().getValue())
                 .accountExpired(false)
                 .accountLocked(false)

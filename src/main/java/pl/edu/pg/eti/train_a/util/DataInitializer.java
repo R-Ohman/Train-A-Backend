@@ -186,13 +186,13 @@ public class DataInitializer {
                         .email("user@user.com")
                         .name("User 1")
                         .role(UserRole.USER)
-                        .passHash("password123")
+                        .passHash("$2a$10$hHwnSpWQ7usdJ0B64Z8HKeK.F8rH/VOrYP0Egmiwf2UxnxNJv3DQW")
                         .build(),
                 User.builder()
                         .email("admin@admin.com")
                         .name("Admin 1")
                         .role(UserRole.MANAGER)
-                        .passHash("password123")
+                        .passHash("$2a$10$hHwnSpWQ7usdJ0B64Z8HKeK.F8rH/VOrYP0Egmiwf2UxnxNJv3DQW")
                         .build()
         );
 

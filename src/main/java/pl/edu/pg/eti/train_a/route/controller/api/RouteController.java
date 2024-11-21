@@ -1,5 +1,6 @@
 package pl.edu.pg.eti.train_a.route.controller.api;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pg.eti.train_a.route.dto.GetRouteInfoResponse;
@@ -23,12 +24,12 @@ public interface RouteController {
     @PostMapping("api/route")
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    Map<String, Integer> postRoute(@RequestBody PostRouteRequest request);
+    Map<String, Integer> postRoute(@RequestBody @Valid PostRouteRequest request);
 
     @PutMapping("/api/route/{id}")
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    Map<String, Integer> putRoute(@PathVariable int id, @RequestBody PutRouteRequest request);
+    Map<String, Integer> putRoute(@PathVariable int id, @RequestBody @Valid PutRouteRequest request);
 
     @DeleteMapping("/api/route/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

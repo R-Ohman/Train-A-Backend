@@ -1,5 +1,6 @@
 package pl.edu.pg.eti.train_a.station.controller.api;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pg.eti.train_a.station.dto.GetStationsResponse;
@@ -16,7 +17,7 @@ public interface StationController {
     @PostMapping("api/station")
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    Map<String, Integer> postStation(@RequestBody PostStationRequest request);
+    Map<String, Integer> postStation(@RequestBody @Valid PostStationRequest request);
 
     @DeleteMapping("/api/station/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

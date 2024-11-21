@@ -1,5 +1,6 @@
 package pl.edu.pg.eti.train_a.user.controller.api;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pg.eti.train_a.user.dto.*;
@@ -17,20 +18,20 @@ public interface UserController {
 
     @PostMapping("api/signup")
     @ResponseStatus(HttpStatus.CREATED)
-    void signUp(@RequestBody PostUserRequest request);
+    void signUp(@RequestBody @Valid PostUserRequest request);
 
     @PostMapping("api/signin")
-    SignInResponse signIn(@RequestBody SignInRequest request) throws Exception;
+    SignInResponse signIn(@RequestBody @Valid SignInRequest request) throws Exception;
 
     @PutMapping("api/profile")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    UserProfileResponse updateUser(@RequestBody PutUserRequest request);
+    UserProfileResponse updateUser(@RequestBody @Valid PutUserRequest request);
 
     @PutMapping("api/profile/password")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    void updatePassword(@RequestBody PutPasswordRequest request);
+    void updatePassword(@RequestBody @Valid PutPasswordRequest request);
 
     @DeleteMapping("api/logout")
     @ResponseStatus(HttpStatus.OK)

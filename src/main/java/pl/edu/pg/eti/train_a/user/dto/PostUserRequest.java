@@ -14,9 +14,9 @@ import lombok.*;
 @EqualsAndHashCode
 public class PostUserRequest {
     @NotBlank
-    @Email(message = "Email is wrong")
+    @Email(message = "invalidEmail")
     String email;
     @NotBlank
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$", message = "Password is wrong")
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&.])[A-Za-z\\d@$!%*?&.]{8,}$", message = "invalidPassword")
     String password;
 }

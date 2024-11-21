@@ -13,7 +13,7 @@ import lombok.*;
 @Builder
 public class SignInRequest {
     @NotBlank
-    @Email(message = "Email is wrong")
+    @Email(message = "invalidEmail")
     private String email;
     @NotBlank
     private String password;

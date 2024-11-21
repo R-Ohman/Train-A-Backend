@@ -1,5 +1,6 @@
 package pl.edu.pg.eti.train_a.carriage.controller.api;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pg.eti.train_a.carriage.dto.GetCarriagesResponse;
@@ -18,12 +19,12 @@ public interface CarriageController {
     @PostMapping("api/carriage")
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    Map<String, UUID> postCarriage(@RequestBody PostCarriageRequest request);
+    Map<String, UUID> postCarriage(@RequestBody @Valid PostCarriageRequest request);
 
     @PutMapping("/api/carriage/{code}")
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    Map<String, UUID> putCarriage(@PathVariable UUID code, @RequestBody PutCarriageRequest request);
+    Map<String, UUID> putCarriage(@PathVariable UUID code, @RequestBody @Valid PutCarriageRequest request);
 
     @DeleteMapping("/api/carriage/{code}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

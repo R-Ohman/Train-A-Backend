@@ -124,7 +124,7 @@
     - Attributes (object)
         - error:
             - message: `Access is not granted` (string) - Error message
-            - reason: `invalidAccessToken` (string) - Wrong token idintifier
+            - reason: `invalidAccessToken` (string) - Wrong token identifier
 
 - Response 400 (application/json)
     - Attributes (object)
@@ -146,7 +146,7 @@
     - Attributes (object)
         - error:
             - message: `Access is not granted` (string) - Error message
-            - reason: `invalidAccessToken` (string) - Wrong token idintifier
+            - reason: `invalidAccessToken` (string) - Wrong token identifier
 
 - Response 400 (application/json)
     - Attributes (object)
@@ -166,7 +166,7 @@
     - Attributes (object)
         - error:
             - message: `Access is not granted` (string) - Error message
-            - reason: `invalidAccessToken` (string) - Wrong token idintifier
+            - reason: `invalidAccessToken` (string) - Wrong token identifier
 
 ## Service
 
@@ -201,13 +201,20 @@
         - routes: (array[object]) - List of available routes
             - id: `64` (number) - Route identifier
             - path: `[33, 5, 62, 11, 48, 34]` (array[number]) - List of station identifiers
-            - carriages: `['carriage_type_2', 'carriage_type_2', 'carriage_type_2', 'carriage_type_2', 'carriage_type_7', 'carriage_type_7', 'carriage_type_7', 'carriage_type_7']` (array[string]) - List of carriage types for the train
+            - carriages:
+              `['carriage_type_2', 'carriage_type_2', 'carriage_type_2', 'carriage_type_2', 'carriage_type_7', 'carriage_type_7', 'carriage_type_7', 'carriage_type_7']` (
+              array[string]) - List of carriage types for the train
             - schedule: (array[object]) - List of potential rides
                 - rideId: `44` (number) - Identifier of certain schedule for the route
-                - segments: (array[object]) - List of road section between each station. Always 1 less than the number of stations on the route
-                    - time: `['2024-08-08T22:19:57.708Z', '2024-08-12T03:29:57.708Z']` (array[string]) - dates of the start of movement on the section and the end of movement on the section in string form - [departure_from_prev_station, arrival_at_next_station]
-                    - price: (object) - set of prices for all carriage types on this route. It has vary size depending on the train configuration
-                        - dynamic-carriage-type-1: `210` (number) - the price of 210 units for _dynamic-carriage-type-1_ carriage type on current section
+                - segments: (array[object]) - List of road section between each station. Always 1 less than the number
+                  of stations on the route
+                    - time: `['2024-08-08T22:19:57.708Z', '2024-08-12T03:29:57.708Z']` (array[string]) - dates of the
+                      start of movement on the section and the end of movement on the section in string
+                      form - [departure_from_prev_station, arrival_at_next_station]
+                    - price: (object) - set of prices for all carriage types on this route. It varies in size depending
+                      on the train configuration
+                        - dynamic-carriage-type-1: `210` (number) - the price of 210 units for _dynamic-carriage-type-1_
+                          carriage type on current section
                     - occupiedSeats: (array[number]) - list of occupied seat numbers
 
 - Response 400 (application/json)
@@ -238,12 +245,19 @@
         - rideId: `745` (number) - Identifier of certain schedule for the route
         - routeId: `18` (number) - Identifier of corresponding route
         - path: `[33, 5, 62, 11, 48, 34]` (array[number]) - List of station identifiers
-        - carriages: `['carriage_type_2', 'carriage_type_2', 'carriage_type_2', 'carriage_type_2', 'carriage_type_7', 'carriage_type_7', 'carriage_type_7', 'carriage_type_7']` (array[string]) - List of carriage types for the train
+        - carriages:
+          `['carriage_type_2', 'carriage_type_2', 'carriage_type_2', 'carriage_type_2', 'carriage_type_7', 'carriage_type_7', 'carriage_type_7', 'carriage_type_7']` (
+          array[string]) - List of carriage types for the train
         - schedule: (object) - Information about the ride
-            - segments: (array[object]) - List of road section between each station. Always 1 less than the number of stations on the route
-                - time: `['2024-08-08T22:19:57.708Z', '2024-08-12T03:29:57.708Z']` (array[string]) - dates of the start of movement on the section and the end of movement on the section in string form - [departure_from_prev_station, arrival_at_next_station]
-                - price: (object) - set of prices for all carriage types on this route. It has vary size depending on the train configuration
-                    - dynamic-carriage-type-1: `210` (number) - the price of 210 units for _dynamic-carriage-type-1_ carriage type on current section
+            - segments: (array[object]) - List of road section between each station. Always 1 less than the number of
+              stations on the route
+                - time: `['2024-08-08T22:19:57.708Z', '2024-08-12T03:29:57.708Z']` (array[string]) - dates of the start
+                  of movement on the section and the end of movement on the section in string
+                  form - [departure_from_prev_station, arrival_at_next_station]
+                - price: (object) - set of prices for all carriage types on this route. It varies in size depending on
+                  the train configuration
+                    - dynamic-carriage-type-1: `210` (number) - the price of 210 units for _dynamic-carriage-type-1_
+                      carriage type on current section
                 - occupiedSeats: `[4,28,42,61]` (array[number]) - list of occupied seat numbers
 
 - Response 400 (application/json)
@@ -343,19 +357,28 @@
     - Attributes: (array[object])
         - id: `64` (number) - Order identifier
         - rideId: `45` (number) - Ride identifier
-        - routeId: `18` (number) - Route idenfitier
+        - routeId: `18` (number) - Route identifier
         - seatId: `33` (number) - Seat index in the whole train
         - userId: `3` (number) - User identifier
         - status: `active|completed|rejected|canceled` (string) - Order status indicates current order state
         - path: `[33, 5, 62, 11, 48, 34]` (array[number]) - List of station identifiers
-        - carriages: `['carriage_type_2', 'carriage_type_2', 'carriage_type_2', 'carriage_type_2', 'carriage_type_7', 'carriage_type_7', 'carriage_type_7', 'carriage_type_7']` (array[string]) - List of carriage types for the train
+        - carriages:
+          `['carriage_type_2', 'carriage_type_2', 'carriage_type_2', 'carriage_type_2', 'carriage_type_7', 'carriage_type_7', 'carriage_type_7', 'carriage_type_7']` (
+          array[string]) - List of carriage types for the train
         - schedule: (object)
-            - segments: (array[object]) - List of road section between each station. Always 1 less than the number of stations on the route
-                - time: `['2024-08-08T22:19:57.708Z', '2024-08-12T03:29:57.708Z']` (array[string]) - dates of the start of movement on the section and the end of movement on the section in string form - [departure_from_prev_station, arrival_at_next_station]
-                - price: (object) - set of prices for all carriage types on this route. It has vary size depending on the train configuration
-                    - dynamic-carriage-type-1: `210` (number) - the price of 210 units for _dynamic-carriage-type-1_ carriage type on current section
+            - segments: (array[object]) - List of road section between each station. Always 1 less than the number of
+              stations on the route
+                - time: `['2024-08-08T22:19:57.708Z', '2024-08-12T03:29:57.708Z']` (array[string]) - dates of the start
+                  of movement on the section and the end of movement on the section in string
+                  form - [departure_from_prev_station, arrival_at_next_station]
+                - price: (object) - set of prices for all carriage types on this route. It varies in size depending on
+                  the train configuration
+                    - dynamic-carriage-type-1: `210` (number) - the price of 210 units for _dynamic-carriage-type-1_
+                      carriage type on current section
 
-### To retrieve users (only for manager)
+## Admin
+
+### Retrieve users
 
 > `(GET) /api/users`
 
@@ -364,39 +387,11 @@
     - Attributes: (object)
 
 - Response 200 (application/json)
-    - Attributes: (arra[object])
+    - Attributes: (array[object])
         - id: `3` (number) - User identifier
         - email: `mail@mail.com` (string) - User email
         - name: `Dohn` (string) - User name
         - role: `user|manager` (string) - User role
-
-### To cancel active order
-
-> `(DELETE) /api/order/{orderId}`
-
-- Request (application/json)
-
-    - Parameters:
-        - orderId: `215` (number, required) - Identifier of the order
-
-- Response 200 (application/json)
-
-    - Attributes: (object)
-
-- Response 400 (application/json)
-
-    - Attributes: (object)
-        - error:
-            - message: `Order is not found` (string) - Error message
-            - reason: `orderNotFound` (string) - Error type
-
-- Response 400 (application/json)
-    - Attributes: (object)
-        - error:
-            - message: `Order is not active` (string) - Error message
-            - reason: `orderNotActive` (string) - Error type
-
-## Admin
 
 ### Retrieve carriage type list
 
@@ -498,7 +493,8 @@
 - Response 400 (application/json)
     - Attributes (object)
         - error:
-            - message: `Carriage is already used` (string) - Error message if some order exist with certain carriage type
+            - message: `Carriage is already used` (string) - Error message if some order exist with certain carriage
+              type
             - reason: `recordInUse` (string) - Unique error type
 
 ### Retrieve station list
@@ -511,7 +507,8 @@
         - city: `London` (string) - City name where station is located
         - latitude: `51.5074` (number) - Latitude of the station
         - longitude: `-0.1278` - Longitude of the station
-        - connectedTo: `[{id: 4, distance: 44},...]` (array[object]) - List of connected stations, where _id_ - identifier, _distance_ - distance between them in km
+        - connectedTo: `[{id: 4, distance: 44},...]` (array[object]) - List of connected stations, where _id_ -
+          identifier, _distance_ - distance between them in km
 
 ### Create new station
 
@@ -535,20 +532,20 @@
     - Attributes (object)
         - error:
             - message: `Access is not granted` (string) - Error message
-            - reason: `invalidAccessToken` (string) - Wrong token idintifier
+            - reason: `invalidAccessToken` (string) - Wrong token identifier
 
 - Response 400 (application/json)
 
     - Attributes (object)
         - error:
             - message: `Invalid station data` (string) - Error message
-            - reason: `invalidStationData` (string) - Wrong token idintifier
+            - reason: `invalidStationData` (string) - Wrong token identifier
 
 - Response 400 (application/json)
     - Attributes (object)
         - error:
             - message: `Invalid station relations` (string) - Error message
-            - reason: `invalidStationData` (string) - Wrong token idintifier
+            - reason: `invalidStationData` (string) - Wrong token identifier
 
 ### Delete station
 
@@ -567,7 +564,7 @@
     - Attributes (object)
         - error:
             - message: `Access is not granted` (string) - Error message
-            - reason: `invalidAccessToken` (string) - Wrong token idintifier
+            - reason: `invalidAccessToken` (string) - Wrong token identifier
 - Response 400 (application/json)
     - Attributes (object)
         - error:
@@ -586,7 +583,9 @@
     - Attributes: (array[object])
         - id: `64` (number) - Route identifier
         - path: `[33, 5, 62, 11, 48, 34]` (array[number]) - List of station identifiers
-        - carriages: `['carriage_type_2', 'carriage_type_2', 'carriage_type_2', 'carriage_type_2', 'carriage_type_7', 'carriage_type_7', 'carriage_type_7', 'carriage_type_7']` (array[string]) - List of carriage types for the train
+        - carriages:
+          `['carriage_type_2', 'carriage_type_2', 'carriage_type_2', 'carriage_type_2', 'carriage_type_7', 'carriage_type_7', 'carriage_type_7', 'carriage_type_7']` (
+          array[string]) - List of carriage types for the train
 
 ### To create new route
 
@@ -596,7 +595,9 @@
 
     - Body (object)
         - path: `[33, 5, 62, 11, 48, 34]` (array[number]) - List of station identifiers
-        - carriages: `['carriage_type_2', 'carriage_type_2', 'carriage_type_2', 'carriage_type_2', 'carriage_type_7', 'carriage_type_7', 'carriage_type_7', 'carriage_type_7']` (array[string]) - List of carriage identifiers for the train
+        - carriages:
+          `['carriage_type_2', 'carriage_type_2', 'carriage_type_2', 'carriage_type_2', 'carriage_type_7', 'carriage_type_7', 'carriage_type_7', 'carriage_type_7']` (
+          array[string]) - List of carriage identifiers for the train
 
 - Response 201 (application/json)
 
@@ -607,7 +608,7 @@
     - Attributes (object)
         - error:
             - message: `Access is not granted` (string) - Error message
-            - reason: `invalidAccessToken` (string) - Wrong token idintifier
+            - reason: `invalidAccessToken` (string) - Wrong token identifier
 
 ### To update route
 
@@ -619,7 +620,9 @@
         - id: `17` (number, required) - Identifier of the route
     - Body (object)
         - path: `[33, 5, 62, 11, 48, 34]` (array[number]) - List of station identifiers
-        - carriages: `['carriage_type_2', 'carriage_type_2', 'carriage_type_2', 'carriage_type_2', 'carriage_type_7', 'carriage_type_7', 'carriage_type_7', 'carriage_type_7']` (array[string]) - List of carriage identifiers for the train
+        - carriages:
+          `['carriage_type_2', 'carriage_type_2', 'carriage_type_2', 'carriage_type_2', 'carriage_type_7', 'carriage_type_7', 'carriage_type_7', 'carriage_type_7']` (
+          array[string]) - List of carriage identifiers for the train
 
 - Response 200 (application/json)
 
@@ -630,7 +633,7 @@
     - Attributes (object)
         - error:
             - message: `Access is not granted` (string) - Error message
-            - reason: `invalidAccessToken` (string) - Wrong token idintifier
+            - reason: `invalidAccessToken` (string) - Wrong token identifier
 
 ### Delete route
 
@@ -650,7 +653,7 @@
     - Attributes (object)
         - error:
             - message: `Access is not granted` (string) - Error message
-            - reason: `invalidAccessToken` (string) - Wrong token idintifier
+            - reason: `invalidAccessToken` (string) - Wrong token identifier
 
 - Response 400 (application/json)
 
@@ -678,13 +681,20 @@
     - Attributes: (array[object])
         - id: `64` (number) - Route identifier
         - path: `[33, 5, 62, 11, 48, 34]` (array[number]) - List of station identifiers
-        - carriages: `['carriage_type_2', 'carriage_type_2', 'carriage_type_2', 'carriage_type_2', 'carriage_type_7', 'carriage_type_7', 'carriage_type_7', 'carriage_type_7']` (array[string]) - List of carriage types for the train
+        - carriages:
+          `['carriage_type_2', 'carriage_type_2', 'carriage_type_2', 'carriage_type_2', 'carriage_type_7', 'carriage_type_7', 'carriage_type_7', 'carriage_type_7']` (
+          array[string]) - List of carriage types for the train
         - schedule: (array[object]) - List of potential rides
             - rideId: `44` (number) - Identifier of certain schedule for the route
-            - segments: (array[object]) - List of road section between each station. Always 1 less than the number of stations on the route
-                - time: `['2024-08-08T22:19:57.708Z', '2024-08-12T03:29:57.708Z']` ([string, string]) - dates of the start of movement on the section and the end of movement on the section in string form - [departure_from_prev_station, arrival_at_next_station]
-                - price: (object) - set of prices for all carriage types on this route. It has vary size depending on the train configuration
-                    - dynamic-carriage-type-1: `210` (number) - the price of 210 units for _dynamic-carriage-type-1_ carriage type on current section
+            - segments: (array[object]) - List of road section between each station. Always 1 less than the number of
+              stations on the route
+                - time: `['2024-08-08T22:19:57.708Z', '2024-08-12T03:29:57.708Z']` ([string, string]) - dates of the
+                  start of movement on the section and the end of movement on the section in string
+                  form - [departure_from_prev_station, arrival_at_next_station]
+                - price: (object) - set of prices for all carriage types on this route. It varies in size depending on
+                  the train configuration
+                    - dynamic-carriage-type-1: `210` (number) - the price of 210 units for _dynamic-carriage-type-1_
+                      carriage type on current section
 
 ### Create new ride
 
@@ -696,9 +706,13 @@
         - routeId: `17` (number, required) - Identifier of the route
     - Body (object)
         - segments: (array[object])
-            - time: `['2024-08-08T22:19:57.708Z', '2024-08-12T03:29:57.708Z']` ([string, string]) - dates of the start of movement on the section and the end of movement on the section in string form - [departure_from_prev_station, arrival_at_next_station]
-            - price: (object) - set of prices for all carriage types on this route. It has vary size depending on the train configuration
-                - dynamic-carriage-type-1: `210` (number) - the price of 210 units for _dynamic-carriage-type-1_ carriage type on current section
+            - time: `['2024-08-08T22:19:57.708Z', '2024-08-12T03:29:57.708Z']` ([string, string]) - dates of the start
+              of movement on the section and the end of movement on the section in string
+              form - [departure_from_prev_station, arrival_at_next_station]
+            - price: (object) - set of prices for all carriage types on this route. It varies in size depending on the
+              train configuration
+                - dynamic-carriage-type-1: `210` (number) - the price of 210 units for _dynamic-carriage-type-1_
+                  carriage type on current section
 
 - Response 201 (application/json)
 
@@ -750,9 +764,13 @@
         - rideId: `215` (number, required) - Identifier of the ride
     - Body (object)
         - segments: (array[object])
-            - time: `['2024-08-08T22:19:57.708Z', '2024-08-12T03:29:57.708Z']` ([string, string]) - dates of the start of movement on the section and the end of movement on the section in string form - [departure_from_prev_station, arrival_at_next_station]
-            - price: (object) - set of prices for all carriage types on this route. It has vary size depending on the train configuration
-                - dynamic-carriage-type-1: `210` (number) - the price of 210 units for _dynamic-carriage-type-1_ carriage type on current section
+            - time: `['2024-08-08T22:19:57.708Z', '2024-08-12T03:29:57.708Z']` ([string, string]) - dates of the start
+              of movement on the section and the end of movement on the section in string
+              form - [departure_from_prev_station, arrival_at_next_station]
+            - price: (object) - set of prices for all carriage types on this route. It varies in size depending on the
+              train configuration
+                - dynamic-carriage-type-1: `210` (number) - the price of 210 units for _dynamic-carriage-type-1_
+                  carriage type on current section
 
 - Response 200 (application/json)
 

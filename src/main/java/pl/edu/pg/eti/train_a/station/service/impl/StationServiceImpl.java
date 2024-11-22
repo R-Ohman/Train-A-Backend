@@ -43,12 +43,14 @@ public class StationServiceImpl implements StationService {
                 .orElseThrow(() -> new EntityNotFoundException("Station not found"));
     }
 
-    public Station findByCityWithDetails(String city) {
-        var station = stationRepository.findByCity(city).orElseThrow(() -> new EntityNotFoundException("Station not found"));
-        station.getRoutes().size();
-        station.getRailways().size();
-        station.getOrdersFrom().size();
-        station.getOrdersTo().size();
+    public  Optional<Station> findByCityWithDetails(String city) {
+        var station = stationRepository.findByCity(city);
+        station.ifPresent((s) -> {
+            s.getRoutes().size();
+            s.getRailways().size();
+            s.getOrdersFrom().size();
+            s.getOrdersTo().size();
+        });
         return station;
     }
 

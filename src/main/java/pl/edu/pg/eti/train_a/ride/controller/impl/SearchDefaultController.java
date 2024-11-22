@@ -2,7 +2,9 @@ package pl.edu.pg.eti.train_a.ride.controller.impl;
 
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
+import pl.edu.pg.eti.train_a.exception.CustomResponseStatusException;
 import pl.edu.pg.eti.train_a.ride.controller.api.SearchController;
 import pl.edu.pg.eti.train_a.ride.dto.GetRideResponse;
 import pl.edu.pg.eti.train_a.ride.dto.GetSearchResponse;
@@ -59,6 +61,8 @@ public class SearchDefaultController implements SearchController {
 
     @Override
     public GetRideResponse getSearchInfoById(int rideId) {
-        return rideToResponse.apply(rideService.findById(rideId).orElseThrow());
+        return rideToResponse.apply(rideService.findById(rideId).orElseThrow(
+                () -> new CustomResponseStatusException(HttpStatus.BAD_REQUEST, "rideNotFound", "Ride not found")
+        ));
     }
 }

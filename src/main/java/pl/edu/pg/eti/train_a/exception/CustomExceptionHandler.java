@@ -1,6 +1,7 @@
-package pl.edu.pg.eti.train_a.advice;
+package pl.edu.pg.eti.train_a.exception;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -26,5 +27,10 @@ public class CustomExceptionHandler {
             }
         };
         return new ErrorResponse(reason, message);
+    }
+
+    @ExceptionHandler(CustomResponseStatusException.class)
+    public ResponseEntity<ErrorResponse> handleIllegalArgument(CustomResponseStatusException exception) {
+        return new ResponseEntity<>(exception.getErrorResponse(), exception.getStatusCode());
     }
 }

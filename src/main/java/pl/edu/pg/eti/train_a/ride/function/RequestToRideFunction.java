@@ -46,7 +46,7 @@ public class RequestToRideFunction implements BiFunction<Integer, PostRideReques
                                 .prices(
                                         segment.getPrice().entrySet().stream()
                                                 .collect(Collectors.toMap(
-                                                        entry -> carriageService.findByType(entry.getKey()),
+                                                        entry -> carriageService.findByType(entry.getKey()).orElseThrow(),
                                                         Map.Entry::getValue))
                                 )
                                 .build())
@@ -70,7 +70,7 @@ public class RequestToRideFunction implements BiFunction<Integer, PostRideReques
                                     .prices(
                                             newSegmentData.getPrice().entrySet().stream()
                                                     .collect(Collectors.toMap(
-                                                            entry -> carriageService.findByType(entry.getKey()),
+                                                            entry -> carriageService.findByType(entry.getKey()).orElseThrow(),
                                                             Map.Entry::getValue))
                                     )
                                     .build();

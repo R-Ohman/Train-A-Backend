@@ -94,7 +94,7 @@ DELETE {{baseUrl}}/api/order/4
 Authorization: Bearer {{token}}
 
 ### Delete carriage type
-DELETE {{baseUrl}}/api/carriage/21537160-6014-40ed-b0f6-966e90238e1e
+DELETE {{baseUrl}}/api/carriage/21537160-6014-40ed-b0f6-966e90238e1a
 Authorization: Bearer {{token}}
 
 ### Delete station
@@ -120,7 +120,7 @@ Authorization: Bearer {{token}}
 }
 
 ### Update carriage type
-PUT {{baseUrl}}/api/carriage/{carriageId}
+PUT {{baseUrl}}/api/carriage/2
 Content-Type: application/json
 Authorization: Bearer {{token}}
 

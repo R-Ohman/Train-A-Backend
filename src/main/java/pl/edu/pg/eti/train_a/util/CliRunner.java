@@ -17,6 +17,7 @@ import pl.edu.pg.eti.train_a.station.service.api.StationService;
 import pl.edu.pg.eti.train_a.user.service.api.UserService;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.Scanner;
 
 @Component
@@ -159,48 +160,52 @@ public class CliRunner implements CommandLineRunner {
     }
 
     private void showRoutes() {
-        routeService.findAll().stream().map(route -> routeService.findByIdWithDetails(route.getId())).forEach(route -> {
-            System.out.println("Route #" + route.getId());
-            System.out.println("\tCarriages:");
-            route.getCarriages().forEach(c -> System.out.printf("\t\t%s\n", c));
-            System.out.println("\tStations:");
-            route.getStations().forEach(s -> System.out.printf("\t\t%s\n", s));
-            System.out.println("\tRides:");
-            route.getRides().forEach(r -> System.out.printf("\t\tRide #%d\n", r.getId()));
-            if (route.getRides().isEmpty()) {
-                System.out.println("\t\tNo rides available");
-            }
+        routeService.findAll().stream().map(route -> routeService.findByIdWithDetails(route.getId())).forEach(r -> {
+            r.ifPresent(route -> {
+                System.out.println("Route #" + route.getId());
+                System.out.println("\tCarriages:");
+                route.getCarriages().forEach(c -> System.out.printf("\t\t%s\n", c));
+                System.out.println("\tStations:");
+                route.getStations().forEach(s -> System.out.printf("\t\t%s\n", s));
+                System.out.println("\tRides:");
+                route.getRides().forEach(route_ride -> System.out.printf("\t\tRide #%d\n", route_ride.getId()));
+                if (route.getRides().isEmpty()) {
+                    System.out.println("\t\tNo rides available");
+                }
+            });
         });
     }
 
     private void showRides() {
         rideService.findAll()
                 .stream().map(ride -> rideService.findByIdWithDetails(ride.getId()))
-                .forEach(ride -> {
-            var route = routeService.findByIdWithDetails(ride.getRoute().getId());
-            var routeStations = route.getStations();
+                .forEach(r -> {
+                    r.ifPresent(ride -> {
+                        var route = routeService.findByIdWithDetails(ride.getRoute().getId()).orElseThrow();
+                        var routeStations = route.getStations();
 
-            System.out.println("Ride #" + ride.getId());
-            System.out.printf("\tRoute #%s\n", route.getId());
+                        System.out.println("Ride #" + ride.getId());
+                        System.out.printf("\tRoute #%s\n", route.getId());
 
-            if (ride.getSegments().isEmpty()) {
-                System.out.println("\tSchedule is not provided yet!");
-                return;
-            }
+                        if (ride.getSegments().isEmpty()) {
+                            System.out.println("\tSchedule is not provided yet!");
+                            return;
+                        }
 
-            for (int i = 0; i < ride.getSegments().size(); i++) {
-                var currentStation = routeStations.get(i);
-                var nextStation = routeStations.get(i + 1);
-                var segment = ride.getSegments().get(i);
+                        for (int i = 0; i < ride.getSegments().size(); i++) {
+                            var currentStation = routeStations.get(i);
+                            var nextStation = routeStations.get(i + 1);
+                            var segment = ride.getSegments().get(i);
 
-                System.out.printf("\t[%s - %s] From %s to %s\n\tPrice list:\n", segment.getDeparture(), segment.getArrival(), currentStation.getCity(), nextStation.getCity());
+                            System.out.printf("\t[%s - %s] From %s to %s\n\tPrice list:\n", segment.getDeparture(), segment.getArrival(), currentStation.getCity(), nextStation.getCity());
 
-                segment.getPrices().forEach((carriage, price) -> {
-                    System.out.printf("\t\t%s - %.2f$\n", carriage.getType(), price);
+                            segment.getPrices().forEach((carriage, price) -> {
+                                System.out.printf("\t\t%s - %.2f$\n", carriage.getType(), price);
+                            });
+
+                        }
+                    });
                 });
-
-            }
-        });
     }
 
     private void showOrders() {
@@ -227,10 +232,10 @@ public class CliRunner implements CommandLineRunner {
         System.out.print("End station: ");
         var stationEndCity = scanner.nextLine();
 
-        var user = userService.findByEmailWithDetails(userEmail);
-        var ride = rideService.findByIdWithDetails(Integer.parseInt(rideId));
-        var stationStart = stationService.findByCityWithDetails(stationStartCity);
-        var stationEnd = stationService.findByCityWithDetails(stationEndCity);
+        var user = userService.findByEmailWithDetails(userEmail).orElseThrow();
+        var ride = rideService.findByIdWithDetails(Integer.parseInt(rideId)).orElseThrow();
+        var stationStart = stationService.findByCityWithDetails(stationStartCity).orElseThrow();
+        var stationEnd = stationService.findByCityWithDetails(stationEndCity).orElseThrow();
         var order = Order.autoBuilder().user(user).ride(ride).seatId(Integer.parseInt(seatId)).stationStart(stationStart).stationEnd(stationEnd).build();
         orderService.create(order);
 
@@ -245,8 +250,8 @@ public class CliRunner implements CommandLineRunner {
         System.out.print("Enter route stations (separate by comma): ");
         var stationIds = Arrays.asList(scanner.nextLine().split(","));
 
-        var carriages = carriageTypes.stream().map(String::trim).map(carriageService::findByTypeWithDetails).toList();
-        var stations = stationIds.stream().map(String::trim).map(stationService::findByCityWithDetails).toList();
+        var carriages = carriageTypes.stream().map(String::trim).map(carriageService::findByTypeWithDetails).map(Optional::orElseThrow).toList();
+        var stations = stationIds.stream().map(String::trim).map(stationService::findByCityWithDetails).map(Optional::orElseThrow).toList();
 
         var route = Route.autoBuilder().carriages(carriages).stations(stations).build();
         routeService.create(route);
@@ -259,7 +264,7 @@ public class CliRunner implements CommandLineRunner {
         var scanner = new Scanner(System.in);
         System.out.print("Enter ride route ID: ");
         var routeId = Integer.parseInt(scanner.nextLine());
-        var route = routeService.findByIdWithDetails(routeId);
+        var route = routeService.findByIdWithDetails(routeId).orElseThrow();
         var ride = Ride.autoBuilder().route(route).build();
         rideService.create(ride);
 

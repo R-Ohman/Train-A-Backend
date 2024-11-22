@@ -8,7 +8,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
+import pl.edu.pg.eti.train_a.exception.CustomResponseStatusException;
 import pl.edu.pg.eti.train_a.security.JwtUtil;
 import pl.edu.pg.eti.train_a.user.controller.api.UserController;
 import pl.edu.pg.eti.train_a.user.dto.*;
@@ -65,6 +65,9 @@ public class UserDefaultController implements UserController {
 
     @Override
     public UserProfileResponse updateUser(PutUserRequest request) {
+        if (userService.findByEmail(request.getEmail()).isPresent()) {
+            throw new CustomResponseStatusException(HttpStatus.BAD_REQUEST, "invalidUniqueKey", "Email already exists");
+        }
         var user = userService.getCurrentUser().orElseThrow();
         var updatedUser = requestToUser.apply(user.getId(), request);
         userService.create(updatedUser);
@@ -85,7 +88,7 @@ public class UserDefaultController implements UserController {
     @Override
     public SignInResponse signIn(SignInRequest request) {
         try {
-            var user = userService.findByEmail(request.getEmail());
+            var user = userService.findByEmail(request.getEmail()).orElseThrow();
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(user.getUsername(), request.getPassword())
             );
@@ -94,7 +97,7 @@ public class UserDefaultController implements UserController {
 
             return SignInResponse.builder().token(jwt).build();
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Incorrect username or password", e);
+            throw new CustomResponseStatusException(HttpStatus.BAD_REQUEST, "userNotFound", "User is not found");
         }
     }
 

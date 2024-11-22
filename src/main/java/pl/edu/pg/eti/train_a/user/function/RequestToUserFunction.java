@@ -29,7 +29,7 @@ public class RequestToUserFunction implements Function<PostUserRequest, User> {
     }
 
     public User apply(int id, PutUserRequest putUserRequest) {
-        var user = userService.findById(id);
+        var user = userService.findById(id).orElseThrow();
         return User.builder()
                 .id(id)
                 .name(putUserRequest.getName())

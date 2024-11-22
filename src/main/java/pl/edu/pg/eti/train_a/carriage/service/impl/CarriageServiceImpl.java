@@ -1,6 +1,5 @@
 package pl.edu.pg.eti.train_a.carriage.service.impl;
 
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,14 +32,14 @@ public class CarriageServiceImpl implements CarriageService {
         return carriageRepository.findById(id);
     }
 
-    public Carriage findByType(String type) {
-        return carriageRepository.findByType(type).orElseThrow(() -> new EntityNotFoundException("Carriage not found"));
+    public Optional<Carriage> findByType(String type) {
+        return carriageRepository.findByType(type);
     }
 
-    public Carriage findByTypeWithDetails(String type) {
+    public Optional<Carriage> findByTypeWithDetails(String type) {
         routeRepository.findAll();
-        var carriage = carriageRepository.findByType(type).orElseThrow(() -> new EntityNotFoundException("Carriage not found"));
-        carriage.getRoutes().size();
+        var carriage = carriageRepository.findByType(type);
+        carriage.ifPresent(c -> c.getRoutes().size());
         return carriage;
     }
 

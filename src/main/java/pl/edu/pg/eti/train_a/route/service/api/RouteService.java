@@ -19,5 +19,5 @@ public interface RouteService {
 
     void delete(int id);
 
-    Route findByIdWithDetails(int routeId);
+    Optional<Route> findByIdWithDetails(int routeId);
 }

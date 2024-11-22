@@ -4,10 +4,11 @@ import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
+import pl.edu.pg.eti.train_a.exception.CustomResponseStatusException;
 import pl.edu.pg.eti.train_a.order.controller.api.OrderController;
 import pl.edu.pg.eti.train_a.order.dto.GetOrdersResponse;
 import pl.edu.pg.eti.train_a.order.dto.PostOrderRequest;
+import pl.edu.pg.eti.train_a.order.entity.OrderStatus;
 import pl.edu.pg.eti.train_a.order.function.OrderToResponseFunction;
 import pl.edu.pg.eti.train_a.order.function.RequestToOrderFunction;
 import pl.edu.pg.eti.train_a.order.service.api.OrderService;
@@ -42,7 +43,7 @@ public class OrderDefaultController implements OrderController {
     public GetOrdersResponse getOrders(boolean all) {
         var user = userService.getCurrentUser().orElseThrow();
         if (all && user.getRole() != UserRole.MANAGER) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+            throw new CustomResponseStatusException(HttpStatus.UNAUTHORIZED, "invalidAccessToken", "Access is not granted");
         } else if (all) {
             return orderToResponse.apply(orderService.findAll());
         }
@@ -60,14 +61,19 @@ public class OrderDefaultController implements OrderController {
         var user = userService.getCurrentUser().orElseThrow();
         if (user.getRole() != UserRole.MANAGER
                 && user.getOrders().stream().noneMatch(order -> order.getId() == orderId)) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+            throw new CustomResponseStatusException(HttpStatus.UNAUTHORIZED, "invalidAccessToken", "Access is not granted");
         }
 
         orderService.findById(orderId)
                 .ifPresentOrElse(
-                        character -> orderService.delete(orderId),
+                        o -> {
+                            if (o.getStatus() != OrderStatus.ACTIVE) {
+                                throw new CustomResponseStatusException(HttpStatus.BAD_REQUEST, "orderNotActive", "Order is not active");
+                            }
+                            orderService.delete(orderId);
+                        },
                         () -> {
-                            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+                            throw new CustomResponseStatusException(HttpStatus.BAD_REQUEST, "orderNotFound", "Order not found");
                         }
                 );
     }

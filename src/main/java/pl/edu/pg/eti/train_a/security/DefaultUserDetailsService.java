@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 import pl.edu.pg.eti.train_a.user.repository.api.UserRepository;
 
 @Service
-public class CustomUserDetailsService implements UserDetailsService {
+public class DefaultUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
 
     @Autowired
-    public CustomUserDetailsService(UserRepository userRepository) {
+    public DefaultUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

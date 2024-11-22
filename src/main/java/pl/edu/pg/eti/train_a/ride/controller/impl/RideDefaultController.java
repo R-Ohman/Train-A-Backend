@@ -4,7 +4,7 @@ import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
+import pl.edu.pg.eti.train_a.exception.CustomResponseStatusException;
 import pl.edu.pg.eti.train_a.ride.controller.api.RideController;
 import pl.edu.pg.eti.train_a.ride.dto.PostRideRequest;
 import pl.edu.pg.eti.train_a.ride.dto.PutRideRequest;
@@ -27,8 +27,12 @@ public class RideDefaultController implements RideController {
 
     @Override
     public Map<String, Integer> postRide(int routeId, PostRideRequest request) {
-        int newRideId = rideService.create(requestToRide.apply(routeId, request));
-        return Map.of("id", newRideId);
+        try {
+            int newRideId = rideService.create(requestToRide.apply(routeId, request));
+            return Map.of("id", newRideId);
+        } catch (Exception e) {
+            throw new CustomResponseStatusException(HttpStatus.BAD_REQUEST, "routeNotFound", "Route not found");
+        }
     }
 
     @Override
@@ -44,7 +48,7 @@ public class RideDefaultController implements RideController {
                 .ifPresentOrElse(
                         character -> rideService.delete(rideId),
                         () -> {
-                            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+                            throw new CustomResponseStatusException(HttpStatus.BAD_REQUEST, "rideNotFound", "Ride not found");
                         }
                 );
     }

@@ -4,7 +4,7 @@ import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
+import pl.edu.pg.eti.train_a.exception.CustomResponseStatusException;
 import pl.edu.pg.eti.train_a.station.controller.api.StationController;
 import pl.edu.pg.eti.train_a.station.dto.GetStationsResponse;
 import pl.edu.pg.eti.train_a.station.dto.PostStationRequest;
@@ -49,7 +49,7 @@ public class StationDefaultController implements StationController {
                 .ifPresentOrElse(
                         character -> stationService.delete(id),
                         () -> {
-                            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+                            throw new CustomResponseStatusException(HttpStatus.BAD_REQUEST, "stationNotFound", "Station not found");
                         }
                 );
     }

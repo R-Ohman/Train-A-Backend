@@ -5,7 +5,7 @@ import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
+import pl.edu.pg.eti.train_a.exception.CustomResponseStatusException;
 import pl.edu.pg.eti.train_a.route.controller.api.RouteController;
 import pl.edu.pg.eti.train_a.route.dto.GetRouteInfoResponse;
 import pl.edu.pg.eti.train_a.route.dto.GetRoutesResponse;
@@ -50,7 +50,7 @@ public class RouteDefaultController implements RouteController {
     @Override
     public GetRouteInfoResponse getRouteInfoById(int id) {
         return routeInfoToResponse.apply(routeService.findById(id).orElseThrow(
-                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Route not found")
+                () -> new CustomResponseStatusException(HttpStatus.BAD_REQUEST, "routeNotFound", "Route not found")
         ));
     }
 
@@ -72,7 +72,7 @@ public class RouteDefaultController implements RouteController {
                 .ifPresentOrElse(
                         character -> routeService.delete(id),
                         () -> {
-                            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+                            throw new CustomResponseStatusException(HttpStatus.BAD_REQUEST, "routeNotFound", "Route not found");
                         }
                 );
     }

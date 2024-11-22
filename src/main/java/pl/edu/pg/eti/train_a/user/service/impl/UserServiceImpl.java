@@ -1,6 +1,5 @@
 package pl.edu.pg.eti.train_a.user.service.impl;
 
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -31,28 +30,31 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findById(int id) {
-        return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found"));
+    public  Optional<User> findById(int id) {
+        return userRepository.findById(id);
     }
 
     @Override
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username).orElseThrow(() -> new EntityNotFoundException("User not found"));
+    public  Optional<User> findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 
     @Override
-    public User findByEmail(String email) {
-        return userRepository.findByEmail(email).orElseThrow(() -> new EntityNotFoundException("User not found"));
+    public Optional<User> findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
-    public User findByEmailWithDetails(String email) {
-        var user = userRepository.findByEmail(email).orElseThrow(() -> new EntityNotFoundException("User not found"));
-        user.getOrders().size();
+    public  Optional<User> findByEmailWithDetails(String email) {
+        var user = userRepository.findByEmail(email);
+        user.ifPresent(u -> u.getOrders().size());
         return user;
     }
 
     @Override
     public void create(User user) {
+        if (userRepository.findByUsername(user.getUsername()).isPresent()) {
+            throw new IllegalArgumentException("invalidUniqueKey");
+        }
         user.setPassHash(passwordEncoder.encode(user.getPassHash()));
         this.userRepository.save(user);
     }
@@ -67,8 +69,7 @@ public class UserServiceImpl implements UserService {
         try {
             var authentication = SecurityContextHolder.getContext().getAuthentication();
             var username = authentication.getName();
-            var user = this.findByUsername(username);
-            return Optional.of(user);
+            return this.findByUsername(username);
         } catch (Exception e) {
             return Optional.empty();
         }

@@ -40,11 +40,13 @@ public class RouteServiceImpl implements RouteService {
                 .toList();
     }
 
-    public Route findByIdWithDetails(int routeId) {
-        Route route = this.findById(routeId).orElseThrow();
-        route.getRides().size();
-        route.getCarriages().size();
-        route.getStations().size();
+    public  Optional<Route> findByIdWithDetails(int routeId) {
+        var route = this.findById(routeId);
+        route.ifPresent(r -> {
+            r.getRides().size();
+            r.getCarriages().size();
+            r.getStations().size();
+        });
         return route;
     }
 

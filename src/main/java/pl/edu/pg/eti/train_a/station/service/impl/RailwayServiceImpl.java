@@ -1,6 +1,5 @@
 package pl.edu.pg.eti.train_a.station.service.impl;
 
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,6 +8,7 @@ import pl.edu.pg.eti.train_a.station.repository.api.RailwayRepository;
 import pl.edu.pg.eti.train_a.station.service.api.RailwayService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -26,8 +26,8 @@ public class RailwayServiceImpl implements RailwayService {
     }
 
     @Override
-    public Railway findById(int id) {
-        return railwayRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Railway not found"));
+    public Optional<Railway> findById(int id) {
+        return railwayRepository.findById(id);
     }
 
     @Override

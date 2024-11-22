@@ -8,6 +8,7 @@ import pl.edu.pg.eti.train_a.route.entity.Route;
 import pl.edu.pg.eti.train_a.carriage.service.api.CarriageService;
 import pl.edu.pg.eti.train_a.station.service.api.StationService;
 
+import java.util.Optional;
 import java.util.function.Function;
 
 @Component
@@ -31,6 +32,7 @@ public class RequestToRouteFunction implements Function<PostRouteRequest, Route>
                         .toList())
                 .carriages(postRouteRequest.getCarriages().stream()
                         .map(carriageService::findByType)
+                        .map(Optional::orElseThrow)
                         .toList())
                 .build();
     }
@@ -43,6 +45,7 @@ public class RequestToRouteFunction implements Function<PostRouteRequest, Route>
                         .toList())
                 .carriages(putRouteRequest.getCarriages().stream()
                         .map(carriageService::findByType)
+                        .map(Optional::orElseThrow)
                         .toList())
                 .build();
     }

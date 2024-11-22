@@ -11,9 +11,9 @@ public interface CarriageService {
 
     Optional<Carriage> findById(UUID id);
 
-    Carriage findByType(String type);
+    Optional<Carriage> findByType(String type);
 
-    Carriage findByTypeWithDetails(String type);
+    Optional<Carriage> findByTypeWithDetails(String type);
 
     UUID create(Carriage carriage);
 

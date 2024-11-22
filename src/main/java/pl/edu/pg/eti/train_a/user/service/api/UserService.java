@@ -12,13 +12,13 @@ public interface UserService {
 
     List<User> findAll();
 
-    User findById(int id);
+    Optional<User> findById(int id);
 
-    User findByUsername(String username);
+    Optional<User> findByUsername(String username);
 
-    User findByEmail(String email);
+    Optional<User> findByEmail(String email);
 
-    User findByEmailWithDetails(String email);
+    Optional<User> findByEmailWithDetails(String email);
 
     Optional<User> getCurrentUser();
 }

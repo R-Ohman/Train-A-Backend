@@ -37,19 +37,4 @@ public class Route {
     @Builder.Default
     @OneToMany(mappedBy = "route", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     List<Ride> rides = new ArrayList<>();
-
-    public static RouteBuilder autoBuilder() {
-        return new AutoRouteBuilder();
-    }
-
-    public static class AutoRouteBuilder extends RouteBuilder {
-
-        @Override
-        public Route build() {
-            var route = super.build();
-//            route.carriages.forEach(carriage -> carriage.getRoutes().add(route));
-            route.stations.forEach(station -> station.getRoutes().add(route));
-            return route;
-        }
-    }
 }

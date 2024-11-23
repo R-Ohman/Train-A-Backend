@@ -35,20 +35,6 @@ public class Ride {
     @OneToMany(mappedBy = "ride", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     List<Segment> segments = new ArrayList<>();
 
-    public static RideBuilder autoBuilder() {
-        return new AutoRideBuilder();
-    }
-
-    public static class AutoRideBuilder extends RideBuilder {
-        @Override
-        public Ride build() {
-            var ride = super.build();
-            ride.route.getRides().add(ride);
-            ride.segments.forEach(segment -> segment.setRide(ride));
-            return ride;
-        }
-    }
-
     @PreRemove
     private void checkForOrdersBeforeRemove() {
         if (!orders.isEmpty()) {

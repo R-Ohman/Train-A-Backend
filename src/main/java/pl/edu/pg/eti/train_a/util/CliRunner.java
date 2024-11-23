@@ -236,7 +236,7 @@ public class CliRunner implements CommandLineRunner {
         var ride = rideService.findById(Integer.parseInt(rideId)).orElseThrow();
         var stationStart = stationService.findByCity(stationStartCity).orElseThrow();
         var stationEnd = stationService.findByCity(stationEndCity).orElseThrow();
-        var order = Order.autoBuilder().user(user).ride(ride).seatId(Integer.parseInt(seatId)).stationStart(stationStart).stationEnd(stationEnd).build();
+        var order = Order.builder().user(user).ride(ride).seatId(Integer.parseInt(seatId)).stationStart(stationStart).stationEnd(stationEnd).build();
         orderService.create(order);
 
         System.out.println("Created order with ID: " + order.getId());
@@ -253,7 +253,7 @@ public class CliRunner implements CommandLineRunner {
         var carriages = carriageTypes.stream().map(String::trim).map(carriageService::findByType).map(Optional::orElseThrow).toList();
         var stations = stationIds.stream().map(String::trim).map(stationService::findByCity).map(Optional::orElseThrow).toList();
 
-        var route = Route.autoBuilder().carriages(carriages).stations(stations).build();
+        var route = Route.builder().carriages(carriages).stations(stations).build();
         routeService.create(route);
 
         System.out.println("Created route with ID: " + route.getId());
@@ -265,7 +265,7 @@ public class CliRunner implements CommandLineRunner {
         System.out.print("Enter ride route ID: ");
         var routeId = Integer.parseInt(scanner.nextLine());
         var route = routeService.findById(routeId).orElseThrow();
-        var ride = Ride.autoBuilder().route(route).build();
+        var ride = Ride.builder().route(route).build();
         rideService.create(ride);
 
         System.out.println("Created ride with ID: " + ride.getId());

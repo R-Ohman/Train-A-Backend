@@ -40,20 +40,4 @@ public class Order {
     @Builder.Default
     @Enumerated(EnumType.STRING)
     OrderStatus status = OrderStatus.ACTIVE;
-
-    public static OrderBuilder autoBuilder() {
-        return new AutoOrderBuilder();
-    }
-
-    public static class AutoOrderBuilder extends OrderBuilder {
-        @Override
-        public Order build() {
-            var order = super.build();
-            order.getUser().getOrders().add(order);
-            order.getRide().getOrders().add(order);
-            order.getStationStart().getOrdersFrom().add(order);
-            order.getStationEnd().getOrdersTo().add(order);
-            return order;
-        }
-    }
 }

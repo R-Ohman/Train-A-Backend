@@ -12,7 +12,7 @@ GET {{baseUrl}}/api/carriage
 GET {{baseUrl}}/api/station
 
 ### Get detailed information about ride
-GET {{baseUrl}}/api/search/1232
+GET {{baseUrl}}/api/search/1
 
 ### Search for available rides
 GET {{baseUrl}}/api/search?

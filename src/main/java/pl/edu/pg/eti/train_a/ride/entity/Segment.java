@@ -36,18 +36,4 @@ public class Segment {
     @MapKeyJoinColumn(name = "carriage_id")
     @Column(name = "price")
     Map<Carriage, BigDecimal> prices;
-
-    public static SegmentBuilder autoBuilder() {
-        return new AutoSegmentBuilder();
-    }
-
-    public static class AutoSegmentBuilder extends SegmentBuilder {
-
-        @Override
-        public Segment build() {
-            var segment = super.build();
-            segment.ride.getSegments().add(segment);
-            return segment;
-        }
-    }
 }

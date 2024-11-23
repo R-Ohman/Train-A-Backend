@@ -47,7 +47,7 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "password": "Newpassword12!3."
+  "password": "Password123."
 }
 
 ### Get user profile information

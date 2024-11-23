@@ -37,7 +37,7 @@ public class RequestToRideFunction implements BiFunction<Integer, PostRideReques
 
     @Override
     public Ride apply(Integer routeId, PostRideRequest postRideRequest) {
-        return Ride.autoBuilder()
+        return Ride.builder()
                 .route(routeService.findById(routeId).orElseThrow())
                 .segments(postRideRequest.getSegments().stream()
                         .map(segment -> Segment.builder()

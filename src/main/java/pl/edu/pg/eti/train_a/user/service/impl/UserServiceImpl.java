@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void create(User user) {
-        if (userRepository.findByUsername(user.getUsername()).isPresent()) {
+        if (userRepository.findByUsername(user.getUsername()).isEmpty()) {
             throw new IllegalArgumentException("invalidUniqueKey");
         }
         user.setPassHash(passwordEncoder.encode(user.getPassHash()));

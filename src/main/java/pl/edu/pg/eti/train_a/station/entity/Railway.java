@@ -28,18 +28,17 @@ public class Railway {
 
     int distance;
 
-    public static RailwayBuilder autoBuilder() {
+    public static RailwayBuilder builder() {
         return new AutoRailwayBuilder();
     }
 
-    public static class AutoRailwayBuilder extends RailwayBuilder {
+    private static class AutoRailwayBuilder extends RailwayBuilder {
         @Override
         public Railway build() {
             var railway = super.build();
             if (railway.stations.size() != 2) {
                 throw new IllegalArgumentException("A railway must connect exactly two stations.");
             }
-            railway.stations.forEach(station -> station.getRailways().add(railway));
             railway.distance = (int) Math.round(
                     111.32 * Math.sqrt(
                             Math.pow(railway.stations.get(0).getLatitude().doubleValue() - railway.stations.get(1).getLatitude().doubleValue(), 2) +

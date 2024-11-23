@@ -32,6 +32,7 @@ public class RequestToUserFunction implements Function<PostUserRequest, User> {
         var user = userService.findById(id).orElseThrow();
         return User.builder()
                 .id(id)
+                .username(user.getUsername())
                 .name(putUserRequest.getName())
                 .email(putUserRequest.getEmail())
                 .passHash(user.getPassHash())

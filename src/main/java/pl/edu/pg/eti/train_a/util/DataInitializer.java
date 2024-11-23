@@ -107,15 +107,15 @@ public class DataInitializer {
         stationRepository.saveAll(stations);
 
         var routes = List.of(
-                Route.autoBuilder()
+                Route.builder()
                         .carriages(carriages)
                         .stations(stations)
                         .build(),
-                Route.autoBuilder()
+                Route.builder()
                         .carriages(List.of(carriages.get(0), carriages.get(1), carriages.get(1)))
                         .stations(List.of(stations.get(1), stations.get(2)))
                         .build(),
-                Route.autoBuilder()
+                Route.builder()
                         .carriages(List.of(carriages.get(2), carriages.get(2), carriages.get(2)))
                         .stations(stations)
                         .build()
@@ -138,7 +138,7 @@ public class DataInitializer {
         rideRepository.saveAll(rides);
 
         var segments = List.of(
-                Segment.autoBuilder()
+                Segment.builder()
                         .ride(rides.get(0))
                         .departure(LocalDateTime.parse("2021-06-01T12:00:00"))
                         .arrival(LocalDateTime.parse("2021-06-01T13:00:00"))
@@ -148,7 +148,7 @@ public class DataInitializer {
                                 carriages.get(2), BigDecimal.valueOf(25)
                         ))
                         .build(),
-                Segment.autoBuilder()
+                Segment.builder()
                         .ride(rides.get(1))
                         .departure(LocalDateTime.parse("2025-06-01T14:00:00"))
                         .arrival(LocalDateTime.parse("2025-06-01T15:00:00"))
@@ -158,7 +158,7 @@ public class DataInitializer {
                                 carriages.get(2), BigDecimal.valueOf(27.5)
                         ))
                         .build(),
-                Segment.autoBuilder()
+                Segment.builder()
                         .ride(rides.get(1))
                         .departure(LocalDateTime.parse("2025-06-01T15:30:00"))
                         .arrival(LocalDateTime.parse("2025-06-01T16:30:00"))
@@ -168,7 +168,7 @@ public class DataInitializer {
                                 carriages.get(2), BigDecimal.valueOf(30)
                         ))
                         .build(),
-                Segment.autoBuilder()
+                Segment.builder()
                         .ride(rides.get(2))
                         .departure(LocalDateTime.parse("2022-06-01T12:00:00"))
                         .arrival(LocalDateTime.parse("2022-06-01T13:00:00"))
@@ -199,7 +199,7 @@ public class DataInitializer {
         userRepository.saveAll(users);
 
         var orders = List.of(
-                Order.autoBuilder()
+                Order.builder()
                         .user(users.get(0))
                         .ride(rides.get(0))
                         .stationStart(rides.get(0).getRoute().getStations().get(0))
@@ -207,7 +207,7 @@ public class DataInitializer {
                         .seatId(11)
                         .status(OrderStatus.COMPLETED)
                         .build(),
-                Order.autoBuilder()
+                Order.builder()
                         .user(users.get(0))
                         .ride(rides.get(1))
                         .stationStart(rides.get(1).getRoute().getStations().get(0))
@@ -215,7 +215,7 @@ public class DataInitializer {
                         .seatId(22)
                         .status(OrderStatus.ACTIVE)
                         .build(),
-                Order.autoBuilder()
+                Order.builder()
                         .user(users.get(1))
                         .ride(rides.get(2))
                         .stationStart(rides.get(2).getRoute().getStations().get(0))
@@ -228,10 +228,10 @@ public class DataInitializer {
         orderRepository.saveAll(orders);
 
         var railways = List.of(
-                Railway.autoBuilder()
+                Railway.builder()
                         .stations(List.of(stations.get(0), stations.get(1)))
                         .build(),
-                Railway.autoBuilder()
+                Railway.builder()
                         .stations(List.of(stations.get(1), stations.get(2)))
                         .build()
         );

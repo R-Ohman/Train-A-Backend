@@ -37,9 +37,13 @@ public class RideDefaultController implements RideController {
 
     @Override
     public Map<String, Integer> putRide(int routeId, int rideId, PutRideRequest request) {
-        var ride = requestToRide.apply(rideId, routeId, request);
-        int updatedRideId = rideService.update(ride);
-        return Map.of("id", updatedRideId);
+        try {
+            var ride = requestToRide.apply(rideId, routeId, request);
+            int updatedRideId = rideService.update(ride);
+            return Map.of("id", updatedRideId);
+        } catch (Exception e) {
+            throw new CustomResponseStatusException(HttpStatus.BAD_REQUEST, "rideNotFound", "Ride not found");
+        }
     }
 
     @Override

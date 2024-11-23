@@ -30,7 +30,7 @@ public class RequestToStationFunction implements Function<PostStationRequest, St
                 .latitude(request.getLatitude())
                 .longitude(request.getLongitude())
                 .railways(request.getRelations().stream()
-                        .map((connectedStationId) -> Railway.autoBuilder()
+                        .map((connectedStationId) -> Railway.builder()
                                 .stations(List.of(station, stationService.findById(connectedStationId).orElseThrow()))
                                 .build()
                         )

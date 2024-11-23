@@ -1,24 +1,28 @@
 package pl.edu.pg.eti.train_a.security;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.server.ServerAuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.web.server.ServerWebExchange;
 import pl.edu.pg.eti.train_a.util.ErrorResponse;
-
-import java.io.IOException;
+import reactor.core.publisher.Mono;
 
 @Component
-public class DefaultAuthenticationEntryPoint implements AuthenticationEntryPoint {
-
+public class DefaultAuthenticationEntryPoint implements ServerAuthenticationEntryPoint {
     @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException {
-        ErrorResponse errorResponse = new ErrorResponse("invalidAccessToken", "Access is not granted");
-        response.setStatus(HttpStatus.UNAUTHORIZED.value());
-        response.setContentType("application/json");
-        response.getWriter().write(new ObjectMapper().writeValueAsString(errorResponse));
+    public Mono<Void> commence(ServerWebExchange exchange, AuthenticationException ex) {
+        return Mono.defer(() -> {
+            exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+            exchange.getResponse().getHeaders().set("Content-Type", "application/json");
+            try {
+                return exchange.getResponse().writeWith(Mono.just(exchange.getResponse()
+                        .bufferFactory().wrap(new ObjectMapper().writeValueAsBytes(new ErrorResponse("invalidAccessToken", "Access is not granted")))));
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 }

@@ -1,15 +1,13 @@
 package pl.edu.pg.eti.train_a.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;
 import pl.edu.pg.eti.train_a.user.repository.api.UserRepository;
+import reactor.core.publisher.Mono;
 
 @Service
-public class DefaultUserDetailsService implements UserDetailsService {
+public class DefaultUserDetailsService implements ReactiveUserDetailsService {
     private final UserRepository userRepository;
 
     @Autowired
@@ -18,17 +16,17 @@ public class DefaultUserDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        var user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with UUID: " + username));
-        return User
-                .withUsername(user.getUsername())
-                .password(user.getPassHash())
-                .roles(user.getRole().getValue())
-                .accountExpired(false)
-                .accountLocked(false)
-                .credentialsExpired(false)
-                .disabled(false)
-                .build();
+    public Mono<UserDetails> findByUsername(String username) {
+        return Mono.justOrEmpty(userRepository.findByUsername(username)
+                .map(user -> User
+                        .withUsername(user.getUsername())
+                        .password(user.getPassHash())
+                        .roles(user.getRole().getValue())
+                        .accountExpired(false)
+                        .accountLocked(false)
+                        .credentialsExpired(false)
+                        .disabled(false)
+                        .build()
+                ));
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
+import pl.edu.pg.eti.train_a.security.ReactiveJwtFilter;
 
 @SpringBootApplication
 public class TrainAApplication {
@@ -17,6 +18,7 @@ public class TrainAApplication {
 	@Bean
 	public RouteLocator routeLocator(
 			RouteLocatorBuilder builder,
+			ReactiveJwtFilter jwtFilter,
 			@Value("${train.user.url}") String userUrl,
 			@Value("${train.railway.url}") String railwayUrl,
 			@Value("${train.gateway.host}") String host

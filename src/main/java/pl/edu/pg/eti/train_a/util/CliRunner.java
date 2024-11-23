@@ -160,7 +160,7 @@ public class CliRunner implements CommandLineRunner {
     }
 
     private void showRoutes() {
-        routeService.findAll().stream().map(route -> routeService.findByIdWithDetails(route.getId())).forEach(r -> {
+        routeService.findAll().stream().map(route -> routeService.findById(route.getId())).forEach(r -> {
             r.ifPresent(route -> {
                 System.out.println("Route #" + route.getId());
                 System.out.println("\tCarriages:");
@@ -178,10 +178,10 @@ public class CliRunner implements CommandLineRunner {
 
     private void showRides() {
         rideService.findAll()
-                .stream().map(ride -> rideService.findByIdWithDetails(ride.getId()))
+                .stream().map(ride -> rideService.findById(ride.getId()))
                 .forEach(r -> {
                     r.ifPresent(ride -> {
-                        var route = routeService.findByIdWithDetails(ride.getRoute().getId()).orElseThrow();
+                        var route = routeService.findById(ride.getRoute().getId()).orElseThrow();
                         var routeStations = route.getStations();
 
                         System.out.println("Ride #" + ride.getId());
@@ -232,10 +232,10 @@ public class CliRunner implements CommandLineRunner {
         System.out.print("End station: ");
         var stationEndCity = scanner.nextLine();
 
-        var user = userService.findByEmailWithDetails(userEmail).orElseThrow();
-        var ride = rideService.findByIdWithDetails(Integer.parseInt(rideId)).orElseThrow();
-        var stationStart = stationService.findByCityWithDetails(stationStartCity).orElseThrow();
-        var stationEnd = stationService.findByCityWithDetails(stationEndCity).orElseThrow();
+        var user = userService.findByEmail(userEmail).orElseThrow();
+        var ride = rideService.findById(Integer.parseInt(rideId)).orElseThrow();
+        var stationStart = stationService.findByCity(stationStartCity).orElseThrow();
+        var stationEnd = stationService.findByCity(stationEndCity).orElseThrow();
         var order = Order.autoBuilder().user(user).ride(ride).seatId(Integer.parseInt(seatId)).stationStart(stationStart).stationEnd(stationEnd).build();
         orderService.create(order);
 
@@ -250,8 +250,8 @@ public class CliRunner implements CommandLineRunner {
         System.out.print("Enter route stations (separate by comma): ");
         var stationIds = Arrays.asList(scanner.nextLine().split(","));
 
-        var carriages = carriageTypes.stream().map(String::trim).map(carriageService::findByTypeWithDetails).map(Optional::orElseThrow).toList();
-        var stations = stationIds.stream().map(String::trim).map(stationService::findByCityWithDetails).map(Optional::orElseThrow).toList();
+        var carriages = carriageTypes.stream().map(String::trim).map(carriageService::findByType).map(Optional::orElseThrow).toList();
+        var stations = stationIds.stream().map(String::trim).map(stationService::findByCity).map(Optional::orElseThrow).toList();
 
         var route = Route.autoBuilder().carriages(carriages).stations(stations).build();
         routeService.create(route);
@@ -264,7 +264,7 @@ public class CliRunner implements CommandLineRunner {
         var scanner = new Scanner(System.in);
         System.out.print("Enter ride route ID: ");
         var routeId = Integer.parseInt(scanner.nextLine());
-        var route = routeService.findByIdWithDetails(routeId).orElseThrow();
+        var route = routeService.findById(routeId).orElseThrow();
         var ride = Ride.autoBuilder().route(route).build();
         rideService.create(ride);
 

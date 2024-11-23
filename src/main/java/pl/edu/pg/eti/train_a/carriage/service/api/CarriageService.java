@@ -13,8 +13,6 @@ public interface CarriageService {
 
     Optional<Carriage> findByType(String type);
 
-    Optional<Carriage> findByTypeWithDetails(String type);
-
     UUID create(Carriage carriage);
 
     UUID update(Carriage carriage);

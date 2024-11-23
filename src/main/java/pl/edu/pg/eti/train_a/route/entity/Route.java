@@ -47,7 +47,7 @@ public class Route {
         @Override
         public Route build() {
             var route = super.build();
-            route.carriages.forEach(carriage -> carriage.getRoutes().add(route));
+//            route.carriages.forEach(carriage -> carriage.getRoutes().add(route));
             route.stations.forEach(station -> station.getRoutes().add(route));
             return route;
         }

@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.edu.pg.eti.train_a.carriage.entity.Carriage;
 import pl.edu.pg.eti.train_a.carriage.repository.api.CarriageRepository;
 import pl.edu.pg.eti.train_a.carriage.service.api.CarriageService;
-import pl.edu.pg.eti.train_a.route.repository.api.RouteRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,12 +15,10 @@ import java.util.UUID;
 @Transactional
 public class CarriageServiceImpl implements CarriageService {
     private final CarriageRepository carriageRepository;
-    private final RouteRepository routeRepository;
 
     @Autowired
-    public CarriageServiceImpl(CarriageRepository carriageRepository, RouteRepository routeRepository) {
+    public CarriageServiceImpl(CarriageRepository carriageRepository) {
         this.carriageRepository = carriageRepository;
-        this.routeRepository = routeRepository;
     }
 
     public List<Carriage> findAll() {
@@ -34,13 +31,6 @@ public class CarriageServiceImpl implements CarriageService {
 
     public Optional<Carriage> findByType(String type) {
         return carriageRepository.findByType(type);
-    }
-
-    public Optional<Carriage> findByTypeWithDetails(String type) {
-        routeRepository.findAll();
-        var carriage = carriageRepository.findByType(type);
-        carriage.ifPresent(c -> c.getRoutes().size());
-        return carriage;
     }
 
     public UUID create(Carriage carriage) {

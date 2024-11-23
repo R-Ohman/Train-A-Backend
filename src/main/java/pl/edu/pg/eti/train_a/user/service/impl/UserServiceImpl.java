@@ -44,12 +44,6 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email);
     }
 
-    public  Optional<User> findByEmailWithDetails(String email) {
-        var user = userRepository.findByEmail(email);
-        user.ifPresent(u -> u.getOrders().size());
-        return user;
-    }
-
     @Override
     public void create(User user) {
         if (userRepository.findByUsername(user.getUsername()).isPresent()) {

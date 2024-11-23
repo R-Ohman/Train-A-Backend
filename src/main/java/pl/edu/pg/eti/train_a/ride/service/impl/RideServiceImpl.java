@@ -33,15 +33,6 @@ public class RideServiceImpl implements RideService {
         return rideRepository.findById(id);
     }
 
-    public Optional<Ride> findByIdWithDetails(int rideId) {
-        var ride = this.findById(rideId);
-        ride.ifPresent(r -> {
-            r.getOrders().size();
-            r.getSegments().size();
-        });
-        return ride;
-    }
-
     @Override
     public int create(Ride ride) {
         var newRide = this.rideRepository.save(ride);

@@ -15,6 +15,4 @@ public interface RideService {
     int update(Ride ride);
 
     void delete(int id);
-
-    Optional<Ride> findByIdWithDetails(int rideId);
 }

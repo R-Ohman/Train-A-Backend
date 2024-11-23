@@ -18,6 +18,4 @@ public interface RouteService {
     int update(Route route);
 
     void delete(int id);
-
-    Optional<Route> findByIdWithDetails(int routeId);
 }

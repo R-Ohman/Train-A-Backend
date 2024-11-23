@@ -40,16 +40,6 @@ public class RouteServiceImpl implements RouteService {
                 .toList();
     }
 
-    public  Optional<Route> findByIdWithDetails(int routeId) {
-        var route = this.findById(routeId);
-        route.ifPresent(r -> {
-            r.getRides().size();
-            r.getCarriages().size();
-            r.getStations().size();
-        });
-        return route;
-    }
-
     @Override
     public int create(Route route) {
         var newRoute = this.routeRepository.save(route);

@@ -25,6 +25,6 @@ public class Ride {
     Route route;
 
     @Builder.Default
-    @OneToMany(mappedBy = "ride", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     List<Segment> segments = new ArrayList<>();
 }

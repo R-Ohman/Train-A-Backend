@@ -7,7 +7,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import pl.edu.pg.eti.train_a.exception.ErrorResponse;
+import pl.edu.pg.eti.train_a.util.ErrorResponse;
 
 import java.io.IOException;
 

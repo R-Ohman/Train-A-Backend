@@ -1,13 +1,10 @@
 package pl.edu.pg.eti.train_a;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.core.util.DefaultIndenter;
-import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.gateway.route.RouteLocator;
+import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
@@ -18,11 +15,45 @@ public class TrainAApplication {
 	}
 
 	@Bean
-	public ObjectWriter objectWriter() {
-		return new ObjectMapper()
-				.enable(SerializationFeature.INDENT_OUTPUT)
-				.setDefaultPropertyInclusion(JsonInclude.Include.NON_NULL)
-				.writer(new DefaultPrettyPrinter()
-						.withArrayIndenter(DefaultIndenter.SYSTEM_LINEFEED_INSTANCE));
+	public RouteLocator routeLocator(
+			RouteLocatorBuilder builder,
+			@Value("${train.user.url}") String userUrl,
+			@Value("${train.railway.url}") String railwayUrl,
+			@Value("${train.gateway.host}") String host
+	) {
+		return builder
+				.routes()
+				.route("users", route -> route
+						.host(host)
+						.and()
+						.path(
+								"/api/profile",
+								"/api/profile/password",
+								"/api/users",
+								"/api/logout",
+								"/api/signin",
+								"/api/signup",
+								"/api/order",
+								"/api/order/**"
+						)
+						.uri(userUrl)
+				)
+				.route("railways", route -> route
+						.host(host)
+						.and()
+						.path(
+								"/api/search",
+								"/api/search/**",
+								"/api/ride",
+								"/api/station",
+								"/api/route",
+								"/api/carriage",
+								"/api/route/**",
+								"/api/carriage/**",
+								"/api/station/**"
+						)
+						.uri(railwayUrl)
+				)
+				.build();
 	}
 }

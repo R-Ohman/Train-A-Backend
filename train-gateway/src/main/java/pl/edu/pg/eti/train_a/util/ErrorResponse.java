@@ -1,4 +1,4 @@
-package pl.edu.pg.eti.train_a.exception;
+package pl.edu.pg.eti.train_a.util;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

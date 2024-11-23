@@ -5,119 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5af5d726-0e6c-48c7-b48d-5619bd9712fa" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/TrainAApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/carriage/controller/api/CarriageController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/carriage/controller/impl/CarriageDefaultController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/carriage/dto/GetCarriagesResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/carriage/dto/PostCarriageRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/carriage/dto/PutCarriageRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/carriage/entity/Carriage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/carriage/function/CarriageToResponseFunction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/carriage/function/RequestToCarriageFunction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/carriage/repository/api/CarriageRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/carriage/service/api/CarriageService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/carriage/service/impl/CarriageServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/config/WebConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/exception/CustomExceptionHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/exception/CustomResponseStatusException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/exception/ErrorResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/order/controller/api/OrderController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/order/controller/impl/OrderDefaultController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/order/dto/GetOrdersResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/order/dto/PostOrderRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/order/entity/Order.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/order/entity/OrderStatus.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/order/function/OrderToResponseFunction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/order/function/RequestToOrderFunction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/order/repository/api/OrderRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/order/service/api/OrderService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/order/service/impl/OrderServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/controller/api/RideController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/controller/api/SearchController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/controller/impl/RideDefaultController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/controller/impl/SearchDefaultController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/dto/GetRideResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/dto/GetSearchResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/dto/PostRideRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/dto/PutRideRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/dto/RideSegmentResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/entity/Ride.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/entity/Segment.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/function/RequestToRideFunction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/function/RideToResponseFunction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/function/SearchToResponseFunction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/repository/api/RideRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/repository/api/SegmentRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/service/api/RideService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/service/impl/RideServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/route/controller/api/RouteController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/route/controller/impl/RouteDefaultController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/route/dto/GetRouteInfoResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/route/dto/GetRoutesResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/route/dto/PostRouteRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/route/dto/PutRouteRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/route/entity/Route.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/route/function/RequestToRouteFunction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/route/function/RouteInfoToResponseFunction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/route/function/RouteToResponseFunction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/route/repository/api/RouteRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/route/service/api/RouteService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/route/service/impl/RouteServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/security/DefaultAccessDeniedHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/security/DefaultAuthenticationEntryPoint.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/security/DefaultUserDetailsService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/security/JwtRequestFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/security/JwtUtil.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/security/SecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/station/controller/api/StationController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/station/controller/impl/StationDefaultController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/station/dto/GetStationsResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/station/dto/PostStationRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/station/entity/Railway.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/station/entity/Station.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/station/function/RequestToStationFunction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/station/function/StationToResponseFunction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/station/repository/api/RailwayRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/station/repository/api/StationRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/station/service/api/RailwayService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/station/service/api/StationService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/station/service/impl/RailwayServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/station/service/impl/StationServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/user/controller/api/UserController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/user/controller/impl/UserDefaultController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/user/dto/GetUsersResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/user/dto/PostUserRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/user/dto/PutPasswordRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/user/dto/PutUserRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/user/dto/SignInRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/user/dto/SignInResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/user/dto/UserProfileResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/user/entity/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/user/entity/UserRole.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/user/function/RequestToUserFunction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/user/function/UserToResponseFunction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/user/repository/api/UserRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/user/service/api/UserService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/user/service/impl/UserServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/util/CliRunner.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/util/DataInitializer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/util/QuadFunction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/pl/edu/pg/eti/train_a/TrainAApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/admin-request.http" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/guest-request.http" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/http-client.env.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/request.http" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/user-request.http" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train-gateway/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/train-gateway/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train-railway/data/train_a.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/train-railway/data/train_a.mv.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train-user/data/train_user.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/train-user/data/train_user.mv.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train-user/src/main/java/pl/edu/pg/eti/train_a/ride/entity/Ride.java" beforeDir="false" afterPath="$PROJECT_DIR$/train-user/src/main/java/pl/edu/pg/eti/train_a/ride/entity/Ride.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train-user/target/classes/pl/edu/pg/eti/train_a/ride/entity/Ride.class" beforeDir="false" afterPath="$PROJECT_DIR$/train-user/target/classes/pl/edu/pg/eti/train_a/ride/entity/Ride.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -278,7 +170,7 @@
     "Spring Boot.TrainAApplication.executor": "Run",
     "git-widget-placeholder": "4-microservices",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/ohman/Studying/University/5_sem/AUI/labs/spring-app/train-user",
+    "last_opened_file_path": "/home/ohman/Studying/University/5_sem/AUI/labs/spring-app",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -415,6 +307,7 @@
       <workItem from="1732376170924" duration="1307000" />
       <workItem from="1732377568485" duration="37000" />
       <workItem from="1732380972167" duration="507000" />
+      <workItem from="1732391431339" duration="77000" />
     </task>
     <task id="LOCAL-00012" summary="chore: simplify toString methods">
       <option name="closed" value="true" />

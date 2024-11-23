@@ -1,0 +1,875 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5af5d726-0e6c-48c7-b48d-5619bd9712fa" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/TrainAApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/carriage/controller/api/CarriageController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/carriage/controller/impl/CarriageDefaultController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/carriage/dto/GetCarriagesResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/carriage/dto/PostCarriageRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/carriage/dto/PutCarriageRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/carriage/entity/Carriage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/carriage/function/CarriageToResponseFunction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/carriage/function/RequestToCarriageFunction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/carriage/repository/api/CarriageRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/carriage/service/api/CarriageService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/carriage/service/impl/CarriageServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/config/WebConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/exception/CustomExceptionHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/exception/CustomResponseStatusException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/exception/ErrorResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/order/controller/api/OrderController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/order/controller/impl/OrderDefaultController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/order/dto/GetOrdersResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/order/dto/PostOrderRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/order/entity/Order.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/order/entity/OrderStatus.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/order/function/OrderToResponseFunction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/order/function/RequestToOrderFunction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/order/repository/api/OrderRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/order/service/api/OrderService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/order/service/impl/OrderServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/controller/api/RideController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/controller/api/SearchController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/controller/impl/RideDefaultController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/controller/impl/SearchDefaultController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/dto/GetRideResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/dto/GetSearchResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/dto/PostRideRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/dto/PutRideRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/dto/RideSegmentResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/entity/Ride.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/entity/Segment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/function/RequestToRideFunction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/function/RideToResponseFunction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/function/SearchToResponseFunction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/repository/api/RideRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/repository/api/SegmentRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/service/api/RideService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/service/impl/RideServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/route/controller/api/RouteController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/route/controller/impl/RouteDefaultController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/route/dto/GetRouteInfoResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/route/dto/GetRoutesResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/route/dto/PostRouteRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/route/dto/PutRouteRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/route/entity/Route.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/route/function/RequestToRouteFunction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/route/function/RouteInfoToResponseFunction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/route/function/RouteToResponseFunction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/route/repository/api/RouteRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/route/service/api/RouteService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/route/service/impl/RouteServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/security/DefaultAccessDeniedHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/security/DefaultAuthenticationEntryPoint.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/security/DefaultUserDetailsService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/security/JwtRequestFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/security/JwtUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/security/SecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/station/controller/api/StationController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/station/controller/impl/StationDefaultController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/station/dto/GetStationsResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/station/dto/PostStationRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/station/entity/Railway.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/station/entity/Station.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/station/function/RequestToStationFunction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/station/function/StationToResponseFunction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/station/repository/api/RailwayRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/station/repository/api/StationRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/station/service/api/RailwayService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/station/service/api/StationService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/station/service/impl/RailwayServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/station/service/impl/StationServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/user/controller/api/UserController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/user/controller/impl/UserDefaultController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/user/dto/GetUsersResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/user/dto/PostUserRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/user/dto/PutPasswordRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/user/dto/PutUserRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/user/dto/SignInRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/user/dto/SignInResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/user/dto/UserProfileResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/user/entity/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/user/entity/UserRole.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/user/function/RequestToUserFunction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/user/function/UserToResponseFunction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/user/repository/api/UserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/user/service/api/UserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/user/service/impl/UserServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/util/CliRunner.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/util/DataInitializer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/util/QuadFunction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/pl/edu/pg/eti/train_a/TrainAApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/admin-request.http" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/guest-request.http" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/http-client.env.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/request.http" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/user-request.http" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="HTTP Public Environment File" />
+        <option value="HTTP Private Environment File" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="2-spring-framework" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;R-Ohman&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/R-Ohman/java-spring-aui-labs.git&quot;,
+    &quot;accountId&quot;: &quot;cde17aa0-90bc-494d-91c9-77fe3ae194ed&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2nD0vmI9fDojkoTRWJXImZXCMt9" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "HTTP Request.All in admin-request.executor": "Run",
+    "HTTP Request.admin-request | Create new carriage type.executor": "Run",
+    "HTTP Request.admin-request | Create new ride for the route.executor": "Run",
+    "HTTP Request.admin-request | Create new route.executor": "Run",
+    "HTTP Request.admin-request | Create new station.executor": "Run",
+    "HTTP Request.admin-request | Delete carriage type.executor": "Run",
+    "HTTP Request.admin-request | Delete order.executor": "Run",
+    "HTTP Request.admin-request | Delete ride.executor": "Run",
+    "HTTP Request.admin-request | Delete route.executor": "Run",
+    "HTTP Request.admin-request | Delete station.executor": "Run",
+    "HTTP Request.admin-request | Get all orders.executor": "Run",
+    "HTTP Request.admin-request | Get all users.executor": "Run",
+    "HTTP Request.admin-request | Get information about route and its rides.executor": "Run",
+    "HTTP Request.admin-request | Save token to global variable for further requests.executor": "Run",
+    "HTTP Request.admin-request | Sign in and get authentication token.executor": "Run",
+    "HTTP Request.admin-request | Update carriage type.executor": "Run",
+    "HTTP Request.admin-request | Update ride.executor": "Run",
+    "HTTP Request.admin-request | Update route.executor": "Run",
+    "HTTP Request.generated-requests | #1.executor": "Run",
+    "HTTP Request.generated-requests | #10.executor": "Run",
+    "HTTP Request.generated-requests | #11.executor": "Run",
+    "HTTP Request.generated-requests | #12 (1).executor": "Run",
+    "HTTP Request.generated-requests | #12.executor": "Run",
+    "HTTP Request.generated-requests | #13 (1).executor": "Run",
+    "HTTP Request.generated-requests | #13.executor": "Run",
+    "HTTP Request.generated-requests | #14.executor": "Run",
+    "HTTP Request.generated-requests | #15.executor": "Run",
+    "HTTP Request.generated-requests | #16.executor": "Run",
+    "HTTP Request.generated-requests | #17.executor": "Run",
+    "HTTP Request.generated-requests | #18.executor": "Run",
+    "HTTP Request.generated-requests | #19.executor": "Run",
+    "HTTP Request.generated-requests | #2.executor": "Run",
+    "HTTP Request.generated-requests | #20.executor": "Run",
+    "HTTP Request.generated-requests | #21.executor": "Run",
+    "HTTP Request.generated-requests | #22.executor": "Run",
+    "HTTP Request.generated-requests | #23.executor": "Run",
+    "HTTP Request.generated-requests | #24.executor": "Run",
+    "HTTP Request.generated-requests | #25.executor": "Run",
+    "HTTP Request.generated-requests | #26.executor": "Run",
+    "HTTP Request.generated-requests | #27.executor": "Run",
+    "HTTP Request.generated-requests | #28.executor": "Run",
+    "HTTP Request.generated-requests | #29.executor": "Run",
+    "HTTP Request.generated-requests | #3.executor": "Run",
+    "HTTP Request.generated-requests | #30.executor": "Run",
+    "HTTP Request.generated-requests | #31.executor": "Run",
+    "HTTP Request.generated-requests | #32.executor": "Run",
+    "HTTP Request.generated-requests | #33.executor": "Run",
+    "HTTP Request.generated-requests | #4.executor": "Run",
+    "HTTP Request.generated-requests | #5.executor": "Run",
+    "HTTP Request.generated-requests | #6.executor": "Run",
+    "HTTP Request.generated-requests | #7.executor": "Run",
+    "HTTP Request.generated-requests | #8.executor": "Run",
+    "HTTP Request.generated-requests | #9.executor": "Run",
+    "HTTP Request.guest-request | #1.executor": "Run",
+    "HTTP Request.guest-request | Create new user.executor": "Run",
+    "HTTP Request.guest-request | Get all carriage types.executor": "Run",
+    "HTTP Request.guest-request | Get all routes.executor": "Run",
+    "HTTP Request.guest-request | Get all stations.executor": "Run",
+    "HTTP Request.guest-request | Get detailed information about ride.executor": "Run",
+    "HTTP Request.guest-request | Reset token.executor": "Run",
+    "HTTP Request.guest-request | Search for available rides.executor": "Run",
+    "HTTP Request.request | #1.executor": "Run",
+    "HTTP Request.request | #10.executor": "Run",
+    "HTTP Request.request | #11.executor": "Run",
+    "HTTP Request.request | #16.executor": "Run",
+    "HTTP Request.request | #17.executor": "Run",
+    "HTTP Request.request | #2.executor": "Run",
+    "HTTP Request.request | #21.executor": "Run",
+    "HTTP Request.request | #22.executor": "Run",
+    "HTTP Request.request | #24.executor": "Run",
+    "HTTP Request.request | #3.executor": "Run",
+    "HTTP Request.request | #5.executor": "Run",
+    "HTTP Request.request | #6.executor": "Run",
+    "HTTP Request.request | #7.executor": "Run",
+    "HTTP Request.request | #9.executor": "Run",
+    "HTTP Request.request | Create new ride for the route.executor": "Run",
+    "HTTP Request.request | Create new route.executor": "Run",
+    "HTTP Request.request | Delete order.executor": "Run",
+    "HTTP Request.request | Delete route.executor": "Run",
+    "HTTP Request.request | Get all carriage types.executor": "Run",
+    "HTTP Request.request | Get all orders.executor": "Run",
+    "HTTP Request.request | Get all routes.executor": "Run",
+    "HTTP Request.request | Get all stations.executor": "Run",
+    "HTTP Request.request | Get all users.executor": "Run",
+    "HTTP Request.request | Get information about route and its rides.executor": "Run",
+    "HTTP Request.request | Get orders for current user.executor": "Run",
+    "HTTP Request.request | Search for available rides.executor": "Run",
+    "HTTP Request.request | Sign in and get authentication token.executor": "Run",
+    "HTTP Request.user-request | Create new order.executor": "Run",
+    "HTTP Request.user-request | Delete order.executor": "Run",
+    "HTTP Request.user-request | Get orders for current user.executor": "Run",
+    "HTTP Request.user-request | Get user profile information.executor": "Run",
+    "HTTP Request.user-request | Save token to global variable for further requests.executor": "Run",
+    "HTTP Request.user-request | Sign in and get authentication token.executor": "Run",
+    "HTTP Request.user-request | Update user password.executor": "Run",
+    "HTTP Request.user-request | Update user profile.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.TrainAApplication.executor": "Run",
+    "git-widget-placeholder": "4-microservices",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/ohman/Studying/University/5_sem/AUI/labs/spring-app/train-user",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
+    "rest.client.default.execution.environment": "admin",
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.uml",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "h2"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/order" />
+      <recent name="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/service" />
+      <recent name="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/repository" />
+      <recent name="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/ride/controller" />
+      <recent name="$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/route/repository" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/train-order" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="pl.edu.pg.eti.train_a.service.order" />
+    </key>
+  </component>
+  <component name="RunManager" selected="HTTP Request.admin-request | Get information about route and its rides">
+    <configuration name="admin-request | Get information about route and its rides" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/test/resources/admin-request.http" executionIdentifier="Get information about route and its rides" index="4" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="admin-request | Sign in and get authentication token" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/test/resources/admin-request.http" executionIdentifier="Sign in and get authentication token" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="admin-request | Update carriage type" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/test/resources/admin-request.http" executionIdentifier="Update carriage type" index="15" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="admin-request | Update ride" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/test/resources/admin-request.http" executionIdentifier="Update ride" index="16" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="guest-request | Get all carriage types" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/test/resources/guest-request.http" executionIdentifier="Get all carriage types" index="2" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="TrainAApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="train-a" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="pl.edu.pg.eti.train_a.TrainAApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="HTTP Request.admin-request | Update ride" />
+        <item itemvalue="HTTP Request.admin-request | Get information about route and its rides" />
+        <item itemvalue="HTTP Request.admin-request | Sign in and get authentication token" />
+        <item itemvalue="HTTP Request.admin-request | Update carriage type" />
+        <item itemvalue="HTTP Request.guest-request | Get all carriage types" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.21565.193" />
+        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-IU-243.21565.193" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5af5d726-0e6c-48c7-b48d-5619bd9712fa" name="Changes" comment="" />
+      <created>1728492574398</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1728492574398</updated>
+      <workItem from="1728492575417" duration="7092000" />
+      <workItem from="1728499674661" duration="310000" />
+      <workItem from="1728828098728" duration="1664000" />
+      <workItem from="1728930792764" duration="2173000" />
+      <workItem from="1728980260424" duration="4886000" />
+      <workItem from="1729011834184" duration="4383000" />
+      <workItem from="1729016324570" duration="3289000" />
+      <workItem from="1729021525148" duration="178000" />
+      <workItem from="1729021708684" duration="2094000" />
+      <workItem from="1729336173063" duration="4964000" />
+      <workItem from="1729343120495" duration="7729000" />
+      <workItem from="1729350864100" duration="6018000" />
+      <workItem from="1729363193494" duration="7118000" />
+      <workItem from="1729430252353" duration="3670000" />
+      <workItem from="1729531485997" duration="4432000" />
+      <workItem from="1729541938858" duration="2580000" />
+      <workItem from="1729585406042" duration="4000" />
+      <workItem from="1729591020997" duration="1287000" />
+      <workItem from="1729711515417" duration="17000" />
+      <workItem from="1729713090624" duration="1189000" />
+      <workItem from="1729753620808" duration="6184000" />
+      <workItem from="1729875647179" duration="3823000" />
+      <workItem from="1729880422945" duration="9249000" />
+      <workItem from="1729962014965" duration="3601000" />
+      <workItem from="1730139017547" duration="798000" />
+      <workItem from="1730193652188" duration="566000" />
+      <workItem from="1730194230265" duration="2224000" />
+      <workItem from="1730489037866" duration="203000" />
+      <workItem from="1730489248911" duration="3538000" />
+      <workItem from="1730752258544" duration="6195000" />
+      <workItem from="1730823109390" duration="1334000" />
+      <workItem from="1731319894433" duration="12650000" />
+      <workItem from="1731355971801" duration="28000" />
+      <workItem from="1731600129147" duration="4902000" />
+      <workItem from="1731682701598" duration="5116000" />
+      <workItem from="1731698598771" duration="4410000" />
+      <workItem from="1731703223917" duration="5319000" />
+      <workItem from="1731708551849" duration="3840000" />
+      <workItem from="1731755772243" duration="10863000" />
+      <workItem from="1731777815808" duration="18005000" />
+      <workItem from="1731957293518" duration="3445000" />
+      <workItem from="1731960783058" duration="634000" />
+      <workItem from="1732008176238" duration="141000" />
+      <workItem from="1732008327488" duration="1852000" />
+      <workItem from="1732010188648" duration="2708000" />
+      <workItem from="1732138582010" duration="1396000" />
+      <workItem from="1732139987435" duration="2301000" />
+      <workItem from="1732179030382" duration="7326000" />
+      <workItem from="1732307251430" duration="8488000" />
+      <workItem from="1732356380882" duration="5499000" />
+      <workItem from="1732376170924" duration="1307000" />
+      <workItem from="1732377568485" duration="37000" />
+      <workItem from="1732380972167" duration="507000" />
+    </task>
+    <task id="LOCAL-00012" summary="chore: simplify toString methods">
+      <option name="closed" value="true" />
+      <created>1729453285628</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1729453285628</updated>
+    </task>
+    <task id="LOCAL-00013" summary="feat: add Schedules">
+      <option name="closed" value="true" />
+      <created>1729535307759</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1729535307759</updated>
+    </task>
+    <task id="LOCAL-00014" summary="chore: replace int id with uuid">
+      <option name="closed" value="true" />
+      <created>1729544687404</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1729544687404</updated>
+    </task>
+    <task id="LOCAL-00015" summary="refactor: lazy fetching">
+      <option name="closed" value="true" />
+      <created>1729714275423</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1729714275423</updated>
+    </task>
+    <task id="LOCAL-00016" summary="feat: delete orders, routes">
+      <option name="closed" value="true" />
+      <created>1729761465244</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1729761465244</updated>
+    </task>
+    <task id="LOCAL-00017" summary="refactor: create interfaces for services">
+      <option name="closed" value="true" />
+      <created>1729882213900</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1729882213900</updated>
+    </task>
+    <task id="LOCAL-00018" summary="feat: CLI add operations">
+      <option name="closed" value="true" />
+      <created>1729889668076</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1729889668076</updated>
+    </task>
+    <task id="LOCAL-00019" summary="refactor: update CLI output; add cascade properties">
+      <option name="closed" value="true" />
+      <created>1729965610003</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1729965610003</updated>
+    </task>
+    <task id="LOCAL-00020" summary="feat: init route controller">
+      <option name="closed" value="true" />
+      <created>1730492786501</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1730492786501</updated>
+    </task>
+    <task id="LOCAL-00021" summary="feat: (GET) Users">
+      <option name="closed" value="true" />
+      <created>1730753920680</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1730753920680</updated>
+    </task>
+    <task id="LOCAL-00022" summary="feat: (GET) Carriages">
+      <option name="closed" value="true" />
+      <created>1730754743581</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1730754743581</updated>
+    </task>
+    <task id="LOCAL-00023" summary="feat: (GET) Stations">
+      <option name="closed" value="true" />
+      <created>1730755691755</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1730755691755</updated>
+    </task>
+    <task id="LOCAL-00024" summary="feat: (GET) Orders">
+      <option name="closed" value="true" />
+      <created>1730758451945</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1730758451945</updated>
+    </task>
+    <task id="LOCAL-00025" summary="feat: (GET) Route info by id">
+      <option name="closed" value="true" />
+      <created>1731326093904</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1731326093904</updated>
+    </task>
+    <task id="LOCAL-00026" summary="feat: (GET) Search ride">
+      <option name="closed" value="true" />
+      <created>1731327908021</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1731327908021</updated>
+    </task>
+    <task id="LOCAL-00027" summary="feat: (GET) Search">
+      <option name="closed" value="true" />
+      <created>1731334952665</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1731334952665</updated>
+    </task>
+    <task id="LOCAL-00028" summary="refactor: replace UUID with int">
+      <option name="closed" value="true" />
+      <created>1731620141569</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1731620141569</updated>
+    </task>
+    <task id="LOCAL-00029" summary="feat: (POST) Route">
+      <option name="closed" value="true" />
+      <created>1731685908069</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1731685908069</updated>
+    </task>
+    <task id="LOCAL-00030" summary="feat: (POST) Carriage">
+      <option name="closed" value="true" />
+      <created>1731687089312</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1731687089312</updated>
+    </task>
+    <task id="LOCAL-00031" summary="feat: (POST) Station">
+      <option name="closed" value="true" />
+      <created>1731688092628</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1731688092629</updated>
+    </task>
+    <task id="LOCAL-00032" summary="feat: (POST) User">
+      <option name="closed" value="true" />
+      <created>1731688688954</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1731688688954</updated>
+    </task>
+    <task id="LOCAL-00033" summary="feat: (POST) Ride draft">
+      <option name="closed" value="true" />
+      <created>1731701227112</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1731701227112</updated>
+    </task>
+    <task id="LOCAL-00034" summary="refactor: + segment, - price, - schedule">
+      <option name="closed" value="true" />
+      <created>1731705391078</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1731705391078</updated>
+    </task>
+    <task id="LOCAL-00035" summary="refactor: restructure the project">
+      <option name="closed" value="true" />
+      <created>1731707386107</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1731707386107</updated>
+    </task>
+    <task id="LOCAL-00036" summary="feat: (POST) Ride">
+      <option name="closed" value="true" />
+      <created>1731709573553</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1731709573553</updated>
+    </task>
+    <task id="LOCAL-00037" summary="feat: (POST) Order">
+      <option name="closed" value="true" />
+      <created>1731710195265</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1731710195265</updated>
+    </task>
+    <task id="LOCAL-00038" summary="feat: (DELETE) Order">
+      <option name="closed" value="true" />
+      <created>1731710642281</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1731710642281</updated>
+    </task>
+    <task id="LOCAL-00039" summary="feat: (DELETE) Carriage">
+      <option name="closed" value="true" />
+      <created>1731711586080</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1731711586080</updated>
+    </task>
+    <task id="LOCAL-00040" summary="feat: (DELETE) Station">
+      <option name="closed" value="true" />
+      <created>1731711918945</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1731711918945</updated>
+    </task>
+    <task id="LOCAL-00041" summary="feat: (DELETE) Route">
+      <option name="closed" value="true" />
+      <created>1731712137795</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1731712137795</updated>
+    </task>
+    <task id="LOCAL-00042" summary="feat: (DELETE) Ride">
+      <option name="closed" value="true" />
+      <created>1731712387439</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1731712387439</updated>
+    </task>
+    <task id="LOCAL-00043" summary="feat: (PUT) Route, (PUT) Carriage">
+      <option name="closed" value="true" />
+      <created>1731765303068</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1731765303068</updated>
+    </task>
+    <task id="LOCAL-00044" summary="feat: (PUT) Ride">
+      <option name="closed" value="true" />
+      <created>1731765343466</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1731765343466</updated>
+    </task>
+    <task id="LOCAL-00045" summary="feat: (PUT) User (profile, password)">
+      <option name="closed" value="true" />
+      <created>1731766642021</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1731766642021</updated>
+    </task>
+    <task id="LOCAL-00046" summary="feat: authorization">
+      <option name="closed" value="true" />
+      <created>1731788908673</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1731788908673</updated>
+    </task>
+    <task id="LOCAL-00047" summary="feat: update access to orders and users for different users">
+      <option name="closed" value="true" />
+      <created>1731790770377</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1731790770377</updated>
+    </task>
+    <task id="LOCAL-00048" summary="fix: disable CORS &amp; small changes in API">
+      <option name="closed" value="true" />
+      <created>1731795852135</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1731795852135</updated>
+    </task>
+    <task id="LOCAL-00049" summary="feat: add request.http">
+      <option name="closed" value="true" />
+      <created>1731960451609</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1731960451609</updated>
+    </task>
+    <task id="LOCAL-00050" summary="docs: request.http">
+      <option name="closed" value="true" />
+      <created>1731961388288</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1731961388288</updated>
+    </task>
+    <task id="LOCAL-00051" summary="refactor: create http files for different clients">
+      <option name="closed" value="true" />
+      <created>1732010759899</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1732010759899</updated>
+    </task>
+    <task id="LOCAL-00052" summary="fix: authorization in http requests">
+      <option name="closed" value="true" />
+      <created>1732142291957</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1732142291957</updated>
+    </task>
+    <task id="LOCAL-00053" summary="docs: fix typos in the API description">
+      <option name="closed" value="true" />
+      <created>1732182615911</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1732182615912</updated>
+    </task>
+    <task id="LOCAL-00054" summary="feat: add password encoding">
+      <option name="closed" value="true" />
+      <created>1732182627753</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1732182627753</updated>
+    </task>
+    <task id="LOCAL-00055" summary="feat: add dto constraints">
+      <option name="closed" value="true" />
+      <created>1732184883252</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1732184883252</updated>
+    </task>
+    <task id="LOCAL-00056" summary="feat: request validation">
+      <option name="closed" value="true" />
+      <created>1732186869820</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1732186869820</updated>
+    </task>
+    <task id="LOCAL-00057" summary="fix: update error response, add optionals">
+      <option name="closed" value="true" />
+      <created>1732314912163</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1732314912163</updated>
+    </task>
+    <task id="LOCAL-00058" summary="refactor: remove methods &quot;withDetails&quot;">
+      <option name="closed" value="true" />
+      <created>1732358713656</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1732358713656</updated>
+    </task>
+    <task id="LOCAL-00059" summary="refactor: remove methods &quot;withDetails&quot;redundant autoBuilders, fix some requests">
+      <option name="closed" value="true" />
+      <created>1732360351072</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1732360351072</updated>
+    </task>
+    <task id="LOCAL-00060" summary="refactor: remove methods &quot;withDetails&quot;redundant autoBuilders, fix some requests">
+      <option name="closed" value="true" />
+      <created>1732376677055</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1732376677056</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="refactor: restructure the project" />
+    <MESSAGE value="feat: (POST) Ride" />
+    <MESSAGE value="feat: (POST) Order" />
+    <MESSAGE value="feat: (DELETE) Order" />
+    <MESSAGE value="feat: (DELETE) Carriage" />
+    <MESSAGE value="feat: (DELETE) Station" />
+    <MESSAGE value="feat: (DELETE) Route" />
+    <MESSAGE value="feat: (DELETE) Ride" />
+    <MESSAGE value="feat: (PUT) Route, (PUT) Carriage" />
+    <MESSAGE value="feat: (PUT) Ride" />
+    <MESSAGE value="feat: (PUT) User (profile, password)" />
+    <MESSAGE value="feat: authorization" />
+    <MESSAGE value="feat: update access to orders and users for different users" />
+    <MESSAGE value="fix: disable CORS &amp; small changes in API" />
+    <MESSAGE value="feat: add request.http" />
+    <MESSAGE value="docs: request.http" />
+    <MESSAGE value="refactor: create http files for different clients" />
+    <MESSAGE value="fix: authorization in http requests" />
+    <MESSAGE value="docs: fix typos in the API description" />
+    <MESSAGE value="feat: add password encoding" />
+    <MESSAGE value="feat: add dto constraints" />
+    <MESSAGE value="feat: request validation" />
+    <MESSAGE value="fix: update error response, add optionals" />
+    <MESSAGE value="refactor: remove methods &quot;withDetails&quot;" />
+    <MESSAGE value="refactor: remove methods &quot;withDetails&quot;redundant autoBuilders, fix some requests" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: remove methods &quot;withDetails&quot;redundant autoBuilders, fix some requests" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/user/controller/impl/UserDefaultController.java</url>
+          <line>71</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/pl/edu/pg/eti/train_a/user/service/impl/UserServiceImpl.java</url>
+          <line>48</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="pl.edu.pg.eti.train_a.entity.Carriage" memberName="routes" />
+      </pinned-members>
+    </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="SpringBootApplicationConfigurationType">
+        <watch expression="ex" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

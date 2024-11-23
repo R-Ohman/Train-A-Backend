@@ -1,0 +1,32 @@
+@baseUrl = http://localhost:8080
+
+### Get all routes
+GET {{baseUrl}}/api/routes
+
+> {% client.global.set("token", ""); %}
+
+### Get all carriage types
+GET {{baseUrl}}/api/carriage
+
+### Get all stations
+GET {{baseUrl}}/api/station
+
+### Get detailed information about ride
+GET {{baseUrl}}/api/search/1
+
+### Search for available rides
+GET {{baseUrl}}/api/search?
+    fromLatitude=54.5&
+    fromLongitude=18.5&
+    toLatitude=54.351&
+    toLongitude=18.7&
+    time=1762866687
+
+### Create new user
+POST {{baseUrl}}/api/signup
+Content-Type: application/json
+
+{
+  "email": "test_user@gmail.com",
+  "password": "Password123."
+}

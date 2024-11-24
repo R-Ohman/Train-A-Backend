@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pg.eti.train_a.user.dto.*;
+import pl.edu.pg.eti.train_a.user.entity.User;
 
 public interface UserController {
     @GetMapping("api/users")
@@ -21,7 +22,7 @@ public interface UserController {
     void signUp(@RequestBody @Valid PostUserRequest request);
 
     @PostMapping("api/signin")
-    SignInResponse signIn(@RequestBody @Valid SignInRequest request) throws Exception;
+    SignInResponse signIn(@RequestBody @Valid SignInRequest request);
 
     @PutMapping("api/profile")
     @ResponseStatus(HttpStatus.OK)

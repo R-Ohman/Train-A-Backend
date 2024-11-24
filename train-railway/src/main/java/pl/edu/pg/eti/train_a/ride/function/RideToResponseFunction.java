@@ -2,10 +2,9 @@ package pl.edu.pg.eti.train_a.ride.function;
 
 import org.springframework.stereotype.Component;
 import pl.edu.pg.eti.train_a.carriage.entity.Carriage;
+import pl.edu.pg.eti.train_a.order.entity.Order;
 import pl.edu.pg.eti.train_a.ride.dto.GetRideResponse;
 import pl.edu.pg.eti.train_a.ride.dto.RideSegmentResponse;
-import pl.edu.pg.eti.train_a.order.entity.Order;
-import pl.edu.pg.eti.train_a.order.entity.OrderStatus;
 import pl.edu.pg.eti.train_a.ride.entity.Ride;
 import pl.edu.pg.eti.train_a.station.entity.Station;
 
@@ -36,8 +35,7 @@ public class RideToResponseFunction implements Function<Ride, GetRideResponse> {
                         .segments(ride.getSegments().stream()
                                 .map(segment -> {
                                     var occupiedSeats = ride.getOrders().stream()
-                                            .filter(order -> order.getRide().getId() == ride.getId()
-                                                    && order.getStatus().equals(OrderStatus.ACTIVE))
+                                            .filter(order -> order.getRide().getId() == ride.getId())
                                             .filter(order -> order.getRide().getSegments().stream()
                                                     .anyMatch(s -> s.getId() == segment.getId()))
                                             .mapToInt(Order::getSeatId)

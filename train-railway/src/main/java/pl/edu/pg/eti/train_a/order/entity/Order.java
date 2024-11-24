@@ -22,8 +22,4 @@ public class Order {
     Ride ride;
 
     int seatId;
-
-    @Builder.Default
-    @Enumerated(EnumType.STRING)
-    OrderStatus status = OrderStatus.ACTIVE;
 }

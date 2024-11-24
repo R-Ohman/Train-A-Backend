@@ -36,10 +36,32 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, DefaultAuthenticationEntryPoint authenticationEntryPoint) throws Exception {
 
-        http.securityMatcher("/api/**").authorizeHttpRequests(rmr -> rmr
+        http.csrf(AbstractHttpConfigurer::disable)
+                .securityMatcher("/api/**").authorizeHttpRequests(rmr -> rmr
                         .requestMatchers(
                                 HttpMethod.GET,
-                                "/api/users"
+                                "/api/users",
+                                "/api/routes/{id}"
+                        ).hasRole(UserRole.MANAGER.getValue())
+                        .requestMatchers(
+                                HttpMethod.DELETE,
+                                "/api/carriage/{code}",
+                                "/api/station/{id}",
+                                "/api/route/{id}",
+                                "/api/route/{routeId}/ride/{rideId}"
+                        ).hasRole(UserRole.MANAGER.getValue())
+                        .requestMatchers(
+                                HttpMethod.PUT,
+                                "/api/carriage/{code}",
+                                "/api/route/{id}",
+                                "/api/route/{routeId}/ride/{rideId}"
+                        ).hasRole(UserRole.MANAGER.getValue())
+                        .requestMatchers(
+                                HttpMethod.POST,
+                                "/api/carriage",
+                                "/api/station",
+                                "/api/route",
+                                "/api/route/{routeId}/ride"
                         ).hasRole(UserRole.MANAGER.getValue())
                         .requestMatchers(
                                 "/api/order",
@@ -54,7 +76,6 @@ public class SecurityConfig {
                 ).sessionManagement(smc -> smc
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
-                .csrf(AbstractHttpConfigurer::disable)
                 .exceptionHandling(ehc -> ehc
                         .accessDeniedHandler(accessDeniedHandler)
                 );

@@ -6,6 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.edu.pg.eti.train_a.user.entity.User;
+import pl.edu.pg.eti.train_a.user.event.api.UserEventRepository;
 import pl.edu.pg.eti.train_a.user.repository.api.UserRepository;
 import pl.edu.pg.eti.train_a.user.service.api.UserService;
 
@@ -17,11 +18,17 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final UserEventRepository userEventRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(
+            UserRepository userRepository,
+            PasswordEncoder passwordEncoder,
+            UserEventRepository userEventRepository
+    ) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.userEventRepository = userEventRepository;
     }
 
     @Override
@@ -51,6 +58,7 @@ public class UserServiceImpl implements UserService {
         }
         user.setPassHash(passwordEncoder.encode(user.getPassHash()));
         this.userRepository.save(user);
+        this.userEventRepository.create(user);
     }
 
     @Override

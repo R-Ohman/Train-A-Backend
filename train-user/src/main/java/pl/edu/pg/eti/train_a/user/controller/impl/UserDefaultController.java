@@ -12,6 +12,8 @@ import pl.edu.pg.eti.train_a.exception.CustomResponseStatusException;
 import pl.edu.pg.eti.train_a.security.JwtUtil;
 import pl.edu.pg.eti.train_a.user.controller.api.UserController;
 import pl.edu.pg.eti.train_a.user.dto.*;
+import pl.edu.pg.eti.train_a.user.entity.User;
+import pl.edu.pg.eti.train_a.user.event.api.UserEventRepository;
 import pl.edu.pg.eti.train_a.user.function.RequestToUserFunction;
 import pl.edu.pg.eti.train_a.user.function.UserToResponseFunction;
 import pl.edu.pg.eti.train_a.user.service.api.UserService;
@@ -25,6 +27,7 @@ public class UserDefaultController implements UserController {
     private final JwtUtil jwtUtil;
     private final UserDetailsService userDetailsService;
     private final AuthenticationManager authenticationManager;
+    private final UserEventRepository userEventRepository;
 
     @Autowired
     public UserDefaultController(
@@ -33,7 +36,8 @@ public class UserDefaultController implements UserController {
             RequestToUserFunction requestToUser,
             JwtUtil jwtUtil,
             UserDetailsService userDetailsService,
-            AuthenticationManager authenticationManager
+            AuthenticationManager authenticationManager,
+            UserEventRepository userEventRepository
     ) {
         this.userService = userService;
         this.userToResponseFunction = userToResponseFunction;
@@ -41,6 +45,7 @@ public class UserDefaultController implements UserController {
         this.jwtUtil = jwtUtil;
         this.userDetailsService = userDetailsService;
         this.authenticationManager = authenticationManager;
+        this.userEventRepository = userEventRepository;
     }
 
     @Override
@@ -95,6 +100,7 @@ public class UserDefaultController implements UserController {
             final UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
             final String jwt = jwtUtil.generateToken(userDetails.getUsername());
 
+            userEventRepository.signIn(request);
             return SignInResponse.builder().token(jwt).build();
         } catch (Exception e) {
             throw new CustomResponseStatusException(HttpStatus.BAD_REQUEST, "userNotFound", "User is not found");

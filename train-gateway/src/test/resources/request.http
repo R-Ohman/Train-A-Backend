@@ -13,7 +13,7 @@ Content-Type: application/json
 > {% client.global.set("token", response.body.token); %}
 
 ### Get all routes
-GET {{baseUrl}}/api/routes
+GET {{baseUrl}}/api/route
 
 ### Get all users
 GET {{baseUrl}}/api/users
@@ -34,7 +34,7 @@ GET {{baseUrl}}/api/order?all=true
 Authorization: Bearer {{token}}
 
 ### Get information about route and its rides
-GET {{baseUrl}}/api/routes/1
+GET {{baseUrl}}/api/route/1
 Authorization: Bearer {{token}}
 
 ### Get detailed information about ride

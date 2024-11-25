@@ -21,5 +21,5 @@ public class User {
     UserRole role;
 
     @ToString.Exclude
-    String passHash;
+    String password;
 }

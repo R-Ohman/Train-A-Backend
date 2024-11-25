@@ -33,6 +33,10 @@ public class CarriageServiceImpl implements CarriageService {
         return carriageRepository.findByType(type);
     }
 
+    public Optional<Carriage> findByCode(String code) {
+        return carriageRepository.findByCode(UUID.fromString(code));
+    }
+
     public UUID create(Carriage carriage) {
         var newCarriage = this.carriageRepository.save(carriage);
         return newCarriage.getCode();

@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
         if (userRepository.findByUsername(user.getUsername()).isPresent()) {
             throw new IllegalArgumentException("invalidUniqueKey");
         }
-        user.setPassHash(passwordEncoder.encode(user.getPassHash()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         this.userRepository.save(user);
         this.userEventRepository.create(user);
     }

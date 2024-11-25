@@ -36,12 +36,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, DefaultAuthenticationEntryPoint authenticationEntryPoint) throws Exception {
 
-        http.csrf(AbstractHttpConfigurer::disable)
-                .securityMatcher("/api/**").authorizeHttpRequests(rmr -> rmr
+        http.securityMatcher("/api/**").authorizeHttpRequests(rmr -> rmr
                         .requestMatchers(
                                 HttpMethod.GET,
                                 "/api/users",
-                                "/api/routes/{id}"
+                                "/api/route/{id}"
                         ).hasRole(UserRole.MANAGER.getValue())
                         .requestMatchers(
                                 HttpMethod.DELETE,
@@ -78,7 +77,8 @@ public class SecurityConfig {
                 )
                 .exceptionHandling(ehc -> ehc
                         .accessDeniedHandler(accessDeniedHandler)
-                );
+                )
+                .csrf(AbstractHttpConfigurer::disable);
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 

@@ -20,7 +20,7 @@ GET {{baseUrl}}/api/order?all=true
 Authorization: Bearer {{token}}
 
 ### Get information about route and its rides
-GET {{baseUrl}}/api/routes/1
+GET {{baseUrl}}/api/route/1
 Authorization: Bearer {{token}}
 
 ### Create new route

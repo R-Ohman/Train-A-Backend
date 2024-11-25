@@ -11,12 +11,12 @@ import pl.edu.pg.eti.train_a.route.dto.PutRouteRequest;
 import java.util.Map;
 
 public interface RouteController {
-    @GetMapping("api/routes")
+    @GetMapping("api/route")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     GetRoutesResponse getRoutes();
 
-    @GetMapping("api/routes/{id}")
+    @GetMapping("api/route/{id}")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     GetRouteInfoResponse getRouteInfoById(@PathVariable int id);

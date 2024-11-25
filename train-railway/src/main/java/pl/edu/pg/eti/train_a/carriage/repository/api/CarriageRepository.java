@@ -10,4 +10,6 @@ import java.util.UUID;
 @Repository
 public interface CarriageRepository extends JpaRepository<Carriage, UUID> {
     Optional<Carriage> findByType(String type);
+
+    Optional<Carriage> findByCode(UUID code);
 }

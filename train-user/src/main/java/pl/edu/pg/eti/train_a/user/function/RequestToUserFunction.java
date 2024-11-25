@@ -23,7 +23,7 @@ public class RequestToUserFunction implements Function<PostUserRequest, User> {
     public User apply(PostUserRequest postUserRequest) {
         return User.builder()
                 .email(postUserRequest.getEmail())
-                .passHash(postUserRequest.getPassword())
+                .password(postUserRequest.getPassword())
                 .role(UserRole.USER)
                 .build();
     }
@@ -35,7 +35,7 @@ public class RequestToUserFunction implements Function<PostUserRequest, User> {
                 .username(user.getUsername())
                 .name(putUserRequest.getName())
                 .email(putUserRequest.getEmail())
-                .passHash(user.getPassHash())
+                .password(user.getPassword())
                 .role(user.getRole())
                 .build();
     }

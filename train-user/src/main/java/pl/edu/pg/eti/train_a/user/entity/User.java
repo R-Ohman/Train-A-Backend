@@ -3,6 +3,8 @@ package pl.edu.pg.eti.train_a.user.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import pl.edu.pg.eti.train_a.order.entity.Order;
 
 import java.util.ArrayList;
@@ -31,7 +33,7 @@ public class User {
     UserRole role;
 
     @ToString.Exclude
-    String passHash;
+    String password;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude

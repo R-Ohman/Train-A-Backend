@@ -23,7 +23,7 @@ public class DefaultUserDetailsService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with UUID: " + username));
         return User
                 .withUsername(user.getUsername())
-                .password(user.getPassHash())
+                .password(user.getPassword())
                 .roles(user.getRole().getValue())
                 .accountExpired(false)
                 .accountLocked(false)

@@ -1,5 +1,6 @@
 package pl.edu.pg.eti.train_a.station.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -27,6 +28,7 @@ public class GetStationsResponse {
         @AllArgsConstructor(access = AccessLevel.PRIVATE)
         @Builder
         public static class Connection {
+            @JsonProperty("id")
             private int stationId;
             private int distance;
         }

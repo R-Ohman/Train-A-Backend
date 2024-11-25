@@ -1,7 +1,7 @@
 @baseUrl = http://localhost:8083
 
 ### Get all routes
-GET {{baseUrl}}/api/routes
+GET {{baseUrl}}/api/route
 
 > {% client.global.set("token", ""); %}
 
@@ -27,6 +27,6 @@ POST {{baseUrl}}/api/signup
 Content-Type: application/json
 
 {
-  "email": "test_user@gmail.com",
+  "email": "admin@admin.com",
   "password": "Password123."
 }

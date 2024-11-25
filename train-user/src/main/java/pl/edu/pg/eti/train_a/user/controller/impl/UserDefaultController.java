@@ -90,7 +90,7 @@ public class UserDefaultController implements UserController {
     @Override
     public void updatePassword(PutPasswordRequest request) {
         var user = userService.getCurrentUser().orElseThrow();
-        user.setPassHash(request.getPassword());
+        user.setPassword(request.getPassword());
         userService.create(user);
     }
 

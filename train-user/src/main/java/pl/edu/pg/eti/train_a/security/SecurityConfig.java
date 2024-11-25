@@ -54,10 +54,10 @@ public class SecurityConfig {
                 ).sessionManagement(smc -> smc
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
-                .csrf(AbstractHttpConfigurer::disable)
                 .exceptionHandling(ehc -> ehc
                         .accessDeniedHandler(accessDeniedHandler)
-                );
+                )
+                .csrf(AbstractHttpConfigurer::disable);
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 

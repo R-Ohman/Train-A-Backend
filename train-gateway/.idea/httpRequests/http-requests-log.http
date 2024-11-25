@@ -1,3 +1,219 @@
+POST http://localhost:8083/api/signin
+Content-Type: application/json
+Content-Length: 62
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "admin@admin.com",
+  "password": "Password123."
+}
+
+<> 2024-11-25T171943.400.json
+
+###
+
+POST http://localhost:8083/api/signup
+Content-Type: application/json
+Content-Length: 62
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "admin@admin.com",
+  "password": "Password123."
+}
+
+###
+
+POST http://localhost:8083/api/signup
+Content-Type: application/json
+Content-Length: 62
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "admin@admin.com",
+  "password": "Password123."
+}
+
+###
+
+POST http://localhost:8083/api/signin
+Content-Type: application/json
+Content-Length: 61
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "admin@admin.com",
+  "password": "password123"
+}
+
+<> 2024-11-25T171022.400.json
+
+###
+
+POST http://localhost:8083/api/signup
+Content-Type: application/json
+Content-Length: 67
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "test_user4@gmail.com",
+  "password": "Password123."
+}
+
+###
+
+POST http://localhost:8083/api/signup
+Content-Type: application/json
+Content-Length: 67
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "test_user2@gmail.com",
+  "password": "Password123."
+}
+
+<> 2024-11-25T170528.500.json
+
+###
+
+POST http://localhost:8083/api/signup
+Content-Type: application/json
+Content-Length: 66
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "test_user@gmail.com",
+  "password": "Password123."
+}
+
+<> 2024-11-25T170246.500.json
+
+###
+
+POST http://localhost:8083/api/signup
+Content-Type: application/json
+Content-Length: 66
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "test_user@gmail.com",
+  "password": "Password123."
+}
+
+<> 2024-11-25T170243.500.json
+
+###
+
+POST http://localhost:8083/api/signup
+Content-Type: application/json
+Content-Length: 66
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "test_user@gmail.com",
+  "password": "Password123."
+}
+
+<> 2024-11-25T165955.500.json
+
+###
+
+GET http://localhost:8083/api/search/1
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2024-11-25T165950.400.json
+
+###
+
+GET http://localhost:8083/api/carriage
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2024-11-25T165853.200.json
+
+###
+
+GET http://localhost:8083/api/routes
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2024-11-25T165851.200.json
+
+###
+
+GET http://localhost:8083/api/routes
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+###
+
+GET http://localhost:8083/api/routes
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+###
+
+GET http://localhost:8082/api/routes
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2024-11-25T164328.200.json
+
+###
+
+GET http://localhost:8083/api/routes
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+###
+
+GET http://localhost:8083/api/route
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+###
+
+GET http://localhost:8083/api/routes
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+###
+
+GET http://localhost:8083/api/carriage
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+###
+
 GET http://localhost:8083/api/routes
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3
 Accept-Encoding: br, deflate, gzip, x-gzip

@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void create(User user) {
-        if (userRepository.findByUsername(user.getUsername()).isEmpty()) {
+        if (userRepository.findByUsername(user.getUsername()).isPresent()) {
             throw new IllegalArgumentException("invalidUniqueKey");
         }
         user.setPassHash(passwordEncoder.encode(user.getPassHash()));

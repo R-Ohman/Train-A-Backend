@@ -65,7 +65,11 @@ public class UserDefaultController implements UserController {
 
     @Override
     public void signUp(PostUserRequest request) {
-        userService.create(requestToUser.apply(request));
+        try {
+            userService.create(requestToUser.apply(request));
+        } catch (IllegalArgumentException e) {
+            throw new CustomResponseStatusException(HttpStatus.BAD_REQUEST, "invalidUniqueKey", "User already exists");
+        }
     }
 
     @Override

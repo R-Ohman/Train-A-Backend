@@ -1,4 +1,4 @@
-@baseUrl = http://localhost:8080
+@baseUrl = http://localhost:8083
 
 ### Sign in and get authentication token
 POST {{baseUrl}}/api/signin

@@ -18,7 +18,7 @@ public class UserEventRestRepository implements UserEventRepository {
 
     @Override
     public void create(User user) {
-        restTemplate.postForEntity("/api/user/", user, Void.class);
+        restTemplate.postForEntity("/api/user", user, Void.class);
     }
 
     @Override

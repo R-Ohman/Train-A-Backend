@@ -4,10 +4,7 @@ target/
 !**/src/test/**/target/
 
 ### IntelliJ IDEA ###
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
+.idea
 *.iws
 *.iml
 *.ipr
@@ -36,8 +33,14 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+
 **/data/*.db
-.idea/dataSources.xml
-data/*.mv.db
 HELP.md
+
+### npm ###
+node_modules/
+
+### Angular ###
+.angular/
 

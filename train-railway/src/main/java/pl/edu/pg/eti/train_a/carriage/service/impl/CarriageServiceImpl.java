@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.edu.pg.eti.train_a.carriage.entity.Carriage;
+import pl.edu.pg.eti.train_a.carriage.event.api.CarriageEventRepository;
 import pl.edu.pg.eti.train_a.carriage.repository.api.CarriageRepository;
 import pl.edu.pg.eti.train_a.carriage.service.api.CarriageService;
 
@@ -15,10 +16,12 @@ import java.util.UUID;
 @Transactional
 public class CarriageServiceImpl implements CarriageService {
     private final CarriageRepository carriageRepository;
+    private final CarriageEventRepository carriageEventRepository;
 
     @Autowired
-    public CarriageServiceImpl(CarriageRepository carriageRepository) {
+    public CarriageServiceImpl(CarriageRepository carriageRepository, CarriageEventRepository carriageEventRepository) {
         this.carriageRepository = carriageRepository;
+        this.carriageEventRepository = carriageEventRepository;
     }
 
     public List<Carriage> findAll() {
@@ -39,6 +42,7 @@ public class CarriageServiceImpl implements CarriageService {
 
     public UUID create(Carriage carriage) {
         var newCarriage = this.carriageRepository.save(carriage);
+        this.carriageEventRepository.create(newCarriage);
         return newCarriage.getCode();
     }
 
@@ -47,6 +51,9 @@ public class CarriageServiceImpl implements CarriageService {
     }
 
     public void delete(UUID id) {
-        this.carriageRepository.findById(id).ifPresent(carriageRepository::delete);
+        this.carriageRepository.findById(id).ifPresent(carriage -> {
+            this.carriageRepository.delete(carriage);
+            this.carriageEventRepository.delete(carriage.getCode());
+        });
     }
 }

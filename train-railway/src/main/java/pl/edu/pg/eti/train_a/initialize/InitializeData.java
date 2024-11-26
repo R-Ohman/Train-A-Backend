@@ -1,8 +1,11 @@
 package pl.edu.pg.eti.train_a.initialize;
 
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestTemplate;
 import pl.edu.pg.eti.train_a.station.entity.Railway;
 import pl.edu.pg.eti.train_a.station.entity.Station;
 import pl.edu.pg.eti.train_a.station.service.api.RailwayService;
@@ -12,19 +15,34 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Component
-public class InitializeData implements InitializingBean {
+public class InitializeData {
     private final StationService stationService;
     private final RailwayService railwayService;
+    private final RestTemplate restTemplate;
 
     @Autowired
-    public InitializeData(StationService stationService, RailwayService railwayService) {
+    public InitializeData(StationService stationService, RailwayService railwayService, RestTemplate restTemplate) {
         this.stationService = stationService;
         this.railwayService = railwayService;
+        this.restTemplate = restTemplate;
     }
 
-    @Override
-    public void afterPropertiesSet() {
+    @EventListener(ApplicationReadyEvent.class)
+    public void afterPropertiesSet() throws InterruptedException {
         if (stationService.findAll().isEmpty()) {
+
+            while (true) {
+                try {
+                    restTemplate.getForEntity("/api", Void.class);
+                    break;
+                } catch (HttpClientErrorException e) {
+                    break;
+                } catch (Exception e) {
+                    System.out.println("Waiting for users service to start...");
+                    Thread.sleep(1000);
+                }
+            }
+
             stationService.create(Station.builder()
                     .city("Warszawa Centralna")
                     .latitude(BigDecimal.valueOf(52.2297))

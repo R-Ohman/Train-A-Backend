@@ -4,10 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import pl.edu.pg.eti.train_a.carriage.entity.Carriage;
-import pl.edu.pg.eti.train_a.ride.entity.Ride;
 import pl.edu.pg.eti.train_a.station.entity.Station;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Data

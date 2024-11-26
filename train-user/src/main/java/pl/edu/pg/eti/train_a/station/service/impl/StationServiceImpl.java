@@ -23,4 +23,14 @@ public class StationServiceImpl implements StationService {
     public Optional<Station> findById(int id) {
         return stationRepository.findById(id);
     }
+
+    @Override
+    public void create(Station station) {
+        this.stationRepository.save(station);
+    }
+
+    @Override
+    public void delete(int id) {
+        this.stationRepository.findById(id).ifPresent(stationRepository::delete);
+    }
 }

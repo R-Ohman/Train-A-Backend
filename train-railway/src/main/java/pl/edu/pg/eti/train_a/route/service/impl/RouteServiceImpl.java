@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.edu.pg.eti.train_a.route.entity.Route;
+import pl.edu.pg.eti.train_a.route.event.api.RouteEventRepository;
 import pl.edu.pg.eti.train_a.route.repository.api.RouteRepository;
 import pl.edu.pg.eti.train_a.route.service.api.RouteService;
 import pl.edu.pg.eti.train_a.station.entity.Station;
@@ -16,10 +17,12 @@ import java.util.Optional;
 @Transactional
 public class RouteServiceImpl implements RouteService {
     private final RouteRepository routeRepository;
+    private final RouteEventRepository routeEventRepository;
 
     @Autowired
-    public RouteServiceImpl(RouteRepository routeRepository) {
+    public RouteServiceImpl(RouteRepository routeRepository, RouteEventRepository routeEventRepository) {
         this.routeRepository = routeRepository;
+        this.routeEventRepository = routeEventRepository;
     }
 
     @Override
@@ -43,6 +46,7 @@ public class RouteServiceImpl implements RouteService {
     @Override
     public int create(Route route) {
         var newRoute = this.routeRepository.save(route);
+        this.routeEventRepository.create(newRoute);
         return newRoute.getId();
     }
 
@@ -56,5 +60,6 @@ public class RouteServiceImpl implements RouteService {
         var route = routeRepository.findById(routeId)
                 .orElseThrow(() -> new EntityNotFoundException("Route not found"));
         this.routeRepository.delete(route);
+        this.routeEventRepository.delete(routeId);
     }
 }

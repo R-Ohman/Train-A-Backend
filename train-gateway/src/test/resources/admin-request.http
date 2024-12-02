@@ -30,7 +30,7 @@ Authorization: Bearer {{token}}
 
 {
   "path": [1, 2, 3],
-  "carriages": ["1st class", "2nd class", "3rd class", "3rd class", "2nd class", "1st class"]
+  "carriages": ["1st class", "1st class"]
 }
 
 ### Create new carriage type
@@ -39,10 +39,10 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "name": "4th class",
-  "rows": 100,
+  "name": "1st class",
+  "rows": 30,
   "leftSeats": 3,
-  "rightSeats": 6
+  "rightSeats": 2
 }
 
 ### Create new station
@@ -51,9 +51,9 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "city": "Warszawa",
-  "latitude": 52.22977,
-  "longitude": 21.01178,
+  "city": "Warszawa Gdańska",
+  "latitude": 52.3,
+  "longitude": 21.23,
   "relations": [1, 2, 3]
 }
 
@@ -66,24 +66,20 @@ Authorization: Bearer {{token}}
   "segments": [
     {
       "time": [
-        "2024-11-15T22:15:00",
-        "2024-11-15T22:30:00"
+        "2024-12-03T12:49:00.000Z",
+        "2024-12-03T14:53:00.000Z"
       ],
       "price": {
-        "1st class": 100,
-        "2nd class": 50,
-        "3rd class": 25
+        "1st class": 1000
       }
     },
     {
       "time": [
-        "2024-11-15T22:30:00",
-        "2024-11-15T22:45:00"
+        "2024-12-03T15:03:00.000Z",
+        "2024-12-03T18:59:00.000Z"
       ],
       "price": {
-        "1st class": 100,
-        "2nd class": 50,
-        "3rd class": 25
+        "1st class": 250
       }
     }
   ]
@@ -98,7 +94,7 @@ DELETE {{baseUrl}}/api/carriage/8206fcd7-ab2a-416a-a766-c2873f3c993e
 Authorization: Bearer {{token}}
 
 ### Delete station
-DELETE {{baseUrl}}/api/station/4
+DELETE {{baseUrl}}/api/station/6
 Authorization: Bearer {{token}}
 
 ### Delete route

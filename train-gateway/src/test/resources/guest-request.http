@@ -27,6 +27,6 @@ POST {{baseUrl}}/api/signup
 Content-Type: application/json
 
 {
-  "email": "admin@admin.com",
+  "email": "user@user.com",
   "password": "Password123."
 }

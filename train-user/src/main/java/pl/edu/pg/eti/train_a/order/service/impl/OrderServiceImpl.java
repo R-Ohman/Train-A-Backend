@@ -35,7 +35,7 @@ public class OrderServiceImpl implements OrderService {
 
     public int create(Order order) {
         var newOrder = this.orderRepository.save(order);
-        this.orderEventRepository.create(newOrder);
+//        this.orderEventRepository.create(newOrder);
         return newOrder.getId();
     }
 

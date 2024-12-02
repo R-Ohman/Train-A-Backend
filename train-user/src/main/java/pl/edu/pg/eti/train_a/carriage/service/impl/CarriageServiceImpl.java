@@ -7,6 +7,7 @@ import pl.edu.pg.eti.train_a.carriage.entity.Carriage;
 import pl.edu.pg.eti.train_a.carriage.repository.api.CarriageRepository;
 import pl.edu.pg.eti.train_a.carriage.service.api.CarriageService;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -17,6 +18,11 @@ public class CarriageServiceImpl implements CarriageService {
     @Autowired
     public CarriageServiceImpl(CarriageRepository carriageRepository) {
         this.carriageRepository = carriageRepository;
+    }
+
+    @Override
+    public Optional<Carriage> findByType(String type) {
+        return this.carriageRepository.findByType(type);
     }
 
     @Override

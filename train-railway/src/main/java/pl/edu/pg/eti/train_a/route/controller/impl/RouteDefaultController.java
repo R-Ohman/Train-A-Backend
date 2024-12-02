@@ -70,7 +70,7 @@ public class RouteDefaultController implements RouteController {
     public void deleteRoute(int id) {
         routeService.findById(id)
                 .ifPresentOrElse(
-                        character -> routeService.delete(id),
+                        r -> routeService.delete(id),
                         () -> {
                             throw new CustomResponseStatusException(HttpStatus.BAD_REQUEST, "routeNotFound", "Route not found");
                         }

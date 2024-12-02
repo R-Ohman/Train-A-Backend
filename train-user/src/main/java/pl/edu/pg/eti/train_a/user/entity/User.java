@@ -1,15 +1,14 @@
 package pl.edu.pg.eti.train_a.user.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import pl.edu.pg.eti.train_a.order.entity.Order;
 
 import java.util.ArrayList;
 import java.util.List;
- import java.util.UUID;
+import java.util.UUID;
 
 @Data
 @Builder
@@ -39,5 +38,6 @@ public class User {
     @EqualsAndHashCode.Exclude
     @Builder.Default
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     List<Order> orders = new ArrayList<>();
 }

@@ -1,5 +1,6 @@
 package pl.edu.pg.eti.train_a.ride.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -25,6 +26,7 @@ public class Segment {
     @EqualsAndHashCode.Exclude
     @ManyToOne
     @JoinColumn(name = "ride_id")
+    @JsonIgnore
     Ride ride;
 
     LocalDateTime arrival;

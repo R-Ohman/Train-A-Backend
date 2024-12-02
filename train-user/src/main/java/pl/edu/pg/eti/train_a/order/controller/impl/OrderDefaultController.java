@@ -9,6 +9,8 @@ import pl.edu.pg.eti.train_a.order.controller.api.OrderController;
 import pl.edu.pg.eti.train_a.order.dto.GetOrdersResponse;
 import pl.edu.pg.eti.train_a.order.dto.PostOrderRequest;
 import pl.edu.pg.eti.train_a.order.entity.OrderStatus;
+import pl.edu.pg.eti.train_a.order.event.repository.api.OrderEventRepository;
+import pl.edu.pg.eti.train_a.order.event.repository.rest.OrderEventRestRepository;
 import pl.edu.pg.eti.train_a.order.function.OrderToResponseFunction;
 import pl.edu.pg.eti.train_a.order.function.RequestToOrderFunction;
 import pl.edu.pg.eti.train_a.order.service.api.OrderService;
@@ -26,17 +28,20 @@ public class OrderDefaultController implements OrderController {
 
     private final RequestToOrderFunction requestToOrder;
     private final UserService userService;
+    private final OrderEventRepository orderEventRepository;
 
     @Autowired
     public OrderDefaultController(
             OrderService orderService,
             OrderToResponseFunction orderToResponse,
             RequestToOrderFunction requestToOrder,
+            OrderEventRestRepository orderEventRepository,
             UserService userService) {
         this.orderService = orderService;
         this.orderToResponse = orderToResponse;
         this.requestToOrder = requestToOrder;
         this.userService = userService;
+        this.orderEventRepository = orderEventRepository;
     }
 
     @Override
@@ -53,6 +58,7 @@ public class OrderDefaultController implements OrderController {
     @Override
     public Map<String, Integer> postOrder(PostOrderRequest request) {
         int orderId = orderService.create(requestToOrder.apply(request));
+        orderEventRepository.create(request);
         return Map.of("orderId", orderId);
     }
 

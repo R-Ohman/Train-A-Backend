@@ -8,6 +8,7 @@ import pl.edu.pg.eti.train_a.exception.CustomResponseStatusException;
 import pl.edu.pg.eti.train_a.ride.controller.api.RideController;
 import pl.edu.pg.eti.train_a.ride.dto.PostRideRequest;
 import pl.edu.pg.eti.train_a.ride.dto.PutRideRequest;
+import pl.edu.pg.eti.train_a.ride.event.api.RideEventRepository;
 import pl.edu.pg.eti.train_a.ride.function.RequestToRideFunction;
 import pl.edu.pg.eti.train_a.ride.service.api.RideService;
 
@@ -18,17 +19,20 @@ import java.util.Map;
 public class RideDefaultController implements RideController {
     private final RequestToRideFunction requestToRide;
     private final RideService rideService;
+    private final RideEventRepository rideEventRepository;
 
     @Autowired
-    public RideDefaultController(RequestToRideFunction requestToRide, RideService rideService) {
+    public RideDefaultController(RequestToRideFunction requestToRide, RideService rideService, RideEventRepository rideEventRepository) {
         this.requestToRide = requestToRide;
         this.rideService = rideService;
+        this.rideEventRepository = rideEventRepository;
     }
 
     @Override
     public Map<String, Integer> postRide(int routeId, PostRideRequest request) {
         try {
             int newRideId = rideService.create(requestToRide.apply(routeId, request));
+            rideEventRepository.create(routeId, request);
             return Map.of("id", newRideId);
         } catch (Exception e) {
             throw new CustomResponseStatusException(HttpStatus.BAD_REQUEST, "routeNotFound", "Route not found");
@@ -40,6 +44,7 @@ public class RideDefaultController implements RideController {
         try {
             var ride = requestToRide.apply(rideId, routeId, request);
             int updatedRideId = rideService.update(ride);
+            rideEventRepository.update(routeId, rideId, request);
             return Map.of("id", updatedRideId);
         } catch (Exception e) {
             throw new CustomResponseStatusException(HttpStatus.BAD_REQUEST, "rideNotFound", "Ride not found");

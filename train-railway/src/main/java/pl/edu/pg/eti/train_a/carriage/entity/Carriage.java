@@ -1,5 +1,6 @@
 package pl.edu.pg.eti.train_a.carriage.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -37,5 +38,6 @@ public class Carriage {
             joinColumns = @JoinColumn(name = "carriage_id"),
             inverseJoinColumns = @JoinColumn(name = "route_id")
     )
+    @JsonIgnore
     List<Route> routes = new ArrayList<>();
 }

@@ -7,6 +7,8 @@ import pl.edu.pg.eti.train_a.route.entity.Route;
 import pl.edu.pg.eti.train_a.route.repository.api.RouteRepository;
 import pl.edu.pg.eti.train_a.route.service.api.RouteService;
 
+import java.util.Optional;
+
 @Service
 @Transactional
 public class RouteServiceImpl implements RouteService {
@@ -15,6 +17,11 @@ public class RouteServiceImpl implements RouteService {
     @Autowired
     public RouteServiceImpl(RouteRepository routeRepository) {
         this.routeRepository = routeRepository;
+    }
+
+    @Override
+    public Optional<Route> findById(int id) {
+        return this.routeRepository.findById(id);
     }
 
     @Override

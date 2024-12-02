@@ -31,7 +31,7 @@ public class RequestToRouteFunction implements Function<PostRouteRequest, Route>
                         .map((id) -> stationService.findById(id).orElseThrow())
                         .toList())
                 .carriages(postRouteRequest.getCarriages().stream()
-                        .map(carriageService::findByCode)
+                        .map(carriageService::findByType)
                         .map(Optional::orElseThrow)
                         .toList())
                 .build();

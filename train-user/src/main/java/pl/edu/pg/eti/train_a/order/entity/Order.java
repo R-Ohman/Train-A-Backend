@@ -1,5 +1,6 @@
 package pl.edu.pg.eti.train_a.order.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -21,6 +22,7 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     User user;
 
     @ManyToOne
@@ -31,10 +33,12 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "station_start")
+    @JsonIgnore
     Station stationStart;
 
     @ManyToOne
     @JoinColumn(name = "station_end")
+    @JsonIgnore
     Station stationEnd;
 
     @Builder.Default

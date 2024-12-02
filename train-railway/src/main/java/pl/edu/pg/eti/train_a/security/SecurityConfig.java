@@ -62,13 +62,6 @@ public class SecurityConfig {
                                 "/api/route",
                                 "/api/route/{routeId}/ride"
                         ).hasRole(UserRole.MANAGER.getValue())
-                        .requestMatchers(
-                                "/api/order",
-                                "/api/order/*",
-                                "/api/profile",
-                                "/api/profile/*",
-                                "/api/logout"
-                        ).authenticated()
                         .anyRequest().permitAll()
                 ).httpBasic(httpbc -> httpbc
                         .authenticationEntryPoint(authenticationEntryPoint)

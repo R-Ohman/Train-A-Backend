@@ -1,5 +1,6 @@
 package pl.edu.pg.eti.train_a.route.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -36,5 +37,6 @@ public class Route {
     @EqualsAndHashCode.Exclude
     @Builder.Default
     @OneToMany(mappedBy = "route", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     List<Ride> rides = new ArrayList<>();
 }

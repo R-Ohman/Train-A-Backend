@@ -1,9 +1,9 @@
 package pl.edu.pg.eti.train_a.station.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import pl.edu.pg.eti.train_a.order.entity.Order;
 import pl.edu.pg.eti.train_a.route.entity.Route;
 
 import java.math.BigDecimal;
@@ -35,11 +35,13 @@ public class Station {
             joinColumns = @JoinColumn(name = "station_id"),
             inverseJoinColumns = @JoinColumn(name = "route_id")
     )
+    @JsonIgnore
     List<Route> routes = new ArrayList<>();
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @Builder.Default
     @ManyToMany(mappedBy = "stations", fetch = FetchType.LAZY)
+    @JsonIgnore
     List<Railway> railways = new ArrayList<>();
 }

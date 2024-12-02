@@ -22,7 +22,7 @@ Authorization: Bearer {{token}}
 
 {
   "rideId": 1,
-  "seatId": 8,
+  "seatId": 6,
   "stationStart": 1,
   "stationEnd": 3
 }

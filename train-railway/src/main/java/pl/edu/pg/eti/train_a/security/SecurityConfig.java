@@ -35,7 +35,6 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, DefaultAuthenticationEntryPoint authenticationEntryPoint) throws Exception {
-
         http.securityMatcher("/api/**").authorizeHttpRequests(rmr -> rmr
                         .requestMatchers(
                                 HttpMethod.GET,

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 import pl.edu.pg.eti.train_a.carriage.event.api.CarriageEventRepository;
 import pl.edu.pg.eti.train_a.carriage.entity.Carriage;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 
 import java.util.UUID;
 
@@ -13,12 +13,12 @@ import java.util.UUID;
 public class CarriageEventRestRepository implements CarriageEventRepository {
     private final RestTemplate restTemplate;
 
-    private final DiscoveryClient discoveryClient;
+    private final LoadBalancerClient loadBalancerClient;
 
     @Autowired
-    public CarriageEventRestRepository(RestTemplate restTemplate, DiscoveryClient discoveryClient) {
+    public CarriageEventRestRepository(RestTemplate restTemplate, LoadBalancerClient loadBalancerClient) {
         this.restTemplate = restTemplate;
-        this.discoveryClient = discoveryClient;
+        this.loadBalancerClient = loadBalancerClient;
     }
 
     @Override
@@ -37,9 +37,7 @@ public class CarriageEventRestRepository implements CarriageEventRepository {
     }
 
     private String getUri() {
-        return discoveryClient.getInstances("train-user").stream()
-                .findFirst()
-                .orElseThrow()
+        return loadBalancerClient.choose("train-user")
                 .getUri()
                 .toString();
     }

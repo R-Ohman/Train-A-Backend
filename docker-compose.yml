@@ -18,16 +18,30 @@ services:
       SPRING_DATASOURCE_PASSWORD: "user_password"
       SPRING_JPA_DATABASE_PLATFORM: "org.hibernate.dialect.PostgreSQLDialect"
 
-  train-railway:
+  train-railway-1:
     image: train-railway:1.0.0-SNAPSHOT
     restart: always
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://train-eureka:8080/eureka"
+      EUREKA_INSTANCE_INSTANCE_ID: "1"
       SPRING_DATASOURCE_URL: "jdbc:postgresql://railway-db:5432/railway_db"
       SPRING_DATASOURCE_DRIVERCLASSNAME: "org.postgresql.Driver"
       SPRING_DATASOURCE_USERNAME: "railway_user"
       SPRING_DATASOURCE_PASSWORD: "railway_password"
       SPRING_JPA_DATABASE_PLATFORM: "org.hibernate.dialect.PostgreSQLDialect"
+
+  train-railway-2:
+    image: train-railway:1.0.0-SNAPSHOT
+    restart: always
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://train-eureka:8080/eureka"
+      EUREKA_INSTANCE_INSTANCE_ID: "2"
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://railway-db:5432/railway_db"
+      SPRING_DATASOURCE_DRIVERCLASSNAME: "org.postgresql.Driver"
+      SPRING_DATASOURCE_USERNAME: "railway_user"
+      SPRING_DATASOURCE_PASSWORD: "railway_password"
+      SPRING_JPA_DATABASE_PLATFORM: "org.hibernate.dialect.PostgreSQLDialect"
+
 
   train-gateway:
     image: train-gateway:1.0.0-SNAPSHOT
@@ -35,6 +49,8 @@ services:
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://train-eureka:8080/eureka"
       TRAIN_GATEWAY_HOST: "train-gateway:8080"
+    depends_on:
+      - train-eureka
 
   train-a-ng:
     image: train-a-ng:1.0.0-SNAPSHOT

@@ -13,6 +13,7 @@ import pl.edu.pg.eti.train_a.station.function.StationToResponseFunction;
 import pl.edu.pg.eti.train_a.station.service.api.StationService;
 
 import java.util.Map;
+import java.util.logging.Level;
 
 @RestController
 @Log
@@ -34,6 +35,7 @@ public class StationDefaultController implements StationController {
 
     @Override
     public GetStationsResponse getStations() {
+        log.log(Level.INFO, "getStations");
         return stationToResponse.apply(stationService.findAll());
     }
 

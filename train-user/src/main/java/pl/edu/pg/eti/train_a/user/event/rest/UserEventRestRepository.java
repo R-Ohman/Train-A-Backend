@@ -1,7 +1,7 @@
 package pl.edu.pg.eti.train_a.user.event.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 import pl.edu.pg.eti.train_a.user.dto.SignInRequest;
@@ -12,12 +12,12 @@ import pl.edu.pg.eti.train_a.user.event.api.UserEventRepository;
 public class UserEventRestRepository implements UserEventRepository {
     private final RestTemplate restTemplate;
 
-    private final DiscoveryClient discoveryClient;
+    private final LoadBalancerClient loadBalancerClient;
 
     @Autowired
-    public UserEventRestRepository(RestTemplate restTemplate, DiscoveryClient discoveryClient) {
+    public UserEventRestRepository(RestTemplate restTemplate, LoadBalancerClient loadBalancerClient) {
         this.restTemplate = restTemplate;
-        this.discoveryClient = discoveryClient;
+        this.loadBalancerClient = loadBalancerClient;
     }
 
     @Override
@@ -31,9 +31,7 @@ public class UserEventRestRepository implements UserEventRepository {
     }
 
     private String getUri() {
-        return discoveryClient.getInstances("train-railway").stream()
-                .findFirst()
-                .orElseThrow()
+        return loadBalancerClient.choose("train-railway")
                 .getUri()
                 .toString();
     }

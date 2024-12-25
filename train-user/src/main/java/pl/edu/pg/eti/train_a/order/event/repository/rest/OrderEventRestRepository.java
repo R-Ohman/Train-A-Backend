@@ -1,7 +1,7 @@
 package pl.edu.pg.eti.train_a.order.event.repository.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 import pl.edu.pg.eti.train_a.order.dto.PostOrderRequest;
@@ -11,12 +11,12 @@ import pl.edu.pg.eti.train_a.order.event.repository.api.OrderEventRepository;
 public class OrderEventRestRepository implements OrderEventRepository {
     private final RestTemplate restTemplate;
 
-    private final DiscoveryClient discoveryClient;
+    private final LoadBalancerClient loadBalancerClient;
 
     @Autowired
-    public OrderEventRestRepository(RestTemplate restTemplate, DiscoveryClient discoveryClient) {
+    public OrderEventRestRepository(RestTemplate restTemplate, LoadBalancerClient loadBalancerClient) {
         this.restTemplate = restTemplate;
-        this.discoveryClient = discoveryClient;
+        this.loadBalancerClient = loadBalancerClient;
     }
 
     @Override
@@ -30,9 +30,7 @@ public class OrderEventRestRepository implements OrderEventRepository {
     }
 
     private String getUri() {
-        return discoveryClient.getInstances("train-railway").stream()
-                .findFirst()
-                .orElseThrow()
+        return loadBalancerClient.choose("train-railway")
                 .getUri()
                 .toString();
     }

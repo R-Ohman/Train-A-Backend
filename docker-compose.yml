@@ -1,11 +1,17 @@
 version: '1'
 
 services:
+  train-eureka:
+    image: train-eureka:1.0.0-SNAPSHOT
+    restart: always
+    ports:
+      - "8090:8080"
+
   train-user:
     image: train-user:1.0.0-SNAPSHOT
     restart: always
     environment:
-      TRAIN_RAILWAY_URL: "http://train-railway:8080"
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://train-eureka:8080/eureka"
       SPRING_DATASOURCE_URL: "jdbc:postgresql://user-db:5432/user_db"
       SPRING_DATASOURCE_DRIVERCLASSNAME: "org.postgresql.Driver"
       SPRING_DATASOURCE_USERNAME: "user_user"
@@ -16,7 +22,7 @@ services:
     image: train-railway:1.0.0-SNAPSHOT
     restart: always
     environment:
-      TRAIN_USER_URL: "http://train-user:8080"
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://train-eureka:8080/eureka"
       SPRING_DATASOURCE_URL: "jdbc:postgresql://railway-db:5432/railway_db"
       SPRING_DATASOURCE_DRIVERCLASSNAME: "org.postgresql.Driver"
       SPRING_DATASOURCE_USERNAME: "railway_user"
@@ -27,8 +33,7 @@ services:
     image: train-gateway:1.0.0-SNAPSHOT
     restart: always
     environment:
-      TRAIN_USER_URL: "http://train-user:8080"
-      TRAIN_RAILWAY_URL: "http://train-railway:8080"
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://train-eureka:8080/eureka"
       TRAIN_GATEWAY_HOST: "train-gateway:8080"
 
   train-a-ng:

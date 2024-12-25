@@ -15,6 +15,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
+import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 import pl.edu.pg.eti.train_a.user.entity.UserRole;
 
 @Configuration
@@ -34,34 +36,26 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http, DefaultAuthenticationEntryPoint authenticationEntryPoint) throws Exception {
-        http.securityMatcher("/api/**").authorizeHttpRequests(rmr -> rmr
-                        .requestMatchers(
-                                HttpMethod.GET,
-                                "/api/users",
-                                "/api/route/{id}"
-                        ).hasRole(UserRole.MANAGER.getValue())
-                        .requestMatchers(
-                                HttpMethod.DELETE,
-                                "/api/carriage/{code}",
-                                "/api/station/{id}",
-                                "/api/route/{id}",
-                                "/api/route/{routeId}/ride/{rideId}"
-                        ).hasRole(UserRole.MANAGER.getValue())
-                        .requestMatchers(
-                                HttpMethod.PUT,
-                                "/api/carriage/{code}",
-                                "/api/route/{id}",
-                                "/api/route/{routeId}/ride/{rideId}"
-                        ).hasRole(UserRole.MANAGER.getValue())
-                        .requestMatchers(
-                                HttpMethod.POST,
-                                "/api/carriage",
-                                "/api/station",
-                                "/api/route",
-                                "/api/route/{routeId}/ride"
-                        ).hasRole(UserRole.MANAGER.getValue())
-                        .anyRequest().permitAll()
+    public SecurityFilterChain filterChain(HttpSecurity http, DefaultAuthenticationEntryPoint authenticationEntryPoint, MvcRequestMatcher.Builder mvc) throws Exception {
+        http.securityMatcher("/api/**")
+                .authorizeHttpRequests(auth -> auth
+                        // Permit all GET requests for anyone except specific ones
+                        .requestMatchers(mvc.pattern("/api/route/{id}"))
+                            .hasRole(UserRole.MANAGER.getValue())
+                        .requestMatchers(mvc.pattern(HttpMethod.GET, "**"))
+                            .permitAll()
+
+                        // Permit all PUT, POST, DELETE requests for MANAGER only
+                        .requestMatchers(mvc.pattern(HttpMethod.PUT, "**"))
+                            .hasRole(UserRole.MANAGER.getValue())
+                        .requestMatchers(mvc.pattern(HttpMethod.POST, "**"))
+                            .hasRole(UserRole.MANAGER.getValue())
+                        .requestMatchers(mvc.pattern(HttpMethod.DELETE, "**"))
+                            .hasRole(UserRole.MANAGER.getValue())
+
+                        // Deny all other requests
+                        .anyRequest()
+                            .denyAll()
                 ).httpBasic(httpbc -> httpbc
                         .authenticationEntryPoint(authenticationEntryPoint)
                 ).sessionManagement(smc -> smc
@@ -85,5 +79,10 @@ public class SecurityConfig {
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
+    }
+
+    @Bean
+    MvcRequestMatcher.Builder mvc(HandlerMappingIntrospector introspector) {
+        return new MvcRequestMatcher.Builder(introspector);
     }
 }

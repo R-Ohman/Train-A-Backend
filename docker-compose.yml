@@ -1,0 +1,64 @@
+version: '1'
+
+services:
+  train-user:
+    image: train-user:1.0.0-SNAPSHOT
+    restart: always
+    environment:
+      TRAIN_RAILWAY_URL: "http://train-railway:8080"
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://user-db:5432/user_db"
+      SPRING_DATASOURCE_DRIVERCLASSNAME: "org.postgresql.Driver"
+      SPRING_DATASOURCE_USERNAME: "user_user"
+      SPRING_DATASOURCE_PASSWORD: "user_password"
+      SPRING_JPA_DATABASE_PLATFORM: "org.hibernate.dialect.PostgreSQLDialect"
+
+  train-railway:
+    image: train-railway:1.0.0-SNAPSHOT
+    restart: always
+    environment:
+      TRAIN_USER_URL: "http://train-user:8080"
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://railway-db:5432/railway_db"
+      SPRING_DATASOURCE_DRIVERCLASSNAME: "org.postgresql.Driver"
+      SPRING_DATASOURCE_USERNAME: "railway_user"
+      SPRING_DATASOURCE_PASSWORD: "railway_password"
+      SPRING_JPA_DATABASE_PLATFORM: "org.hibernate.dialect.PostgreSQLDialect"
+
+  train-gateway:
+    image: train-gateway:1.0.0-SNAPSHOT
+    restart: always
+    environment:
+      TRAIN_USER_URL: "http://train-user:8080"
+      TRAIN_RAILWAY_URL: "http://train-railway:8080"
+      TRAIN_GATEWAY_HOST: "train-gateway:8080"
+
+  train-a-ng:
+    image: train-a-ng:1.0.0-SNAPSHOT
+    restart: always
+    environment:
+      API_URL: http://train-gateway:8080/api
+    ports:
+      - "4280:80"
+
+  user-db:
+    image: postgres:16.1
+    restart: always
+    environment:
+      POSTGRES_DB: "user_db"
+      POSTGRES_USER: "user_user"
+      POSTGRES_PASSWORD: "user_password"
+    volumes:
+      - user-db-data:/var/lib/postgresql/data
+
+  railway-db:
+    image: postgres:16.1
+    restart: always
+    environment:
+      POSTGRES_DB: "railway_db"
+      POSTGRES_USER: "railway_user"
+      POSTGRES_PASSWORD: "railway_password"
+    volumes:
+      - railway-db-data:/var/lib/postgresql/data
+
+volumes:
+  user-db-data:
+  railway-db-data:

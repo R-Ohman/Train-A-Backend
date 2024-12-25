@@ -42,6 +42,8 @@ public class InitializeData {
                     .password("my-password")
                     .role(UserRole.MANAGER)
                     .build());
+
+            System.out.println("User microservice's DB is initialized.");
         }
     }
 }

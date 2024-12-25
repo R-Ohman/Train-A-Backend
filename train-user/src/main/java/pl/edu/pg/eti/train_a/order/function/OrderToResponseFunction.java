@@ -25,6 +25,8 @@ public class OrderToResponseFunction implements Function<List<Order>, GetOrdersR
                                 .seatId(order.getSeatId())
                                 .userId(order.getUser().getId())
                                 .status(order.getStatus())
+                                .stationStart(order.getStationStart().getId())
+                                .stationEnd(order.getStationEnd().getId())
                                 .path(order.getRide().getRoute().getStations().stream()
                                         .map(Station::getId)
                                         .toList())

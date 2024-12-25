@@ -99,6 +99,8 @@ public class InitializeData {
                             stationService.findByCity("Poznań Główny").orElseThrow()
                     ))
                     .build());
+
+            System.out.println("Railway microservice's DB is initialized.");
         }
     }
 }

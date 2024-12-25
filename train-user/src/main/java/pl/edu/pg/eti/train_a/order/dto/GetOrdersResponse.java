@@ -52,6 +52,8 @@ public class GetOrdersResponse {
         private List<Integer> path;
         private List<String> carriages;
         private Schedule schedule;
+        private int stationStart;
+        private int stationEnd;
     }
 
     private List<Order> orders;

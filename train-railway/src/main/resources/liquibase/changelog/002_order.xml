@@ -6,12 +6,15 @@
     <changeSet id="2" author="R-Ohman">
 
         <createTable tableName="orders">
-            <column name="id" type="int">
+            <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true" primaryKeyName="orders__PK"/>
             </column>
 
             <column name="ride_id" type="int">
-                <constraints nullable="false"/>
+                <constraints foreignKeyName="orders__rides__FK"
+                             referencedTableName="rides"
+                             referencedColumnNames="id"
+                             nullable="false"/>
             </column>
 
             <column name="seat_id" type="int"/>

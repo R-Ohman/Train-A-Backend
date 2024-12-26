@@ -10,6 +10,8 @@
 #   None.
 #######################################
 main() {
+    mvn clean package -DskipTests
+
     export JAVA_HOME=/usr/lib/jvm/java-17
     mvn clean verify
 

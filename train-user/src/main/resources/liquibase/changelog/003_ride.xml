@@ -6,31 +6,45 @@
     <changeSet id="3" author="R-Ohman">
 
         <createTable tableName="rides">
-            <column name="id" type="int">
+            <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true" primaryKeyName="rides__PK"/>
             </column>
 
             <column name="route_id" type="int">
-                <constraints nullable="false"/>
+                <constraints foreignKeyName="rides__routes__FK"
+                             referencedTableName="routes"
+                             referencedColumnNames="id"
+                             nullable="false"/>
             </column>
         </createTable>
 
         <createTable tableName="rides_segments">
-            <column name="id" type="int">
+            <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true" primaryKeyName="rides_segments__PK"/>
             </column>
 
             <column name="arrival" type="datetime"/>
+
             <column name="departure" type="datetime"/>
         </createTable>
 
         <createTable tableName="ride_segment_prices">
             <column name="ride_segment_id" type="int">
-                <constraints primaryKey="true" primaryKeyName="ride_segment_prices__PK"/>
+                <constraints primaryKey="true"
+                             primaryKeyName="ride_segment_prices__PK"
+                             foreignKeyName="ride_segment_prices__ride_segments__FK"
+                             referencedTableName="rides_segments"
+                             referencedColumnNames="id"
+                             nullable="false"/>
             </column>
 
-            <column name="carriage_id" type="int">
-                <constraints primaryKey="true" primaryKeyName="ride_segment_prices__PK"/>
+            <column name="carriage_id" type="uuid">
+                <constraints primaryKey="true"
+                             primaryKeyName="ride_segment_prices__PK"
+                             foreignKeyName="ride_segment_prices__carriages__FK"
+                             referencedTableName="carriages"
+                             referencedColumnNames="id"
+                             nullable="false"/>
             </column>
 
             <column name="price" type="decimal"/>

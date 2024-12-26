@@ -6,7 +6,7 @@
     <changeSet id="5" author="R-Ohman">
 
         <createTable tableName="stations">
-            <column name="id" type="int">
+            <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true" primaryKeyName="stations__PK"/>
             </column>
 
@@ -33,13 +33,24 @@
 
         <createTable tableName="railway_stations">
             <column name="station_id" type="int">
-                <constraints primaryKey="true" primaryKeyName="stations_railways__PK"/>
+                <constraints primaryKey="true"
+                             primaryKeyName="railway_stations__PK"
+                             foreignKeyName="railway_stations__stations__FK"
+                             referencedTableName="stations"
+                             referencedColumnNames="id"
+                             nullable="false"/>
             </column>
 
             <column name="railway_id" type="int">
-                <constraints primaryKey="true" primaryKeyName="stations_railways__PK"/>
+                <constraints primaryKey="true"
+                             primaryKeyName="railway_stations__PK"
+                             foreignKeyName="railway_stations__railways__FK"
+                             referencedTableName="railways"
+                             referencedColumnNames="id"
+                             nullable="false"/>
             </column>
         </createTable>
+
     </changeSet>
 
 </databaseChangeLog>

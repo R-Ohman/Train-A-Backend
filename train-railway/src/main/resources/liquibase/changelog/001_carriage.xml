@@ -21,16 +21,6 @@
             <column name="right_seats" type="int"/>
         </createTable>
 
-        <createTable tableName="route_carriages">
-            <column name="carriage_id" type="uuid">
-                <constraints primaryKey="true" primaryKeyName="route_carriages__PK"/>
-            </column>
-
-            <column name="route_id" type="id">
-                <constraints primaryKey="true" primaryKeyName="route_carriages__PK"/>
-            </column>
-        </createTable>
-
     </changeSet>
 
 </databaseChangeLog>

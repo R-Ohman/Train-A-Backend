@@ -2,6 +2,7 @@ package pl.edu.pg.eti.train_a.initialize;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
@@ -19,12 +20,14 @@ public class InitializeData {
     private final StationService stationService;
     private final RailwayService railwayService;
     private final RestTemplate restTemplate;
+    private final LoadBalancerClient loadBalancerClient;
 
     @Autowired
-    public InitializeData(StationService stationService, RailwayService railwayService, RestTemplate restTemplate) {
+    public InitializeData(StationService stationService, RailwayService railwayService, RestTemplate restTemplate, LoadBalancerClient loadBalancerClient) {
         this.stationService = stationService;
         this.railwayService = railwayService;
         this.restTemplate = restTemplate;
+        this.loadBalancerClient = loadBalancerClient;
     }
 
     @EventListener(ApplicationReadyEvent.class)
@@ -33,7 +36,7 @@ public class InitializeData {
 
             while (true) {
                 try {
-                    restTemplate.getForEntity("/api", Void.class);
+                    userHealthCheck();
                     break;
                 } catch (HttpClientErrorException e) {
                     break;
@@ -102,5 +105,12 @@ public class InitializeData {
 
             System.out.println("Railway microservice's DB is initialized.");
         }
+    }
+
+    private void userHealthCheck() {
+        var uri = loadBalancerClient.choose("train-user")
+                .getUri()
+                .toString();
+        restTemplate.getForEntity(uri + "/api/event", Void.class);
     }
 }

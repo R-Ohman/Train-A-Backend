@@ -9,6 +9,7 @@
             <column name="id" type="UUID">
                 <constraints primaryKey="true" primaryKeyName="carriages__PK"/>
             </column>
+
             <column name="type" type="VARCHAR(255)">
                 <constraints nullable="false" unique="true"/>
             </column>

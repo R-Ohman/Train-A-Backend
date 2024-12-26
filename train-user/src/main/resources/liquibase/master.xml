@@ -6,19 +6,19 @@
     <include file="classpath:liquibase/changelog/001_carriage.xml"
              relativeToChangelogFile="false"/>
 
-    <include file="classpath:liquibase/changelog/002_order.xml"
+    <include file="classpath:liquibase/changelog/005_station.xml"
              relativeToChangelogFile="false"/>
 
-    <include file="classpath:liquibase/changelog/003_ride.xml"
+    <include file="classpath:liquibase/changelog/006_user.xml"
              relativeToChangelogFile="false"/>
 
     <include file="classpath:liquibase/changelog/004_route.xml"
              relativeToChangelogFile="false"/>
 
-    <include file="classpath:liquibase/changelog/005_station.xml"
+    <include file="classpath:liquibase/changelog/003_ride.xml"
              relativeToChangelogFile="false"/>
 
-    <include file="classpath:liquibase/changelog/006_user.xml"
+    <include file="classpath:liquibase/changelog/002_order.xml"
              relativeToChangelogFile="false"/>
 
 </databaseChangeLog>

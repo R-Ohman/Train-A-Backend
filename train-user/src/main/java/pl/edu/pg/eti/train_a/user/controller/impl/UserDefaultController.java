@@ -96,7 +96,6 @@ public class UserDefaultController implements UserController {
     @Override
     public SignInResponse signIn(SignInRequest request) {
         try {
-            System.out.println(userService.findAll());
             var user = userService.findByEmail(request.getEmail()).orElseThrow();
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(user.getUsername(), request.getPassword())
@@ -104,14 +103,9 @@ public class UserDefaultController implements UserController {
             final UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
             final String jwt = jwtUtil.generateToken(userDetails.getUsername());
 
-            System.out.println("[user] JWT: " + jwt);
-
             userEventRepository.signIn(request);
-
-            System.out.println("[user] User signed in: " + user.getEmail());
             return SignInResponse.builder().token(jwt).build();
         } catch (Exception e) {
-            System.out.println("Exception: " + e.getMessage());
             throw new CustomResponseStatusException(HttpStatus.BAD_REQUEST, "userNotFound", "User is not found");
         }
     }

@@ -1,0 +1,38 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="2" author="R-Ohman">
+
+        <createTable tableName="orders">
+            <column name="id" type="int">
+                <constraints primaryKey="true" primaryKeyName="orders__PK"/>
+            </column>
+
+            <column name="user_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="ride_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="seat_id" type="int"/>
+
+            <column name="station_start" type="int">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="station_end" type="int">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="status" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+    </changeSet>
+
+</databaseChangeLog>

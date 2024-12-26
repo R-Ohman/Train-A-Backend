@@ -1,0 +1,34 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="4" author="R-Ohman">
+
+        <createTable tableName="routes">
+            <column name="id" type="int">
+                <constraints primaryKey="true" primaryKeyName="routes__PK"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="routes_carriages">
+            <column name="route_id" type="int">
+                <constraints primaryKey="true" primaryKeyName="routes_carriages__PK"/>
+            </column>
+            <column name="carriage_id" type="uuid">
+                <constraints primaryKey="true" primaryKeyName="routes_carriages__PK"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="routes_stations">
+            <column name="route_id" type="int">
+                <constraints primaryKey="true" primaryKeyName="routes_carriages__PK"/>
+            </column>
+            <column name="station_id" type="int">
+                <constraints primaryKey="true" primaryKeyName="routes_carriages__PK"/>
+            </column>
+        </createTable>
+
+    </changeSet>
+
+</databaseChangeLog>

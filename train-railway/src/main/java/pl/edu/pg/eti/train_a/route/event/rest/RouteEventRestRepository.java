@@ -21,17 +21,17 @@ public class RouteEventRestRepository implements RouteEventRepository {
 
     @Override
     public void create(Route route) {
-        restTemplate.postForEntity(getUri() + "/api/route", route, Void.class);
+        restTemplate.postForEntity(getUri() + "/api/event/route", route, Void.class);
     }
 
     @Override
     public void update(Route route) {
-        restTemplate.put(getUri() + "/api/route", route);
+        restTemplate.put(getUri() + "/api/event/route", route);
     }
 
     @Override
     public void delete(int routeId) {
-        restTemplate.delete(getUri() + "/api/route/{id}", routeId);
+        restTemplate.delete(getUri() + "/api/event/route/{id}", routeId);
     }
 
     private String getUri() {

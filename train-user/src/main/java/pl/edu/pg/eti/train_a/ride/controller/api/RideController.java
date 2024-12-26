@@ -6,15 +6,15 @@ import pl.edu.pg.eti.train_a.ride.dto.PostRideRequest;
 import pl.edu.pg.eti.train_a.ride.dto.PutRideRequest;
 
 public interface RideController {
-    @PostMapping("/api/route/{routeId}/ride")
+    @PostMapping("/api/event/route/{routeId}/ride")
     @ResponseStatus(HttpStatus.CREATED)
     void postRide(@PathVariable int routeId, @RequestBody PostRideRequest request);
 
-    @PutMapping("/api/route/{routeId}/ride/{rideId}")
+    @PutMapping("/api/event/route/{routeId}/ride/{rideId}")
     @ResponseStatus(HttpStatus.CREATED)
     void putRide(@PathVariable int routeId, @PathVariable int rideId, @RequestBody PutRideRequest request);
 
-    @DeleteMapping("/api/ride/{rideId}")
+    @DeleteMapping("/api/event/ride/{rideId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void deleteRide(@PathVariable int rideId);
 }

@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.*;
 import pl.edu.pg.eti.train_a.station.entity.Station;
 
 public interface StationController {
-    @PostMapping("/api/station")
+    @PostMapping("/api/event/station")
     @ResponseStatus(HttpStatus.CREATED)
     void postStation(@RequestBody Station station);
 
-    @DeleteMapping("/api/station/{stationId}")
+    @DeleteMapping("/api/event/station/{stationId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void deleteStation(@PathVariable int stationId);
 }

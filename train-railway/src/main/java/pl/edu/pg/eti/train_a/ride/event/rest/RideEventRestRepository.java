@@ -22,17 +22,17 @@ public class RideEventRestRepository implements RideEventRepository {
 
     @Override
     public void create(int routeId, PostRideRequest request) {
-        restTemplate.postForEntity(getUri() + "/api/route/" + routeId + "/ride", request, Void.class);
+        restTemplate.postForEntity(getUri() + "/api/event/route/" + routeId + "/ride", request, Void.class);
     }
 
     @Override
     public void update(int routeId, int rideId, PutRideRequest request) {
-        restTemplate.put(getUri() + "/api/route/" + routeId + "/ride/" + rideId, request);
+        restTemplate.put(getUri() + "/api/event/route/" + routeId + "/ride/" + rideId, request);
     }
 
     @Override
     public void delete(int rideId) {
-        restTemplate.delete(getUri() + "/api/ride/{id}", rideId);
+        restTemplate.delete(getUri() + "/api/event/ride/{id}", rideId);
     }
 
     private String getUri() {

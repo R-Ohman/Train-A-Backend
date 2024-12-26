@@ -41,6 +41,10 @@ public class SecurityConfig {
 
         http.securityMatcher("/api/**")
                 .authorizeHttpRequests(auth -> auth
+                        // Permit all event requests
+                        .requestMatchers(mvc.pattern("/api/event/**"))
+                            .permitAll()
+
                         .requestMatchers(mvc.pattern("/api/users"))
                             .hasRole(UserRole.MANAGER.getValue())
                         .requestMatchers(mvc.pattern("/api/signin"))

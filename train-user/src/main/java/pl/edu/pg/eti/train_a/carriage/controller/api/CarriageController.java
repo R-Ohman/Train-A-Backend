@@ -7,15 +7,15 @@ import pl.edu.pg.eti.train_a.carriage.entity.Carriage;
 import java.util.UUID;
 
 public interface CarriageController {
-    @PostMapping("/api/carriage")
+    @PostMapping("/api/event/carriage")
     @ResponseStatus(HttpStatus.CREATED)
     void postCarriage(@RequestBody Carriage carriage);
 
-    @PutMapping("/api/carriage")
+    @PutMapping("/api/event/carriage")
     @ResponseStatus(HttpStatus.CREATED)
     void putCarriage(@RequestBody Carriage carriage);
 
-    @DeleteMapping("/api/carriage/{carriageId}")
+    @DeleteMapping("/api/event/carriage/{carriageId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void deleteCarriage(@PathVariable UUID carriageId);
 }

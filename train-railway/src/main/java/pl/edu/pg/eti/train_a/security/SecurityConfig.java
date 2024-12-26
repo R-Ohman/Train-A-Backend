@@ -39,6 +39,10 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http, DefaultAuthenticationEntryPoint authenticationEntryPoint, MvcRequestMatcher.Builder mvc) throws Exception {
         http.securityMatcher("/api/**")
                 .authorizeHttpRequests(auth -> auth
+                        // Permit all event requests
+                        .requestMatchers(mvc.pattern("/api/event/**"))
+                            .permitAll()
+
                         // Permit all GET requests for anyone except specific ones
                         .requestMatchers(mvc.pattern("/api/route/{id}"))
                             .hasRole(UserRole.MANAGER.getValue())

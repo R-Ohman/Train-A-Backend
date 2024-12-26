@@ -23,17 +23,17 @@ public class CarriageEventRestRepository implements CarriageEventRepository {
 
     @Override
     public void create(Carriage carriage) {
-        restTemplate.postForEntity(getUri() + "/api/carriage", carriage, Void.class);
+        restTemplate.postForEntity(getUri() + "/api/event/carriage", carriage, Void.class);
     }
 
     @Override
     public void update(Carriage carriage) {
-        restTemplate.put(getUri() + "/api/carriage", carriage);
+        restTemplate.put(getUri() + "/api/event/carriage", carriage);
     }
 
     @Override
     public void delete(UUID code) {
-        restTemplate.delete(getUri() + "/api/carriage/{id}", code);
+        restTemplate.delete(getUri() + "/api/event/carriage/{id}", code);
     }
 
     private String getUri() {

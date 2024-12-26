@@ -21,12 +21,12 @@ public class OrderEventRestRepository implements OrderEventRepository {
 
     @Override
     public void create(PostOrderRequest request) {
-        restTemplate.postForEntity(getUri() + "/api/order", request, Void.class);
+        restTemplate.postForEntity(getUri() + "/api/event/order", request, Void.class);
     }
 
     @Override
     public void delete(int orderId) {
-        restTemplate.delete(getUri() + "/api/order/" + orderId);
+        restTemplate.delete(getUri() + "/api/event/order/" + orderId);
     }
 
     private String getUri() {

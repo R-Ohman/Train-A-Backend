@@ -9,10 +9,10 @@ import pl.edu.pg.eti.train_a.user.dto.SignInRequest;
 import pl.edu.pg.eti.train_a.user.entity.User;
 
 public interface UserController {
-    @PostMapping("api/user")
+    @PostMapping("api/event/user")
     @ResponseStatus(HttpStatus.CREATED)
     void createUser(@RequestBody User user);
 
-    @PostMapping("api/signin")
+    @PostMapping("api/event/signin")
     void signIn(@RequestBody @Valid SignInRequest request);
 }

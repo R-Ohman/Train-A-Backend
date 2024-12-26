@@ -20,12 +20,12 @@ public class StationEventRestRepository implements StationEventRepository {
 
     @Override
     public void create(Station station) {
-        restTemplate.postForEntity(getUri() + "/api/station", station, Void.class);
+        restTemplate.postForEntity(getUri() + "/api/event/station", station, Void.class);
     }
 
     @Override
     public void delete(int stationId) {
-        restTemplate.delete(getUri() + "/api/station/{id}", stationId);
+        restTemplate.delete(getUri() + "/api/event/station/{id}", stationId);
     }
 
     private String getUri() {

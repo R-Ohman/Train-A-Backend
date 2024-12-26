@@ -22,12 +22,12 @@ public class UserEventRestRepository implements UserEventRepository {
 
     @Override
     public void create(User user) {
-        restTemplate.postForEntity(getUri() + "/api/user", user, Void.class);
+        restTemplate.postForEntity(getUri() + "/api/event/user", user, Void.class);
     }
 
     @Override
     public void signIn(SignInRequest request) {
-        restTemplate.postForEntity(getUri() + "/api/signin", request, Void.class);
+        restTemplate.postForEntity(getUri() + "/api/event/signin", request, Void.class);
     }
 
     private String getUri() {

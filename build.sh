@@ -14,6 +14,7 @@ function main() {
     cd ./train-railway/; sh ./build.sh; cd ..
     cd ./train-gateway/; sh ./build.sh; cd ..
     cd ./train-eureka/; sh ./build.sh; cd ..
+    cd ./train-config/; sh ./build.sh; cd ..
 }
 
 main "$@"

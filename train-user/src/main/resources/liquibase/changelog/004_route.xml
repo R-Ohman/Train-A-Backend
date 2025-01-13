@@ -13,7 +13,7 @@
 
         <createTable tableName="routes_carriages">
             <column name="route_id" type="int">
-                <constraints primaryKey="true"
+                <constraints
                              primaryKeyName="routes_carriages__PK"
                              foreignKeyName="routes_carriages__routes__FK"
                              referencedTableName="routes"
@@ -21,8 +21,8 @@
                              nullable="false"/>
             </column>
 
-            <column name="carriage_id" type="uuid">
-                <constraints primaryKey="true"
+            <column name="carriages_id" type="uuid">
+                <constraints
                              primaryKeyName="routes_carriages__PK"
                              foreignKeyName="routes_carriages__carriages__FK"
                              referencedTableName="carriages"
@@ -33,7 +33,7 @@
 
         <createTable tableName="routes_stations">
             <column name="route_id" type="int">
-                <constraints primaryKey="true"
+                <constraints
                              primaryKeyName="routes_stations__PK"
                              foreignKeyName="routes_stations__routes__FK"
                              referencedTableName="routes"
@@ -41,8 +41,8 @@
                              nullable="false"/>
             </column>
 
-            <column name="station_id" type="int">
-                <constraints primaryKey="true"
+            <column name="stations_id" type="int">
+                <constraints
                              primaryKeyName="routes_stations__PK"
                              foreignKeyName="routes_stations__stations__FK"
                              referencedTableName="stations"

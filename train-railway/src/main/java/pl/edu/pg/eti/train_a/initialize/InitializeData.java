@@ -32,19 +32,19 @@ public class InitializeData {
 
     @EventListener(ApplicationReadyEvent.class)
     public void afterPropertiesSet() throws InterruptedException {
-        if (stationService.findAll().isEmpty()) {
-
-            while (true) {
-                try {
-                    userHealthCheck();
-                    break;
-                } catch (HttpClientErrorException e) {
-                    break;
-                } catch (Exception e) {
-                    System.out.println("Waiting for users service to start...");
-                    Thread.sleep(1000);
-                }
+        while (true) {
+            try {
+                userHealthCheck();
+                break;
+            } catch (HttpClientErrorException e) {
+                break;
+            } catch (Exception e) {
+                System.out.println("Waiting for users service to start...");
+                Thread.sleep(1000);
             }
+        }
+
+        if (stationService.findAll().isEmpty()) {
 
             stationService.create(Station.builder()
                     .city("Warszawa Centralna")
@@ -104,6 +104,8 @@ public class InitializeData {
                     .build());
 
             System.out.println("Railway microservice's DB is initialized.");
+        } else {
+            System.out.println("Railway microservice's DB is already initialized.");
         }
     }
 

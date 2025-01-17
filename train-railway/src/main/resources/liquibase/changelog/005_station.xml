@@ -1,0 +1,56 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="5" author="R-Ohman">
+
+        <createTable tableName="stations">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="stations__PK"/>
+            </column>
+
+            <column name="city" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="latitude" type="decimal">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="longitude" type="decimal">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="railways">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="railways__PK"/>
+            </column>
+
+            <column name="distance" type="int"/>
+        </createTable>
+
+        <createTable tableName="railway_stations">
+            <column name="station_id" type="int">
+                <constraints primaryKey="true"
+                             primaryKeyName="railway_stations__PK"
+                             foreignKeyName="railway_stations__stations__FK"
+                             referencedTableName="stations"
+                             referencedColumnNames="id"
+                             nullable="false"/>
+            </column>
+
+            <column name="railway_id" type="int">
+                <constraints primaryKey="true"
+                             primaryKeyName="railway_stations__PK"
+                             foreignKeyName="railway_stations__railways__FK"
+                             referencedTableName="railways"
+                             referencedColumnNames="id"
+                             nullable="false"/>
+            </column>
+        </createTable>
+
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,55 @@
+@baseUrl = http://localhost:8083
+
+### Sign in and get authentication token
+POST {{baseUrl}}/api/signin
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "password": "{{password}}"
+}
+
+> {% client.global.set("token", response.body.token); %}
+
+### Get orders for current user
+GET {{baseUrl}}/api/order
+Authorization: Bearer {{token}}
+
+### Create new order
+POST {{baseUrl}}/api/order
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "rideId": 1,
+  "seatId": 6,
+  "stationStart": 1,
+  "stationEnd": 3
+}
+
+### Delete order
+DELETE {{baseUrl}}/api/order/4
+Authorization: Bearer {{token}}
+
+### Update user profile
+PUT {{baseUrl}}/api/profile
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "email": "new@email.com",
+  "name": "John Doe"
+}
+
+### Update user password
+PUT {{baseUrl}}/api/profile/password
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "password": "Password123."
+}
+
+### Get user profile information
+GET {{baseUrl}}/api/profile
+Authorization: Bearer {{token}}

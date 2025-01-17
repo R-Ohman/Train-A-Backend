@@ -1,0 +1,77 @@
+version: '1'
+
+services:
+  train-config:
+    image: train-config:1.0.0-SNAPSHOT
+    restart: always
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://train-eureka:8080/eureka"
+    volumes:
+      - "./configuration:/var/train-config/configuration"
+
+  train-eureka:
+    image: train-eureka:1.0.0-SNAPSHOT
+    restart: always
+    ports:
+      - "8090:8080"
+
+  train-user:
+    image: train-user:1.0.0-SNAPSHOT
+    restart: always
+    environment:
+      SPRING_CONFIG_IMPORT: "configserver:http://train-config:8080"
+
+  train-railway-1:
+    image: train-railway:1.0.0-SNAPSHOT
+    restart: always
+    environment:
+      SPRING_CONFIG_IMPORT: "configserver:http://train-config:8080"
+      EUREKA_INSTANCE_INSTANCE_ID: "1"
+
+  train-railway-2:
+    image: train-railway:1.0.0-SNAPSHOT
+    restart: always
+    environment:
+      SPRING_CONFIG_IMPORT: "configserver:http://train-config:8080"
+      EUREKA_INSTANCE_INSTANCE_ID: "2"
+
+  train-gateway:
+    image: train-gateway:1.0.0-SNAPSHOT
+    restart: always
+    environment:
+      SPRING_CONFIG_IMPORT: "configserver:http://train-config:8080"
+      TRAIN_GATEWAY_HOST: "train-gateway:8080"
+    depends_on:
+      - train-eureka
+
+  train-a-ng:
+    image: train-a-ng:1.0.0-SNAPSHOT
+    restart: always
+    environment:
+      API_URL: http://train-gateway:8080/api
+    ports:
+      - "4280:80"
+
+  user-db:
+    image: postgres:16.1
+    restart: always
+    environment:
+      POSTGRES_DB: "user_db"
+      POSTGRES_USER: "user_user"
+      POSTGRES_PASSWORD: "user_password"
+    volumes:
+      - user-db-data:/var/lib/postgresql/data
+
+  railway-db:
+    image: postgres:16.1
+    restart: always
+    environment:
+      POSTGRES_DB: "railway_db"
+      POSTGRES_USER: "railway_user"
+      POSTGRES_PASSWORD: "railway_password"
+    volumes:
+      - railway-db-data:/var/lib/postgresql/data
+
+volumes:
+  user-db-data:
+  railway-db-data:
